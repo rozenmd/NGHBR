@@ -13,9 +13,9 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.kmji.nghbr")
-public class HelloWorldConfiguration extends WebMvcConfigurerAdapter {
+public class NghbrConfiguration extends WebMvcConfigurerAdapter {
 
-	@Bean(name="HelloWorld")
+	@Bean(name="Nghbr")
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 		viewResolver.setViewClass(JstlView.class);
