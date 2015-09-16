@@ -5,6 +5,8 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository("userDao")
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 
@@ -18,5 +20,16 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		return (User) crit.uniqueResult();
 	}
 
-	
+	public List<User> getAll() {
+		Criteria crit = createEntityCriteria();
+		return crit.list();
+	}
+
+	public void saveOrUpdate(User user) {
+		persist(user);
+	}
+
+	public void destroy(User user) {
+		delete(user);
+	}
 }

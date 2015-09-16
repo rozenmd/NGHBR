@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service("userService")
 @Transactional
 public class UserServiceImpl implements UserService{
@@ -21,4 +24,16 @@ public class UserServiceImpl implements UserService{
 		return dao.findBySSO(sso);
 	}
 
+	public List<User> findAllUsers(){
+		return dao.getAll();
+	}
+
+	public void save(User user) {
+		System.out.println("Only an Admin can Update a User");
+		dao.saveOrUpdate(user);
+	}
+
+	public void deleteUser(User user){
+		dao.destroy(user);
+	}
 }

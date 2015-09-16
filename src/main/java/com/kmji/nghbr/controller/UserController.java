@@ -11,12 +11,21 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.kmji.nghbr.model.User;
+import com.kmji.nghbr.service.UserService;
+
 @Controller
 public class UserController extends AbstractController {
+
+    @Autowired
+    UserService userService;
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(ModelMap model) {
         model.addAttribute("user", getPrincipal());
+        model.addAttribute("users", userService.findAllUsers());
         return "user/admin";
     }
 
@@ -38,5 +47,25 @@ public class UserController extends AbstractController {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/login?logout";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String registerPage(ModelMap model) {
+        // create a test user
+        try {
+            User user = new User();
+            user.setFirstName("test");
+            user.setLastName("user");
+            user.setSsoId("test");
+            user.setEmail("test@example.com");
+            user.setPassword("Pass.123");
+            userService.save(user);
+            model.addAttribute("user", user);
+        } catch(Exception e) {
+            model.addAttribute("user", userService.findBySso("test"));
+        }
+
+
+        return "user/register";
     }
 }
