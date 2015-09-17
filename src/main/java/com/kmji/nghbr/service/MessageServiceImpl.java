@@ -17,9 +17,15 @@ public class MessageServiceImpl implements MessageService{
 	private MessageDao dao;
 
 	@Override
-	public Message findBySso(String sso) {
-		return dao.findBySSO(sso);
+	public Message findByUsername(String username) {
+		return dao.findByUsername(username);
 	}
+	
+	@Override
+	public Message findByPostCode(int postCode){
+		return dao.findByPostCode(postCode);
+	}
+	
 
 	@Override
 	public List<Message> findAllUsers() {

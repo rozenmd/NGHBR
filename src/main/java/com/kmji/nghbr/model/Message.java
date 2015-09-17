@@ -26,8 +26,11 @@ public class Message {
 	@Column(name="Text", nullable=false)
 	private String text;
 	
-	@Column(name="SSO_ID", unique=true, nullable=true)
-	private String ssoId;
+	@Column(name="Username", nullable=false)
+	private String username;
+	
+	@Column(name="PostCode", nullable=false)
+	private int postCode;
 	
 //	@Column(name="PostCode", nullable=false)
 //	private String postCode;
@@ -44,8 +47,20 @@ public class Message {
 		this.id = id;
 	}
 	
-	public String getSsoId() {
-		return ssoId;
+	public String getUsername() {
+		return username;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	public int getPostCode() {
+		return postCode;
+	}
+	
+	public void setPostCode(int postCode) {
+		this.postCode = postCode;
 	}
 
 	
@@ -82,7 +97,7 @@ public class Message {
 	
 	@Override
 	public String toString() {
-		return "Message [id=" + id + ", username=" + ssoId + ", message text=" + text + ", state=" + state +"]";
+		return "Message [id=" + id + ", username=" + username + ", message text=" + text + ", state=" + state +"]";
 		
 	}
 

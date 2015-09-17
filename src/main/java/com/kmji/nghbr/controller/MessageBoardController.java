@@ -22,6 +22,8 @@ public class MessageBoardController extends AbstractController {
 	public String homePage(ModelMap model) {
 			Message message = new Message();
 			message.setText("this is a post");
+			message.setPostCode(2036);
+			message.setUsername("James");
 			messageService.save(message);
 			model.addAttribute("message", message);
 		return "user/messageboard";

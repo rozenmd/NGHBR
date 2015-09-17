@@ -8,7 +8,9 @@ public interface MessageDao {
 	
 	Message findById(int id);
 	
-	Message findBySSO(String sso);
+	Message findByUsername(String username);
+	
+	Message findByPostCode(int postCode);
 
 	List<Message>getAll();
 

@@ -7,14 +7,17 @@ import java.util.List;
 
 public interface MessageService {
 	
-	Message findBySso(String sso);
+	Message findByUsername(String sso);
+	
+	Message findByPostCode(int postCode);
+
 
 	List<Message> findAllUsers();
 
 	Message findById(int id);
 
-	void save(Message user);
+	void save(Message message);
 
-	void deleteUser(Message user);
+	void deleteUser(Message message);
 
 }

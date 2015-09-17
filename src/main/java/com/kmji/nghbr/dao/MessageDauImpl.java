@@ -17,11 +17,21 @@ public class MessageDauImpl extends AbstractDao<Integer, Message> implements Mes
 	}
 
 	@Override
-	public Message findBySSO(String sso) {
+	public Message findByUsername(String username) {
 		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("ssoId", sso));
+		crit.add(Restrictions.eq("Username", username));
 		return (Message) crit.uniqueResult();
 	}
+	
+	@Override
+	
+	public Message findByPostCode(int postCode) {
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("PostCode", postCode));
+		return (Message) crit.uniqueResult();
+		
+	}
+
 
 	@Override
 	public List<Message> getAll() {
