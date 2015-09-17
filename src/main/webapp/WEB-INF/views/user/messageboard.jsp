@@ -51,11 +51,11 @@
 			<!--/.navbar-collapse -->
 		</div>
 	</nav>
-	<h3>MessageBoard</h3>
+	<h3>Message Board</h3>
 	<div class="container box well">
 		<div id="conversationsholder"></div>
 		<div class="input-group">
-			<input id="messagetext" type="text" class="form-control" placeholder="Type Message...">
+			<textarea id="messagetext" class="form-control" placeholder="Type Message..." rows="2"></textarea>
 			<span class="input-group-btn">
 				<button class="btn btn-primary btn-lg" type="button">Post!</button>
 			</span>

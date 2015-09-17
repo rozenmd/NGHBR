@@ -1,8 +1,14 @@
 
+body{
+	background-color: #E2F4FF;
+	
+}
+
 h3 {
     padding-top: 70px;
     padding-left: 70px;
     padding-bottom: 40px;
+        
   }
   
  .box{
