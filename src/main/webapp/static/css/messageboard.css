@@ -9,9 +9,17 @@ h3 {
     width:600px;
     height:400px;
     background: #C9CACA;
-    box-shadow: 0 0 30px black;
-   
+    box-shadow: 0 0 30px black;   
+}
 
-    
+ #conversationsholder{
+    width:600px;
+    height:325px;
+}
+
+#messagetext{
+	resize: none;
+	margin-right:50px;
+    height: 47px;
 }
 
