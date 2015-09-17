@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.SessionFactory;
+
 @Entity
 @Table(name="APP_MESSAGE")
 public class Message {
@@ -24,13 +26,13 @@ public class Message {
 	@Column(name="Text", nullable=false)
 	private String text;
 	
-	@Column(name="User", nullable=false)
-	private String username;
+	@Column(name="SSO_ID", unique=true, nullable=true)
+	private String ssoId;
 	
 //	@Column(name="PostCode", nullable=false)
 //	private String postCode;
 	
-	@Column(name="STATE", nullable=false)
+	@Column(name="STATE")
 	private String state=State.ACTIVE.getState();
 	
 	
@@ -42,13 +44,10 @@ public class Message {
 		this.id = id;
 	}
 	
-	public String getusername() {
-		return username;
+	public String getSsoId() {
+		return ssoId;
 	}
 
-	public void setusername(String username) {
-		this.username = username;
-	}
 	
 	public String getText() {
 		return text;
@@ -83,7 +82,7 @@ public class Message {
 	
 	@Override
 	public String toString() {
-		return "Message [id=" + id + ", username=" + username + ", message text=" + text + ", state=" + state +"]";
+		return "Message [id=" + id + ", username=" + ssoId + ", message text=" + text + ", state=" + state +"]";
 		
 	}
 
