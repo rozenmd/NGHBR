@@ -1,6 +1,8 @@
 <%@ page session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -54,14 +56,21 @@
 	<h3>Message Board</h3>
 	<div class="container box well">
 		<div id="conversationsholder"></div>
-		<div class="input-group">
-			<textarea id="messagetext" class="form-control" placeholder="Type Message..." rows="2"></textarea>
-			<span class="input-group-btn">
-				<button class="btn btn-primary btn-lg" type="button">Post!</button>
-			</span>
-		</div>
+
+		<form:form method="POST" action="postmessage" name="message">
+			<div class="input-group">
+				<textarea id="messagetext" class="form-control"
+					placeholder="Type Message..." rows="2" name="text"></textarea>
+				<span class="input-group-btn">
+					<button class="btn a btn-primary btn-lg" type="submit">Post!</button>
+
+				</span>
+			</div>
+
+		</form:form>
 
 	</div>
 </body>
 </html>
+
 

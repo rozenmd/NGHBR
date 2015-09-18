@@ -23,7 +23,7 @@ public class Message {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="Text", nullable=false)
+	@Column(name="Text", nullable=true)
 	private String text;
 	
 	@Column(name="Username", nullable=false)

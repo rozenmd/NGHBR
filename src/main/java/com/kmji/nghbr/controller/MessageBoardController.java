@@ -2,9 +2,14 @@ package com.kmji.nghbr.controller;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,21 +19,44 @@ import com.kmji.nghbr.service.MessageService;
 @Controller
 public class MessageBoardController extends AbstractController {
 
-    @Autowired
-    MessageService messageService;
-    
+	@Autowired
+	MessageService messageService;
+
 
 	@RequestMapping(value = { "/messageboard" }, method = RequestMethod.GET)
-	public String homePage(ModelMap model) {
-			Message message = new Message();
-			message.setText("this is a post");
-			message.setPostCode(2036);
-			message.setUsername("James");
-			messageService.save(message);
-			model.addAttribute("message", message);
+	public String messageBoardPage(ModelMap model) {
+		Message message = new Message();
+		message.setText("this is a post");
+		message.setPostCode(2036);
+		message.setUsername("James");
+		messageService.save(message);
+		model.addAttribute("message", message);
+		return "user/messageboard";
+	}
+	
+	@RequestMapping(value = "/postmessage",  method = RequestMethod.POST)
+	public String postmessage(@ModelAttribute("message") Message message, ModelMap model) {
+
+		message.setPostCode(2036);
+		message.setUsername("Peter");
+		messageService.save(message);
+		model.addAttribute("message", message);
 		return "user/messageboard";
 	}
 
+	
+
+//	@RequestMapping(value="/messageboard", method=RequestMethod.GET)
+//	public String messageSubmit(@ModelAttribute Message message, ModelMap model,@RequestParam String text ) {
+//		message.setText(text);
+//		message.setPostCode(2036);
+//		message.setUsername("James");
+//		messageService.save(message);
+//		model.addAttribute("Message", message);
+//		return "result";
+//	}
+	
+	
 
 }
 

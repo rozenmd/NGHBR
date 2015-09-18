@@ -12,7 +12,7 @@ h3 {
   }
   
  .box{
-    width:600px;
+    width:650px;
     height:400px;
     background: #C9CACA;
     box-shadow: 0 0 30px black;   
@@ -27,5 +27,9 @@ h3 {
 	resize: none;
 	margin-right:50px;
     height: 47px;
+}
+
+.a{
+	float right;
 }
 
