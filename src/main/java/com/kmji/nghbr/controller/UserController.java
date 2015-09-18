@@ -65,7 +65,6 @@ public class UserController extends AbstractController {
             model.addAttribute("user", userService.findBySso("test"));
         }
 
-
         return "user/register";
     }
 }

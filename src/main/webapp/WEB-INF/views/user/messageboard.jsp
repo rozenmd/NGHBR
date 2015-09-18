@@ -63,10 +63,8 @@
 					placeholder="Type Message..." rows="2" name="text"></textarea>
 				<span class="input-group-btn">
 					<button class="btn a btn-primary btn-lg" type="submit">Post!</button>
-
 				</span>
 			</div>
-
 		</form:form>
 
 	</div>

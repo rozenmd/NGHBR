@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -33,35 +32,27 @@ public class MessageBoardController extends AbstractController {
 		model.addAttribute("message", message);
 		return "user/messageboard";
 	}
-	
+
+	/*Retrieve message data from user and send to database  */
 	@RequestMapping(value = "/postmessage",  method = RequestMethod.POST)
 	public String postmessage(@ModelAttribute("message") Message message, ModelMap model) {
+		try {
+			message.setPostCode(2036);
+			message.setUsername("Peter");
+			messageService.save(message);
+			model.addAttribute("message", message);
+			
+		} catch(Exception e) {
 
-		message.setPostCode(2036);
-		message.setUsername("Peter");
-		messageService.save(message);
-		model.addAttribute("message", message);
+		}
 		return "user/messageboard";
+
+
 	}
 
-	
-
-//	@RequestMapping(value="/messageboard", method=RequestMethod.GET)
-//	public String messageSubmit(@ModelAttribute Message message, ModelMap model,@RequestParam String text ) {
-//		message.setText(text);
-//		message.setPostCode(2036);
-//		message.setUsername("James");
-//		messageService.save(message);
-//		model.addAttribute("Message", message);
-//		return "result";
-//	}
-	
-	
 
 }
 
-
-// create a test user
 
 
 
