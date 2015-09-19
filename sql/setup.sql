@@ -23,17 +23,17 @@ VALUES ('jason','abc126', 'Jason','Silver','jason@nghbr.com', 'Active');
 
 /* Populate JOIN Table */
 INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
-  SELECT user.id, profile.id FROM app_user user, user_profile profile
+  SELECT user.id, profile.id FROM APP_USER user, USER_PROFILE profile
   where user.sso_id='khanh' and profile.type='ADMIN';
 
 INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
-  SELECT user.id, profile.id FROM app_user user, user_profile profile
+  SELECT user.id, profile.id FROM APP_USER user, USER_PROFILE profile
   where user.sso_id='imran' and profile.type='ADMIN';
 
 INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
-  SELECT user.id, profile.id FROM app_user user, user_profile profile
+  SELECT user.id, profile.id FROM APP_USER user, USER_PROFILE profile
   where user.sso_id='max' and profile.type='ADMIN';
 
 INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
-  SELECT user.id, profile.id FROM app_user user, user_profile profile
+  SELECT user.id, profile.id FROM APP_USER user, USER_PROFILE profile
   where user.sso_id='jason' and profile.type='ADMIN';
