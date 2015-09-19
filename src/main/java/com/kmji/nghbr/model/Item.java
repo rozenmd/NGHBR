@@ -37,7 +37,7 @@ public class Item {
 	private User owner;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "BORROWER_ID")
+	@JoinColumn(name = "BORROWER_ID", nullable=true)
 	private User borrower;
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -45,7 +45,7 @@ public class Item {
 	private java.util.Date startDate;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="END_DATE")
+	@Column(name="END_DATE", nullable=true)
 	private java.util.Date endDate;
 
 	public int getId() {
