@@ -2,6 +2,8 @@ package com.kmji.nghbr.controller;
 
 
 import org.springframework.stereotype.Controller;
+import java.util.Date;
+
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,6 +35,7 @@ public class MessageBoardController extends AbstractController {
 		try {
 			message.setPostCode(2036);
 			message.setUsername("Peter");
+			message.setDate(new Date());
 			messageService.save(message);
 			model.addAttribute("message", message);
 			

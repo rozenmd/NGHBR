@@ -1,7 +1,5 @@
 package com.kmji.nghbr.model;
 
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +13,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.SessionFactory;
+
+import java.util.Date;
+
 
 @Entity
 @Table(name="APP_MESSAGE")
@@ -32,12 +33,14 @@ public class Message {
 	@Column(name="PostCode", nullable=false)
 	private int postCode;
 	
-//	@Column(name="PostCode", nullable=false)
-//	private String postCode;
+	@Column(name="Date")
+	private Date date;
 	
 	@Column(name="STATE")
 	private String state=State.ACTIVE.getState();
 	
+
+
 	
 	public int getId() {
 		return id;
@@ -51,10 +54,18 @@ public class Message {
 		return username;
 	}
 	
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
+	
+	public Date getDate() {
+		return date;
+	}
+	
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
 	public int getPostCode() {
 		return postCode;
 	}
