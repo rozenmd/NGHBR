@@ -62,19 +62,10 @@ public class UserController extends AbstractController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerPage(ModelMap model) {
         // create a test user
-        try {
-            User user = new User();
-            user.setFirstName("test");
-            user.setLastName("user");
-            user.setSsoId("test");
-            user.setEmail("test@example.com");
-            user.setPassword("Pass.123");
-            userService.save(user);
-            model.addAttribute("user", user);
-        } catch(Exception e) {
-            model.addAttribute("user", userService.findBySso("test"));
-        }
+        model.addAttribute("user", getPrincipal());
 
         return "user/register";
     }
+
+
 }

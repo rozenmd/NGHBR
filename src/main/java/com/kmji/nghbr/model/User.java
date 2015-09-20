@@ -1,8 +1,8 @@
 package com.kmji.nghbr.model;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,27 +24,30 @@ public class User {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name="SSO_ID", unique=true, nullable=false)
+	@Column(name="SSO_ID", unique=true, nullable=true)
 	private String ssoId;
 	
-	@Column(name="PASSWORD", nullable=false)
+	@Column(name="PASSWORD", nullable=true)
 	private String password;
 		
-	@Column(name="FIRST_NAME", nullable=false)
+	@Column(name="FIRST_NAME", nullable=true)
 	private String firstName;
 
-	@Column(name="LAST_NAME", nullable=false)
+	@Column(name="LAST_NAME", nullable=true)
 	private String lastName;
 
-	@Column(name="EMAIL", nullable=false)
+	@Column(name="EMAIL", nullable=true)
 	private String email;
 
+	@Column(name="FACEBOOK_ID", nullable=false)
+	private String facebookId;
+	
 	@Column(name="POSTCODE", nullable=false)
 	private int postcode;
 	
 	@Column(name="POINTS", nullable=false)
 	private int points;
-	
+
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="owner")
 	private List<Item> ownedItems;
 	
@@ -156,6 +159,23 @@ public class User {
 		this.userProfiles = userProfiles;
 	}
 
+	public String getFacebookId() { return facebookId; }
+
+	public void setFacebookId(String facebookId) { this.facebookId = facebookId; }
+
+	public Collection<GrantedAuthority> getAuthorities() {
+		//make everyone ROLE_USER
+		Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+		GrantedAuthority grantedAuthority = new GrantedAuthority() {
+			//anonymous inner type
+			public String getAuthority() {
+				return "ROLE_USER";
+			}
+		};
+		grantedAuthorities.add(grantedAuthority);
+		return grantedAuthorities;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -188,7 +208,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", ssoId=" + ssoId + ", password=" + password
 				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + ", state=" + state + ", userProfiles=" + userProfiles +"]";
+				+ ", email=" + email + ", state=" + state + ", userProfiles=" + userProfiles + ", facebookId=" + facebookId +"]";
 	}
 
 	

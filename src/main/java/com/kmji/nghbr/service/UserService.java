@@ -8,6 +8,8 @@ public interface UserService {
 
 	User findBySso(String sso);
 
+	User findByFacebookId(String facebookId);
+
 	List<User> findAllUsers();
 
 	User findById(int id);
