@@ -39,6 +39,12 @@ public class User {
 	@Column(name="EMAIL", nullable=false)
 	private String email;
 	
+	@Column(name="SUBURB_ID", nullable=false)
+	private int suburbId;
+	
+	@Column(name="POINTS", nullable=false)
+	private int points;
+	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="owner")
 	private List<Item> ownedItems;
 	
@@ -101,7 +107,23 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public int getSuburb() {
+		return suburbId;
+	}
 
+	public void setSuburb(int suburbId) {
+		this.suburbId = suburbId;
+	}
+	
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+	
 	public List<Item> getOwnedItems() {
 		return ownedItems;
 	}
