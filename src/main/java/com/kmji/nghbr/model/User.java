@@ -1,8 +1,10 @@
 package com.kmji.nghbr.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -35,6 +38,12 @@ public class User {
 
 	@Column(name="EMAIL", nullable=false)
 	private String email;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="owner")
+	private List<Item> ownedItems;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="borrower")
+	private List<Item> borrowedItems;
 
 	@Column(name="STATE", nullable=false)
 	private String state=State.ACTIVE.getState();
@@ -91,6 +100,22 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<Item> getOwnedItems() {
+		return ownedItems;
+	}
+
+	public void setOwnedItems(List<Item> ownedItems) {
+		this.ownedItems = ownedItems;
+	}
+
+	public List<Item> getBorrowedItems() {
+		return borrowedItems;
+	}
+
+	public void setBorrowedItems(List<Item> borrowedItems) {
+		this.borrowedItems = borrowedItems;
 	}
 
 	public String getState() {
