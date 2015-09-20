@@ -34,7 +34,10 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="<c:url value="/login" />">Login</a></li>
+				<c:choose>
+					<c:when test="${pageContext.request.userPrincipal.authenticated}"><li><a href="<c:url value="/logout" />">Logout</a></li></c:when>
+					<c:otherwise><li><a href="<c:url value="/login" />">Login</a></li></c:otherwise>
+				</c:choose>
 			</ul>
 
 		</div><!--/.navbar-collapse -->
@@ -51,6 +54,7 @@
 				<a class="btn btn-lg btn-social btn-facebook">
 					<i class="fa fa-facebook"></i> Sign in with Facebook
 				</a>
+
 			</div>
 
 			<div class="text-center" id="loadBannerVideoSpinner" style="padding: 10px; border-radius: 4px; display: none; margin-top: 20px; background-color: rgba(0, 0, 0, 0.498039);">

@@ -38,9 +38,9 @@ public class User {
 
 	@Column(name="EMAIL", nullable=false)
 	private String email;
-	
-	@Column(name="SUBURB_ID", nullable=false)
-	private int suburbId;
+
+	@Column(name="POSTCODE", nullable=false)
+	private int postcode;
 	
 	@Column(name="POINTS", nullable=false)
 	private int points;
@@ -108,12 +108,12 @@ public class User {
 		this.email = email;
 	}
 	
-	public int getSuburb() {
-		return suburbId;
+	public int getPostcode() {
+		return postcode;
 	}
 
-	public void setSuburb(int suburbId) {
-		this.suburbId = suburbId;
+	public void setPostcode(int suburbId) {
+		this.postcode = postcode;
 	}
 	
 	public int getPoints() {
