@@ -49,6 +49,11 @@ public class UserController extends AbstractController {
         return "redirect:/login?logout";
     }
 
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profilePage() {
+        return "user/profile";
+    }
+
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerPage(ModelMap model) {
         // create a test user
