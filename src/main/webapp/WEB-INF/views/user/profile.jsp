@@ -61,7 +61,11 @@
 	</nav>
 	<h3>Profile</h3>
 	<div class="container box well">
+		<div class="table-responsive">
+			<table class="table">
 
+			</table>
+		</div>
 
 
 

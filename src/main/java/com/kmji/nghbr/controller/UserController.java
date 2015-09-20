@@ -50,7 +50,12 @@ public class UserController extends AbstractController {
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String profilePage() {
+    public String profilePage(ModelMap model) {
+        try{
+
+        }catch(Exception e){
+            //something something
+        }
         return "user/profile";
     }
 
