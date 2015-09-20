@@ -42,6 +42,12 @@ public class User {
 	@Column(name="FACEBOOK_ID", nullable=false)
 	private String facebookId;
 	
+	@Column(name="POSTCODE", nullable=false)
+	private int postcode;
+	
+	@Column(name="POINTS", nullable=false)
+	private int points;
+
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="owner")
 	private List<Item> ownedItems;
 	
@@ -104,7 +110,23 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public int getPostcode() {
+		return postcode;
+	}
 
+	public void setPostcode(int suburbId) {
+		this.postcode = postcode;
+	}
+	
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+	
 	public List<Item> getOwnedItems() {
 		return ownedItems;
 	}
