@@ -40,8 +40,7 @@ public class MessageServiceImpl implements MessageService{
 
 	@Override
 	public void save(Message message) {
-		System.out.println("Only an Admin can Update a User");
-		dao.saveOrUpdate(message);		
+		dao.saveOrUpdate(message);
 	}
 
 	@Override

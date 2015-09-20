@@ -24,6 +24,11 @@ public class UserServiceImpl implements UserService{
 		return dao.findBySSO(sso);
 	}
 
+	@Override
+	public User findByFacebookId(String facebookId) {
+		return dao.findByFacebookId(facebookId);
+	}
+
 	public List<User> findAllUsers(){
 		return dao.getAll();
 	}

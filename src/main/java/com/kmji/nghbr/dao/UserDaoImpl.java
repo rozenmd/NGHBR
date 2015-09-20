@@ -14,6 +14,13 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		return getByKey(id);
 	}
 
+	@Override
+	public User findByFacebookId(String facebookId) {
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("facebookId", facebookId));
+		return (User) crit.uniqueResult();
+	}
+
 	public User findBySSO(String sso) {
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("ssoId", sso));

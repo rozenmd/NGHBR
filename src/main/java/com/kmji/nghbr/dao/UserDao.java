@@ -7,6 +7,8 @@ import java.util.List;
 public interface UserDao {
 
 	User findById(int id);
+
+	User findByFacebookId(String facebookId);
 	
 	User findBySSO(String sso);
 
