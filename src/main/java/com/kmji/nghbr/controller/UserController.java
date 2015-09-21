@@ -37,7 +37,12 @@ public class UserController extends AbstractController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
-        return "user/login";
+
+        if (getPrincipal() != "anonymousUser") {
+            return "redirect:/";
+        } else {
+            return "user/login";
+        }
     }
 
     @RequestMapping(value="/logout", method = RequestMethod.GET)
