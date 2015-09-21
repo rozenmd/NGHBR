@@ -59,9 +59,9 @@
 		<h4>Here are the items you own ${user.getSsoId()}</h4>
 		<c:forEach items="${items}" var="item">
 			<div class="item row box well">
-				<form class="form-inline" action="/nghbr/item/edit/${item.getId()}">
+				<form class="form-inline" action="/item/edit/${item.getId()}">
 					<div class="form-group">
-						<img class="itemimage img-thumbnail" src="/nghbr/static/images/1defaultitem.png" alt="Item Image">
+						<img class="itemimage img-thumbnail" src="/static/images/1defaultitem.png" alt="Item Image">
 					</div>
 					<div class="itemtext form-group">
 						<h4 class="itemname">${item.getName()}</h4>
@@ -73,7 +73,7 @@
 				
 			</div>
 		</c:forEach>
-		<button type="button" class="addbutton btn btn-primary" onclick="location.href='/nghbr/additem'">Add New Item</button>
+		<button type="button" class="addbutton btn btn-primary" onclick="location.href='/additem'">Add New Item</button>
 	</div>
 	
 </body>
