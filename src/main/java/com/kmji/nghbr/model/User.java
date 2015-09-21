@@ -42,11 +42,14 @@ public class User {
 	@Column(name="FACEBOOK_ID", nullable=true)
 	private String facebookId;
 	
-	@Column(name="POSTCODE", nullable=false)
+	@Column(name="POSTCODE", nullable=true)
 	private int postcode;
+
+	@Column(name="SUBURB", nullable=true)
+	private String suburb;
 	
-	@Column(name="POINTS", nullable=false)
-	private int points;
+	@Column(name="POINTS", nullable=true)
+	private int points = 0;
 
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="owner")
 	private List<Item> ownedItems;
@@ -110,12 +113,20 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
+	public String getSuburb() {
+		return suburb;
+	}
+
+	public void setSuburb(String suburb) {
+		this.suburb = suburb;
+	}
+
 	public int getPostcode() {
 		return postcode;
 	}
 
-	public void setPostcode(int suburbId) {
+	public void setPostcode(int postcode) {
 		this.postcode = postcode;
 	}
 	
@@ -208,7 +219,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", ssoId=" + ssoId + ", password=" + password
 				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + ", state=" + state + ", userProfiles=" + userProfiles + ", facebookId=" + facebookId +"]";
+				+ ", email=" + email + ", state=" + state + ", postcode=" + postcode + ", userProfiles=" + userProfiles + ", facebookId=" + facebookId +"]";
 	}
 
 	

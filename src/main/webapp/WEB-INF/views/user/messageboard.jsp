@@ -31,7 +31,6 @@
 </head>
 
 <body>
-
 	<jsp:include page="/navBar"></jsp:include>
 
 	<h3>Message Board</h3>

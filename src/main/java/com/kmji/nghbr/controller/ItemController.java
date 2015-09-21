@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kmji.nghbr.service.PostcodeService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -34,7 +35,9 @@ public class ItemController extends AbstractController {
 	
 	@Autowired
 	ItemService itemService;
-	
+
+
+
 	@RequestMapping(value={"/items"}, method = RequestMethod.GET)
 	public String itemPage(ModelMap model){
 		User user = userService.findBySso(getPrincipal());

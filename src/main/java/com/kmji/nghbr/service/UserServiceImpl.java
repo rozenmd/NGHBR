@@ -34,7 +34,6 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public void save(User user) {
-		System.out.println("Only an Admin can Update a User");
 		dao.saveOrUpdate(user);
 	}
 
