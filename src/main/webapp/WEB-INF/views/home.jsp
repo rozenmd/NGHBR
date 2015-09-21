@@ -12,8 +12,8 @@
 			<div class="headline">
 				<h1 class="robot-land-title">NGHBR</h1>
 				<h3 class="text-white text-thin">Bringing the community together.</h3>
-				<a class="btn btn-lg btn-social btn-facebook">
-					<i class="fa fa-facebook"></i> Sign in with Facebook
+				<a href="<c:url value="/login" />" class="btn btn-lg btn-success">
+					Join your neighbourhood!
 				</a>
 
 			</div>

@@ -40,8 +40,11 @@
 				</div>
 			</form>
 
-			<fb:login-button size="large" scope="public_profile,email" onlogin="checkLoginState();">
-			</fb:login-button>
+			<hr>
+
+			<div class="login-facebook text-center">
+				<fb:login-button size="xlarge" scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+			</div>
 
 		</div>
 

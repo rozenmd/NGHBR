@@ -11,13 +11,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">NGHBR</a>
+      <a class="navbar-brand" href="<c:url value="/" />">NGHBR</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <c:choose>
           <c:when test="${pageContext.request.userPrincipal.authenticated}">
             <li><a href="<c:url value="/profile" />">Profile</a></li>
+            <li><a href="<c:url value="/messageboard" />">Message Board</a></li>
+            <li><a href="<c:url value="/items" />">Items</a></li>
             <li><a href="<c:url value="/logout" />">Logout</a></li>
           </c:when>
           <c:otherwise>
