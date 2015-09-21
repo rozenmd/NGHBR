@@ -46,7 +46,7 @@ public class UserController extends AbstractController {
         if (auth != null){
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        return "redirect:/login?logout";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)

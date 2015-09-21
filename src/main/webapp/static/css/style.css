@@ -1,3 +1,7 @@
 html, body {
     font-family: "Open Sans", Helvetica, Arial;
 }
+
+body {
+    padding-top: 50px;
+}

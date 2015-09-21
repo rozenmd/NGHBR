@@ -18,7 +18,18 @@ public class NghbrController extends AbstractController {
 	@RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
 	public String accessDeniedPage(ModelMap model) {
 		model.addAttribute("user", getPrincipal());
-		return "accessDenied";
+		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/navBar", method = RequestMethod.GET)
+	public String navBar(ModelMap model) {
+		model.addAttribute("user", getPrincipal());
+		return "navBar";
+	}
+
+	@RequestMapping(value = "/head", method = RequestMethod.GET)
+	public String head() {
+		return "head";
 	}
 
 
