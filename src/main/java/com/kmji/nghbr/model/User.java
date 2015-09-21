@@ -24,22 +24,22 @@ public class User {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name="SSO_ID", unique=true, nullable=true)
+	@Column(name="SSO_ID", unique=true, nullable=false)
 	private String ssoId;
 	
-	@Column(name="PASSWORD", nullable=true)
+	@Column(name="PASSWORD", nullable=false)
 	private String password;
 		
-	@Column(name="FIRST_NAME", nullable=true)
+	@Column(name="FIRST_NAME", nullable=false)
 	private String firstName;
 
-	@Column(name="LAST_NAME", nullable=true)
+	@Column(name="LAST_NAME", nullable=false)
 	private String lastName;
 
-	@Column(name="EMAIL", nullable=true)
+	@Column(name="EMAIL", nullable=false)
 	private String email;
 
-	@Column(name="FACEBOOK_ID", nullable=false)
+	@Column(name="FACEBOOK_ID", nullable=true)
 	private String facebookId;
 	
 	@Column(name="POSTCODE", nullable=false)

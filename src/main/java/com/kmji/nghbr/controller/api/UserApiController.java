@@ -28,7 +28,7 @@ public class UserApiController extends AbstractController {
     UserService userService;
 
     @ResponseBody
-    @RequestMapping(value = "/api/users/authenticate", method = RequestMethod.POST, headers = {"Content-type=application/json"})
+    @RequestMapping(value = "/api/users/authenticate", method = RequestMethod.POST)
     public User authenticate(@RequestBody User requestUser, HttpServletRequest request) {
 
         System.out.println(requestUser.toString());

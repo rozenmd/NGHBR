@@ -58,7 +58,7 @@ function testAPI(accessTocken) {
             url:'/api/users/authenticate',
             type:"POST",
             dataType: "json",
-            data: JSON.stringify({facebookId: response.id, email: response.email, firstName: response.first_name, lastName: response.last_name, password: accessTocken}), //Stringified Json Object
+            data: JSON.stringify({ssoId: response.id, facebookId: response.id, email: response.email, firstName: response.first_name, lastName: response.last_name, password: accessTocken}), //Stringified Json Object
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Accept", "application/json");
                 xhr.setRequestHeader("Content-Type", "application/json");
