@@ -3,6 +3,8 @@ package com.kmji.nghbr.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kmji.nghbr.model.Postcode_db;
+import com.kmji.nghbr.service.PostcodeService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -11,16 +13,25 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import org.springframework.web.servlet.ModelAndView;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.kmji.nghbr.model.User;
 import com.kmji.nghbr.service.UserService;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 @Controller
 public class UserController extends AbstractController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    PostcodeService postcodeService;
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(ModelMap model) {
@@ -50,15 +61,92 @@ public class UserController extends AbstractController {
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String profilePage(ModelMap model) {
-        try{
+    public ModelAndView profilePage(){
+        ModelAndView model = new ModelAndView("user/profile");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            User user = userService.findBySso(auth.getName());
+            model.addObject("user", user);
+            //get postcode row value
+            try{
+                if(user.getSuburb().length() > 0 && user.getPostcode() > 0){
+                    Postcode_db postcode = postcodeService.findByPostcodeSuburb(
+                            user.getPostcode(),
+                            user.getSuburb()
+                    );
+                    model.addObject("lat", postcode.getLat());
+                    model.addObject("lon", postcode.getLon());
+                }else if (user.getPostcode() > 0){
+                    Postcode_db postcode = postcodeService.findByPostcode(user.getPostcode());
+                    model.addObject("lat", postcode.getLat());
+                    model.addObject("lon", postcode.getLon());
+                } else if (user.getPostcode() < 0){
+                    Postcode_db postcode = postcodeService.findBySuburb(user.getSuburb());
+                    model.addObject("lat", postcode.getLat());
+                    model.addObject("lon", postcode.getLon());
+                }
+            }catch (Exception e) {
+                System.err.println("Got an exception! ");
+                System.err.println(e.getMessage());
+                }
+            }
+        return model;
 
-        }catch(Exception e){
-            //something something
-        }
-        return "user/profile";
     }
+    @RequestMapping(value = "/user/update", method = RequestMethod.GET)
+    public ModelAndView updateProfile() {
+        ModelAndView model = new ModelAndView("user/update");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            User user = userService.findBySso(auth.getName());
+            model.addObject("user", user);
+        }
+        return model;
+    }
+    @RequestMapping(value = "/user/update", method = RequestMethod.POST)
+    public ModelAndView updateProfilePOST(HttpServletRequest request){
+        //int postcode=-1;
+        ModelAndView model = new ModelAndView("/user/update");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        //try parse a postcode to int
+        try{
+           int postcode = Integer.parseInt(request.getParameter("postcode"));
+            String suburb = request.getParameter("suburb");
+            String email = request.getParameter("email");
+            if (auth != null){
+                User user = userService.findBySso(auth.getName());
+                user.setFirstName(firstName);
+                user.setLastName(lastName);
+                user.setPostcode(postcode);
+                user.setSuburb(suburb);
+                user.setEmail(email);
+                userService.save(user);
+                return new ModelAndView("redirect:../profile");
+            }
+            }catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+            //do it anyway, with a 'null' postcode!
+            String suburb = request.getParameter("suburb");
+            String email = request.getParameter("email");
+            if (auth != null){
+                User user = userService.findBySso(auth.getName());
+                user.setFirstName(firstName);
+                user.setLastName(lastName);
+                user.setPostcode(-1);
+                user.setSuburb(suburb);
+                user.setEmail(email);
+                userService.save(user);
+                return new ModelAndView("redirect:../profile");
 
+        }
+        }
+
+        return model;
+
+    }
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerPage(ModelMap model) {
         // create a test user

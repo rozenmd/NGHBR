@@ -73,38 +73,50 @@
 	<div  style="padding-top: 40px;padding-bottom:345px;" class="container box well">
 		<h3>Profile</h3>
 		<div class="table-responsive" style="width:40%;float:left">
+			<form method="post" action="update" >
+
 			<table class="table" >
 				<c:choose>
 					<c:when test="${pageContext.request.userPrincipal.authenticated}">
 						<tr>
-							<td>Name</td>
-							<td>${user.firstName} ${user.lastName}</td>
+							<td>First Name</td>
+							<td>
+								<input type="text" style="width: 185px;"
+									   value="${user.firstName}" maxlength="30" name="firstName" id="firstName" />
+							</td>
+						</tr>
+						<tr>
+							<td>Last Name</td>
+							<td><input type="text" style="width: 185px;"
+									   value="${user.lastName}" maxlength="30" name="lastName" id="lastName" /></td>
 						</tr>
 						<tr>
 							<td>Postcode</td>
-							<td>${user.postcode}</td>
+							<td><input type="text" style="width: 185px;"
+									   value="${user.postcode}" maxlength="5" name="postcode" id="postcode" /></td>
 						</tr>
 						<tr>
 							<td>Suburb</td>
-							<td>${user.suburb}</td>
+							<td><input type="text" style="width: 185px;"
+									   value="${user.suburb}" maxlength="30" name="suburb" id="suburb" /></td>
 						</tr>
 						<tr>
 							<td>Email</td>
-							<td>${user.email}</td>
+							<td><input type="text" style="width: 185px;"
+									   value="${user.email}" maxlength="30" name="email" id="email" /></td>
 						</tr>
-						<tr>
-							<td>Points</td>
-							<td>${user.points}</td>
-						</tr>
-			</table>
-<a href="user/update">
-	<span class="glyphicon glyphicon-edit" aria-hidden="true" style="float:left;">Edit</span>
-</a>
-					</c:when>
+						</table>
+				<input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
+			<input type="submit" class="update" title="Update" value="Update" />
+			<a href="../profile">Cancel</a>
+		</form>
+
+		</c:when>
 					<c:otherwise>
 						Please <a href="<c:url value="/login" />">login</a> to continue
 					</c:otherwise>
 				</c:choose>
+
 			<div id="map" style="position: absolute;
     top: 10%;
     left: 44%;

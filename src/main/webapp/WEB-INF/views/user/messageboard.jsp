@@ -46,7 +46,18 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<%-- 				<li><a href="<c:url value="/login" />">Login</a></li>
- --%>
+ --%><ul class="nav navbar-nav navbar-right">
+					<c:choose>
+						<c:when test="${pageContext.request.userPrincipal.authenticated}">
+							<li><a href="<c:url value="/messageboard" />">Message board</a></li>
+							<li><a href="<c:url value="/profile" />">Profile</a></li>
+							<li><a href="<c:url value="/logout" />">Logout</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="<c:url value="/login" />">Login</a></li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
 				</ul>
 
 			</div>

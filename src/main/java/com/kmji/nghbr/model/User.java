@@ -41,6 +41,9 @@ public class User {
 
 	@Column(name="POSTCODE", nullable=false)
 	private int postcode;
+
+	@Column(name="SUBURB", nullable=false)
+	private String suburb;
 	
 	@Column(name="POINTS", nullable=false)
 	private int points;
@@ -107,12 +110,20 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
+	public String getSuburb() {
+		return suburb;
+	}
+
+	public void setSuburb(String suburb) {
+		this.suburb = suburb;
+	}
+
 	public int getPostcode() {
 		return postcode;
 	}
 
-	public void setPostcode(int suburbId) {
+	public void setPostcode(int postcode) {
 		this.postcode = postcode;
 	}
 	
@@ -188,7 +199,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", ssoId=" + ssoId + ", password=" + password
 				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + ", state=" + state + ", userProfiles=" + userProfiles +"]";
+				+ ", email=" + email + ", state=" + state + ", postcode=" + postcode + ", userProfiles=" + userProfiles +"]";
 	}
 
 	

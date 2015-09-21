@@ -26,7 +26,7 @@ public class Suburb {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="POSTCODE", unique=true, nullable=false)
+	@Column(name="POSTCODE", nullable=false)
 	private int postcode;
 	
 	@Column(name="SUBURB_NAME", nullable=true)
