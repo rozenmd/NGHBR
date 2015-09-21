@@ -9,8 +9,6 @@ function statusChangeCallback(response) {
     if (response.status === 'connected') {
         // Logged into your app and Facebook.
         testAPI(response.authResponse.accessToken);
-        //redirecting once logged in
-        window.location = '/';
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
         document.getElementById('status').innerHTML = 'Please log ' +
@@ -99,7 +97,8 @@ function testAPI(accessTocken) {
                 xhr.setRequestHeader(header, token);
             },
             success: function(data){
-                console.log(data)
+                //redirecting once logged in
+                window.location = '/';
             }});
 
     });
