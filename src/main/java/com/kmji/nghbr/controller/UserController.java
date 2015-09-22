@@ -103,7 +103,7 @@ public class UserController extends AbstractController {
         ModelAndView model = new ModelAndView("user/update");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null){
-            User user = userService.findBySso(auth.getName());
+            User user = userService.findBySso(getPrincipal());
             model.addObject("user", user);
         }
         return model;
