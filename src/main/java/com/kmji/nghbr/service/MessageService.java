@@ -12,7 +12,7 @@ public interface MessageService {
 	Message findByPostCode(int postCode);
 
 
-	List<Message> findAllUsers();
+	List<Message> findAllMessages();
 
 	Message findById(int id);
 

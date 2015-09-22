@@ -28,7 +28,7 @@ public class MessageServiceImpl implements MessageService{
 	
 
 	@Override
-	public List<Message> findAllUsers() {
+	public List<Message> findAllMessages() {
 		return dao.getAll();
 	}
 

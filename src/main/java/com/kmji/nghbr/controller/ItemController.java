@@ -57,8 +57,8 @@ public class ItemController extends AbstractController {
 	@RequestMapping(value={"/additem"}, method = RequestMethod.POST)
 	public String addItemPagePost(@ModelAttribute("itemForm") Item item, BindingResult result, ModelMap model){
 		if(result.hasErrors()){
-			System.out.println("\n\n\n\n\nErrors!!!!!");
-			System.out.println(result.getAllErrors());
+//			System.out.println("\n\n\n\n\nErrors!!!!!");
+//			System.out.println(result.getAllErrors());
 			return "item/additem";
 		}
 		

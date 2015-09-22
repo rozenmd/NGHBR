@@ -35,9 +35,16 @@
 
 	<h3>Message Board</h3>
 	<div class="container box well">
-		<div id="conversationsholder"></div>
+		<div id="conversationsholder">
+			<c:forEach items="${messages}" var="message">
+							<p>${message.getText()}</p>
 
-		<form:form method="POST" action="postmessage" name="message">
+			</c:forEach>
+
+
+		</div>
+
+		<form:form method="POST" action="messageboard" name="message">
 			<div class="input-group">
 				<textarea id="messagetext" class="form-control"
 					placeholder="Type Message..." rows="2" name="text"></textarea>

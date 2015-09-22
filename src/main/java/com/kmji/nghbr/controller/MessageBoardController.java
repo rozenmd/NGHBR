@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -29,23 +30,34 @@ public class MessageBoardController extends AbstractController {
 	MessageService messageService;
 	@Autowired
 	UserService userService;
-
-	@RequestMapping(value = { "/messageboard" }, method = RequestMethod.GET)
-	public ModelAndView messageBoardPage() {
-		ModelAndView model = new ModelAndView("user/messageboard");
-
-		//model.addObject();
-		return model;
+	
+	@RequestMapping(value={"/messageboard"}, method = RequestMethod.GET)
+	public String itemPage(ModelMap model){
+		User user = userService.findBySso(getPrincipal());
+		model.addAttribute("user", user);
+		List<Message> messages = messageService.findAllMessages();
+		model.addAttribute("messages",messages);
+		return "user/messageboard";
 
 	}
 
+//	@RequestMapping(value = { "/messageboard" }, method = RequestMethod.GET)
+//	public ModelAndView messageBoardPage() {
+//		ModelAndView model = new ModelAndView("user/messageboard");
+//
+//		//model.addObject();
+//		return model;
+//
+//	}
+
 	/*Retrieve message data from user and send to database  */
-	@RequestMapping(value = "/postmessage",  method = RequestMethod.POST)
+	@RequestMapping(value = "/messageboard",  method = RequestMethod.POST)
 	public String postmessage(@ModelAttribute("message") Message message, ModelMap model) {
 		try {
+
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			if (auth != null) {
-				User user = userService.findBySso(auth.getName());
+				User user = userService.findBySso(getPrincipal());
 				message.setPostCode(user.getPostcode());
 				message.setUsername(user.getFirstName());
 				message.setDate(new Date());
@@ -63,7 +75,7 @@ public class MessageBoardController extends AbstractController {
 		} catch(Exception e) {
 
 		}
-		return "user/messageboard";
+		return "redirect:/messageboard";
 
 
 	}
