@@ -22,7 +22,7 @@ public class MessageServiceImpl implements MessageService{
 	}
 	
 	@Override
-	public Message findByPostCode(int postCode){
+	public List<Message> findByPostCode(int postCode){
 		return dao.findByPostCode(postCode);
 	}
 	

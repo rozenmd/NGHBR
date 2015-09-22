@@ -39,8 +39,6 @@ public class Message {
 	@Column(name="STATE")
 	private String state=State.ACTIVE.getState();
 	
-
-
 	
 	public int getId() {
 		return id;

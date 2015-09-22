@@ -9,7 +9,7 @@ public interface MessageService {
 	
 	Message findByUsername(String sso);
 	
-	Message findByPostCode(int postCode);
+	List<Message> findByPostCode(int postCode);
 
 
 	List<Message> findAllMessages();

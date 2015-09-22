@@ -35,7 +35,7 @@ public class MessageBoardController extends AbstractController {
 	public String itemPage(ModelMap model){
 		User user = userService.findBySso(getPrincipal());
 		model.addAttribute("user", user);
-		List<Message> messages = messageService.findAllMessages();
+		List<Message> messages = messageService.findByPostCode(user.getPostcode());
 		model.addAttribute("messages",messages);
 		return "user/messageboard";
 

@@ -25,10 +25,10 @@ public class MessageDauImpl extends AbstractDao<Integer, Message> implements Mes
 	
 	@Override
 	
-	public Message findByPostCode(int postCode) {
+	public List<Message> findByPostCode(int postCode) {
 		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("PostCode", postCode));
-		return (Message) crit.uniqueResult();
+		crit.add(Restrictions.eq("postCode", postCode));
+		return (List<Message>) crit.list();
 		
 	}
 

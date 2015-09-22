@@ -10,7 +10,7 @@ public interface MessageDao {
 	
 	Message findByUsername(String username);
 	
-	Message findByPostCode(int postCode);
+	List<Message> findByPostCode(int postCode);
 
 	List<Message>getAll();
 
