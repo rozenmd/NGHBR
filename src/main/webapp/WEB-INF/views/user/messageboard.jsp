@@ -58,7 +58,7 @@
 		<form:form method="POST" action="messageboard" name="message">
 			<div class="input-group">
 				<textarea id="messagetext" class="form-control"
-					placeholder="Type Message..." rows="2" name="text"></textarea>
+					placeholder="Type Message..."  maxlength="150" rows="2" name="text"></textarea>
 				<span class="input-group-btn">
 					<button class="btn a btn-primary btn-lg"
 						type="submit">Post!</button>
