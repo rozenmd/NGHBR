@@ -36,12 +36,20 @@
 	<h3>Message Board</h3>
 	<div class="container box well">
 		<div id="conversationsholder">
-			<c:forEach items="${messages}" var="message">
+			<c:forEach items="${messages}" var="message" varStatus="counter">
+				<c:choose>
+					<c:when test="${counter.index % 2 == 0}">
+						<div class="bubble_left">
 							<p>${message.getText()}</p>
-
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="bubble_right">
+							<p>${message.getText()}</p>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</c:forEach>
-
-
 		</div>
 
 		<form:form method="POST" action="messageboard" name="message">
