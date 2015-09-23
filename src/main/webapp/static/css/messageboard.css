@@ -1,94 +1,90 @@
-
-body{
+body {
 	background-color: #E2F4FF;
-	
 }
 
 h3 {
-    padding-top: 70px;
-    padding-left: 70px;
-    padding-bottom: 40px;
-  }
-  
- .box{
-    width:650px;
-    height:500px;
-    background: #C9CACA;
-    box-shadow: 0 0 30px black;   
+	padding-top: 70px;
+	padding-left: 70px;
+	padding-bottom: 40px;
 }
 
- #conversationsholder{
-    width:600px;
-    height:425px;
+.box {
+	width: 700px;
+	height: 500px;
+	background: #C9CACA;
+	box-shadow: 0 0 30px black;
 }
 
-#messagetext{
+.conversationsholder {
+	width: 675px;
+	height: 425px;
+	overflow-y: auto;
+	
+}
+
+#messagetext {
 	resize: none;
-	margin-right:50px;
-    height: 47px;
+	margin-right: 50px;
+	height: 47px;
+/* 	border: 2px solid #000000;
+ */	
+	
 }
 
-.a{
-	float right;
+.a {float right;
+	
 }
 
+.bubble_left {
+	position: relative;
+	width: 320px;
+	height: 60px;
+	padding: 10px;
+	margin-bottom: 10px;
+	margin-left: 15px;
 
-.bubble_left
-{
- position: relative;
- width: 320px;
-height: 60px;
-padding: 10px;
-margin-bottom: 10px;
-background: #FFFFFF;
--webkit-border-radius: 5px;
--moz-border-radius: 5px;
-border-radius: 5px;
-
+	background: #FFFFFF;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 
-.bubble_right
-{
-position: relative;
-width: 320px;
-height: 60px;
-padding: 10px;
-margin-bottom: 10px;
-margin-left: 290px;
-
-background: #FFFFFF;
--webkit-border-radius: 5px;
--moz-border-radius: 5px;
-border-radius: 5px;
-/* float:right; */
+.bubble_right {
+	position: relative;
+	width: 320px;
+	height: 60px;
+	padding: 10px;
+	margin-bottom: 10px;
+	margin-left: 325px;
+	background: #FFFFFF;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	/* float:right; */
 }
 
-
-
-.bubble_left:before
-{
-content: '';
-position: absolute;
-border-style: solid;
-border-width: 8px 15px 8px 0;
-border-color: transparent #FFFFFF;
-display: block;
-width: 0;
-z-index: 1;
-left: -15px;
-top: 11px;
+.bubble_left:before {
+	content: '';
+	position: absolute;
+	border-style: solid;
+	border-width: 8px 15px 8px 0;
+	border-color: transparent #FFFFFF;
+	display: block;
+	width: 0;
+	z-index: 1;
+	left: -15px;
+	top: 11px;
 }
 
-.bubble_right:after 
-{
-content: '';
-position: absolute;
-border-style: solid;
-border-width: 8px 0 8px 15px;
-border-color: transparent #FFFFFF;
-display: block;
-width: 0;
-z-index: 1;
-right: -15px;
-top: 11px;
+.bubble_right:after {
+	content: '';
+	position: absolute;
+	border-style: solid;
+	border-width: 8px 0 8px 15px;
+	border-color: transparent #FFFFFF;
+	display: block;
+	width: 0;
+	z-index: 1;
+	right: -15px;
+	top: 11px;
 }

@@ -21,11 +21,14 @@
 	rel="stylesheet">
 
 
+
 <%-- JavaScripts --%>
 <script
 	src="<c:url value="/static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" />"></script>
 <script src="<c:url value="/static/js/vendor/jquery-1.11.2.min.js" />"></script>
 <script src="<c:url value="/static/js/vendor/bootstrap.min.js" />"></script>
+<script src="<c:url value="/static/js/messageboard.js" />"></script>
+
 
 <title>NGHBR</title>
 </head>
@@ -35,7 +38,7 @@
 
 	<h3>Message Board</h3>
 	<div class="container box well">
-		<div id="conversationsholder">
+		<div class="conversationsholder">
 			<c:forEach items="${messages}" var="message" varStatus="counter">
 				<c:choose>
 					<c:when test="${counter.index % 2 == 0}">
@@ -57,7 +60,8 @@
 				<textarea id="messagetext" class="form-control"
 					placeholder="Type Message..." rows="2" name="text"></textarea>
 				<span class="input-group-btn">
-					<button class="btn a btn-primary btn-lg" type="submit">Post!</button>
+					<button class="btn a btn-primary btn-lg"
+						type="submit">Post!</button>
 				</span>
 			</div>
 		</form:form>
