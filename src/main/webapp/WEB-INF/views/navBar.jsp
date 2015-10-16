@@ -20,6 +20,7 @@
             <li><a href="<c:url value="/profile" />">Profile</a></li>
             <li><a href="<c:url value="/messageboard" />">Message Board</a></li>
             <li><a href="<c:url value="/items" />">Items</a></li>
+            <li><a href="<c:url value="/events" />">Events</a></li>
             <li><a href="<c:url value="/logout" />">Logout</a></li>
           </c:when>
           <c:otherwise>

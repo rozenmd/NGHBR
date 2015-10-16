@@ -5,3 +5,18 @@ html, body {
 body {
     padding-top: 50px;
 }
+
+.sign-in {
+    margin-top: 100px;
+    text-align: center;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #dcdcdc;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 0px;
+    -moz-box-shadow: 0 2px 7px rgba(0, 0, 0, .1);
+    -webkit-box-shadow: 0 2px 7px rgba(0, 0, 0, .1);
+    box-shadow: 0 2px 7px rgba(0, 0, 0, .1);
+}
+

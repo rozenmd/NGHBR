@@ -10,7 +10,7 @@
 
 	<div class="container">
 
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-8 col-md-offset-2 sign-in">
 			<h1 class="text-center">Login to NGHBR</h1>
 			<c:url var="loginUrl" value="/login" />
 			<form action="${loginUrl}" method="post" class="form-horizontal">
@@ -36,14 +36,14 @@
 
 				<div class="form-actions">
 					<input type="submit"
-						   class="btn btn-block btn-primary btn-lg" value="Log in">
+						   class="btn btn-primary btn-lg" value="Login">
 				</div>
 			</form>
 
 			<hr>
 
 			<div class="login-facebook text-center">
-				<fb:login-button size="xlarge" scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+				<a class="btn btn-social btn-lg btn-facebook" onclick="login()"><i class="fa fa-facebook"></i>Sign in with Facebook</a>
 			</div>
 
 		</div>
