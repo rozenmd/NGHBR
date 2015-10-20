@@ -4,18 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.*;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="APP_USER")
@@ -45,9 +34,10 @@ public class User {
 	@Column(name="POSTCODE", nullable=true)
 	private int postcode;
 
-	@Column(name="SUBURB", nullable=true)
-	private String suburb;
-	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "SUBURB_ID", nullable=true)
+	private Suburb suburb;
+
 	@Column(name="POINTS", nullable=true)
 	private int points = 0;
 
@@ -114,11 +104,11 @@ public class User {
 		this.email = email;
 	}
 
-	public String getSuburb() {
+	public Suburb getSuburb() {
 		return suburb;
 	}
 
-	public void setSuburb(String suburb) {
+	public void setSuburb(Suburb suburb) {
 		this.suburb = suburb;
 	}
 
