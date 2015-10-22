@@ -3,7 +3,7 @@ package com.kmji.nghbr.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kmji.nghbr.model.Postcode_db;
+import com.kmji.nghbr.model.Postcode;
 import com.kmji.nghbr.model.Suburb;
 import com.kmji.nghbr.service.PostcodeService;
 import org.springframework.security.core.Authentication;
@@ -76,18 +76,22 @@ public class UserController extends AbstractController {
             //get postcode row value
             try{
                 if(user.getSuburb().getSuburbName().length() > 0 && user.getPostcode() > 0){
-                    Postcode_db postcode = postcodeService.findByPostcodeSuburb(
+
+                    Postcode postcode = postcodeService.findByPostcodeSuburb(
                             user.getPostcode(),
+
                             user.getSuburb().getSuburbName()
                     );
                     model.addObject("lat", postcode.getLat());
                     model.addObject("lon", postcode.getLon());
                 }else if (user.getPostcode() > 0){
-                    Postcode_db postcode = postcodeService.findByPostcode(user.getPostcode());
+
+                    Postcode postcode = postcodeService.findByPostcode(user.getPostcode());
                     model.addObject("lat", postcode.getLat());
                     model.addObject("lon", postcode.getLon());
                 } else if (user.getPostcode() < 0){
-                    Postcode_db postcode = postcodeService.findBySuburb(user.getSuburb().getSuburbName());
+
+                    Postcode postcode = postcodeService.findBySuburb(user.getSuburb());
                     model.addObject("lat", postcode.getLat());
                     model.addObject("lon", postcode.getLon());
                 }
@@ -118,6 +122,7 @@ public class UserController extends AbstractController {
         //try parse a postcode to int
         try{
             int postcode = Integer.parseInt(request.getParameter("postcode"));
+
             Suburb suburb = new Suburb();
             suburb.setSuburbName(request.getParameter("suburb"));
             suburb.setPostcode(postcode);
