@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="APP_POSTCODE_DB")
-public class Postcode_db implements Serializable {
+public class Postcode implements Serializable {
 
 	@Id
 	@Column(name = "SUBURB_POSTCODE", nullable = false)

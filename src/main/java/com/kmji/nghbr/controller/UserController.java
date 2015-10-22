@@ -3,7 +3,7 @@ package com.kmji.nghbr.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kmji.nghbr.model.Postcode_db;
+import com.kmji.nghbr.model.Postcode;
 import com.kmji.nghbr.service.PostcodeService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -75,18 +75,18 @@ public class UserController extends AbstractController {
             //get postcode row value
             try{
                 if(user.getSuburb().length() > 0 && user.getPostcode() > 0){
-                    Postcode_db postcode = postcodeService.findByPostcodeSuburb(
+                    Postcode postcode = postcodeService.findByPostcodeSuburb(
                             user.getPostcode(),
                             user.getSuburb()
                     );
                     model.addObject("lat", postcode.getLat());
                     model.addObject("lon", postcode.getLon());
                 }else if (user.getPostcode() > 0){
-                    Postcode_db postcode = postcodeService.findByPostcode(user.getPostcode());
+                    Postcode postcode = postcodeService.findByPostcode(user.getPostcode());
                     model.addObject("lat", postcode.getLat());
                     model.addObject("lon", postcode.getLon());
                 } else if (user.getPostcode() < 0){
-                    Postcode_db postcode = postcodeService.findBySuburb(user.getSuburb());
+                    Postcode postcode = postcodeService.findBySuburb(user.getSuburb());
                     model.addObject("lat", postcode.getLat());
                     model.addObject("lon", postcode.getLon());
                 }
