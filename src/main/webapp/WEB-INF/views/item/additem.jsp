@@ -36,7 +36,7 @@
 	<div class="container">
 		<h3>Add a new Item</h3>
 		<h4>Enter the details of the item below:</h4>
-		<form:form method="POST" modelAttribute="itemForm" action="additem" name="item">
+		<form:form method="POST" modelAttribute="itemForm" action="additem?${_csrf.parameterName}=${_csrf.token}" name="item" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="name">Name</label>
 				<form:input path="name" type="text" class="form-control" id="name" placeholder="Name"/>
@@ -56,6 +56,11 @@
 				<label for="endDate">End Date (e.g. 2015-01-02)</label>
 				<form:input path="endDate" type="text" class="form-control" id="endDate" placeholder="2015-01-02"/>
 				<form:errors path="endDate" /> 
+			</div>
+			<div class="form-group">
+				<label for="file">Select Image From Disk</label>
+				<form:input type="file" path="imageFile" id="imageFile" class="form-control input-sm"/>
+                <form:errors path="imageFile"/>
 			</div>
 			<button type="submit" class="addbutton btn btn-primary btn-lg">Submit</button>
 		</form:form>

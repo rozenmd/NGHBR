@@ -35,8 +35,8 @@ public class User {
 	private int postcode;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "SUBURB_ID", nullable=true)
-	private String suburb;
+	@JoinColumn(name = "SUBURB", nullable=true)
+	private Suburb suburb;
 
 	@Column(name="POINTS", nullable=true)
 	private int points = 0;
@@ -104,11 +104,11 @@ public class User {
 		this.email = email;
 	}
 
-	public String getSuburb() {
+	public Suburb getSuburb() {
 		return suburb;
 	}
 
-	public void setSuburb(String suburb) {
+	public void setSuburb(Suburb suburb) {
 		this.suburb = suburb;
 	}
 

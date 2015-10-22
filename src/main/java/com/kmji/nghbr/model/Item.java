@@ -16,6 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="APP_ITEM")
@@ -47,6 +50,9 @@ public class Item {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="END_DATE", nullable=true)
 	private java.util.Date endDate;
+	
+	@Transient //Not mapped in hibernate
+	private MultipartFile imageFile;
 
 	public int getId() {
 		return id;
@@ -102,6 +108,14 @@ public class Item {
 
 	public void setEndDate(java.util.Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public MultipartFile  getImageFile() {
+		return imageFile;
+	}
+
+	public void setImageFile(MultipartFile  imageFile) {
+		this.imageFile = imageFile;
 	}
 
 }

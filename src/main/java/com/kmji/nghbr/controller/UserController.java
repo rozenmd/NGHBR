@@ -79,7 +79,6 @@ public class UserController extends AbstractController {
 
                     Postcode postcode = postcodeService.findByPostcodeSuburb(
                             user.getPostcode(),
-
                             user.getSuburb().getSuburbName()
                     );
                     model.addObject("lat", postcode.getLat());
@@ -91,7 +90,7 @@ public class UserController extends AbstractController {
                     model.addObject("lon", postcode.getLon());
                 } else if (user.getPostcode() < 0){
 
-                    Postcode postcode = postcodeService.findBySuburb(user.getSuburb());
+                    Postcode postcode = postcodeService.findBySuburb(user.getSuburb().getSuburbName());
                     model.addObject("lat", postcode.getLat());
                     model.addObject("lon", postcode.getLon());
                 }

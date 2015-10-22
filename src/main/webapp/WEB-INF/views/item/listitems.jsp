@@ -40,7 +40,7 @@
 			<div class="item row box well">
 				<form class="form-inline" action="/item/edit/${item.getId()}">
 					<div class="form-group">
-						<img class="itemimage img-thumbnail" src="/static/images/1defaultitem.png" alt="Item Image">
+						<img class="itemimage img-thumbnail" src="/item_images/${user.getId()}/${item.getId()}.jpg" alt="Item Image">
 					</div>
 					<div class="itemtext form-group">
 						<h4 class="itemname">${item.getName()}</h4>
