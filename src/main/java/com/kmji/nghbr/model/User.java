@@ -25,7 +25,7 @@ public class User {
 	@Column(name="LAST_NAME", nullable=false)
 	private String lastName;
 
-	@Column(name="EMAIL", nullable=false)
+	@Column(name="EMAIL", nullable=true)
 	private String email;
 
 	@Column(name="FACEBOOK_ID", nullable=true)
