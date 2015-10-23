@@ -6,7 +6,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
@@ -40,6 +42,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
 import com.kmji.nghbr.model.Item;
+import com.kmji.nghbr.model.Suburb;
 import com.kmji.nghbr.model.User;
 import com.kmji.nghbr.service.ItemService;
 import com.kmji.nghbr.service.UserService;
@@ -69,7 +72,38 @@ public class ItemController extends AbstractController implements ServletContext
 		User user = userService.findBySso(getPrincipal());
 		model.addAttribute("user", user);
 		model.addAttribute("items", user.getOwnedItems());
+		model.addAttribute("label", "Items you own");
 		return "item/listitems";
+
+	}
+	
+	@RequestMapping(value={"/items/borrowed"}, method = RequestMethod.GET)
+	public String borrowedItemPage(ModelMap model){
+		User user = userService.findBySso(getPrincipal());
+		model.addAttribute("user", user);
+		model.addAttribute("items", user.getBorrowedItems());
+		model.addAttribute("label", "Items you've borrowed");
+		return "item/listitems";
+
+	}
+	
+	@RequestMapping(value={"/items/search"}, method = RequestMethod.GET)
+	public String itemSearchPage(ModelMap model){
+		User user = userService.findBySso(getPrincipal());
+		Suburb suburb = user.getSuburb();
+		List<User> suburbUsers = suburb.getResidents();
+		List<Item> items = new ArrayList<Item>();
+		
+		for(User u : suburbUsers){
+			if(!u.equals(user)){ //don't add users own items lol
+				items.addAll(u.getOwnedItems());
+			}
+		}
+		
+		model.addAttribute("user", user);
+		model.addAttribute("items", items);
+		model.addAttribute("label", "Items you own");
+		return "item/searchitems";
 
 	}
 	
@@ -84,8 +118,8 @@ public class ItemController extends AbstractController implements ServletContext
 	public String addItemPagePost(@ModelAttribute("itemForm") @Valid Item itemForm, 
 			BindingResult result, ModelMap model) throws IOException{
 		if(result.hasErrors()){
-//			System.out.println("\n\n\n\n\nErrors!!!!!");
-//			System.out.println(result.getAllErrors());
+			Item item = new Item();
+			model.addAttribute("itemForm", item);
 			return "item/additem";
 		}
 		

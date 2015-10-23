@@ -35,10 +35,10 @@
 	
 	<div class="container">
 		<h3>My Items</h3>
-		<h4>Here are the ${label} ${user.getFirstName()}</h4>
+		<h4>Here are items available in your area!}</h4>
 		<c:forEach items="${items}" var="item">
 			<div class="item row box well">
-				<form class="form-inline" action="/item/edit/${item.getId()}">
+				<form class="form-inline" action="/item/borrow/${item.getId()}">
 					<div class="form-group">
 						<img class="itemimage img-thumbnail" src="/item_images/${item.getOwner().getId()}/${item.getId()}.jpg" alt="Item Image">
 					</div>
@@ -46,20 +46,12 @@
 						<h4 class="itemname">${item.getName()}</h4>
 						<p class="itemdesc">${item.getDescription()}</p>
 					</div>
-					<button type="submit" class="editbutton btn btn-info">Edit</button> 
+					<button type="submit" class="editbutton btn btn-primary">Borrow</button> 
 					
 				</form>
 				
 			</div>
 		</c:forEach>
-		<c:choose>
-			<c:when test="${label.equals("Items you own")}">
-				<button type="button" class="addbutton btn btn-primary" onclick="location.href='/additem'">Add New Item</button>
-			</c:when>
-			<c:otherwise>
-				button type="button" class="addbutton btn btn-primary" onclick="location.href='/items/search'">Find Items in you area!</button>
-			</c:otherwise>
-		</c:choose>
 	</div>
 	
 </body>
