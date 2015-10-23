@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kmji.nghbr.model.Postcode;
 import com.kmji.nghbr.model.Suburb;
-import com.kmji.nghbr.service.PostcodeService;
+import com.kmji.nghbr.service.SuburbService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -32,7 +32,7 @@ public class UserController extends AbstractController {
     @Autowired
     UserService userService;
     @Autowired
-    PostcodeService postcodeService;
+    SuburbService suburbService;
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(ModelMap model) {
@@ -75,24 +75,24 @@ public class UserController extends AbstractController {
             model.addObject("user", user);
             //get postcode row value
             try{
-                if(user.getSuburb().getSuburbName().length() > 0 && user.getPostcode() > 0){
+                if(user.getSuburb().getSuburbName().length() > 0 && user.getSuburb().getPostcode() > 0){
 
-                    Postcode postcode = postcodeService.findByPostcodeSuburb(
-                            user.getPostcode(),
+                    Suburb suburb = suburbService.findByPostcodeSuburb(
+                            user.getSuburb().getPostcode(),
                             user.getSuburb().getSuburbName()
                     );
-                    model.addObject("lat", postcode.getLat());
-                    model.addObject("lon", postcode.getLon());
-                }else if (user.getPostcode() > 0){
+                    model.addObject("lat", suburb.getLat());
+                    model.addObject("lon", suburb.getLon());
+                }else if (user.getSuburb().getPostcode() > 0){
+                	//Will just pick first suburb in list...
+                	Suburb suburb = suburbService.findByPostcode(user.getSuburb().getPostcode()).get(0);
+                    model.addObject("lat", suburb.getLat());
+                    model.addObject("lon", suburb.getLon());
+                } else if (user.getSuburb().getPostcode() < 0){
 
-                    Postcode postcode = postcodeService.findByPostcode(user.getPostcode());
-                    model.addObject("lat", postcode.getLat());
-                    model.addObject("lon", postcode.getLon());
-                } else if (user.getPostcode() < 0){
-
-                    Postcode postcode = postcodeService.findBySuburb(user.getSuburb().getSuburbName());
-                    model.addObject("lat", postcode.getLat());
-                    model.addObject("lon", postcode.getLon());
+                	Suburb suburb = suburbService.findBySuburb(user.getSuburb().getSuburbName());
+                    model.addObject("lat", suburb.getLat());
+                    model.addObject("lon", suburb.getLon());
                 }
             }catch (Exception e) {
                 System.err.println("Got an exception! ");
@@ -132,7 +132,7 @@ public class UserController extends AbstractController {
 
             user.setFirstName(firstName);
             user.setLastName(lastName);
-            user.setPostcode(postcode);
+            //user.setPostcode(postcode);
             user.setSuburb(suburb);
             user.setEmail(email);
             userService.save(user);

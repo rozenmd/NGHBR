@@ -30,9 +30,6 @@ public class User {
 
 	@Column(name="FACEBOOK_ID", nullable=true)
 	private String facebookId;
-	
-	@Column(name="POSTCODE", nullable=true)
-	private int postcode;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "SUBURB", nullable=true)
@@ -110,14 +107,6 @@ public class User {
 
 	public void setSuburb(Suburb suburb) {
 		this.suburb = suburb;
-	}
-
-	public int getPostcode() {
-		return postcode;
-	}
-
-	public void setPostcode(int postcode) {
-		this.postcode = postcode;
 	}
 	
 	public int getPoints() {
@@ -209,7 +198,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", ssoId=" + ssoId + ", password=" + password
 				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + ", state=" + state + ", postcode=" + postcode + ", userProfiles=" + userProfiles + ", facebookId=" + facebookId +"]";
+				+ ", email=" + email + ", state=" + state + ", userProfiles=" + userProfiles + ", facebookId=" + facebookId +"]";
 	}
 
 	

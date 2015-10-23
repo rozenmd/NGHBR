@@ -48,11 +48,11 @@
 			</tr>
 			<tr>
 				<td>Postcode</td>
-				<td>${user.postcode}</td>
+				<td>${user.getSuburb().getPostcode()}</td>
 			</tr>
 			<tr>
 				<td>Suburb</td>
-				<td>${user.suburb}</td>
+				<td>${user.getSuburb().getSuburbName()}</td>
 			</tr>
 			<tr>
 				<td>Email</td>

@@ -47,35 +47,33 @@ VALUES ('ADMIN');
 INSERT INTO USER_PROFILE(type)
 VALUES ('DBA');
 
+/* Populate Suburb */
+INSERT INTO app_suburb(SUBURB_ID, POSTCODE, SUBURB_STATE, SUBURB_NAME, RANKING, TOTAL_POINTS, SUBURB_DC, SUBURB_LAT, SUBURB_LON)
+values (1, 2000, "NSW", "Sydney", 1, 0, 0, 0, 0);
+
+/* Populate USER_PROFILE Table */
+INSERT INTO USER_PROFILE(type)
+VALUES ('USER');
+
+INSERT INTO USER_PROFILE(type)
+VALUES ('ADMIN');
+
+INSERT INTO USER_PROFILE(type)
+VALUES ('DBA');
+
 /* Populate APP_USER Table */
-INSERT INTO APP_USER(sso_id, password, first_name, last_name, email, state)
-VALUES ('khanh','abc123', 'Khanh','Nguyen','khanh@nghbr.com', 'Active');
+INSERT INTO APP_USER(sso_id, password, first_name, last_name, email, state, SUBURB)
+VALUES ('khanh','abc123', 'Khanh','Nguyen','khanh@nghbr.com', 'Active', 1);
 
-INSERT INTO APP_USER(sso_id, password, first_name, last_name, email, state)
-VALUES ('imran','abc124', 'Imran','Khan','imran@nghbr.com', 'Active');
+INSERT INTO APP_USER(sso_id, password, first_name, last_name, email, state, SUBURB)
+VALUES ('imran','abc124', 'Imran','Khan','imran@nghbr.com', 'Active', 1);
 
-INSERT INTO APP_USER(sso_id, password, first_name, last_name, email, state)
-VALUES ('max','abc125', 'Max','Rozen','maxy@nghbr.com', 'Active');
+INSERT INTO APP_USER(sso_id, password, first_name, last_name, email, state, SUBURB)
+VALUES ('max','abc125', 'Max','Rozen','maxy@nghbr.com', 'Active', 1);
 
-INSERT INTO APP_USER(sso_id, password, first_name, last_name, email, state)
-VALUES ('jason','abc126', 'Jason','Silver','jason@nghbr.com', 'Active');
+INSERT INTO APP_USER(sso_id, password, first_name, last_name, email, state, SUBURB)
+VALUES ('jason','abc126', 'Jason','Silver','jason@nghbr.com', 'Active', 1);
 
-/* Populate JOIN Table */
-INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
-  SELECT user.id, profile.id FROM APP_USER user, USER_PROFILE profile
-  where user.sso_id='khanh' and profile.type='ADMIN';
-
-INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
-  SELECT user.id, profile.id FROM APP_USER user, USER_PROFILE profile
-  where user.sso_id='imran' and profile.type='ADMIN';
-
-INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
-  SELECT user.id, profile.id FROM APP_USER user, USER_PROFILE profile
-  where user.sso_id='max' and profile.type='ADMIN';
-
-INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
-  SELECT user.id, profile.id FROM APP_USER user, USER_PROFILE profile
-  where user.sso_id='jason' and profile.type='ADMIN';
   
 INSERT INTO APP_ITEM(DESCRIPTION, END_DATE, NAME, START_DATE, BORROWER_ID, OWNER_ID)
 values ('This is a strong hammer, to be weilded only by the mighty.', '2015-01-01 04:20:20', 'Strong Hammer', '2015-01-01 04:20:20', 1, 2);

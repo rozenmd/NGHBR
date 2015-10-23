@@ -35,7 +35,7 @@ public class MessageBoardController extends AbstractController {
 	public String itemPage(ModelMap model){
 		User user = userService.findBySso(getPrincipal());
 		model.addAttribute("user", user);
-		List<Message> messages = messageService.findByPostCode(user.getPostcode());
+		List<Message> messages = messageService.findByPostCode(user.getSuburb().getPostcode());
 		model.addAttribute("messages",messages);
 		return "user/messageboard";
 
@@ -58,7 +58,7 @@ public class MessageBoardController extends AbstractController {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			if (auth != null) {
 				User user = userService.findBySso(getPrincipal());
-				message.setPostCode(user.getPostcode());
+				message.setPostCode(user.getSuburb().getPostcode());
 				message.setUsername(user.getFirstName());
 				message.setDate(new Date());
 				messageService.save(message);

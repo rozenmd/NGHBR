@@ -35,6 +35,46 @@ public class Suburb {
 	@Column(name="SUBURB_NAME", nullable=true)
 	private String suburbName;
 	
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getDc() {
+		return dc;
+	}
+
+	public void setDc(String dc) {
+		this.dc = dc;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public double getLat() {
+		return lat;
+	}
+
+	public void setLat(double lat) {
+		this.lat = lat;
+	}
+
+	public double getLon() {
+		return lon;
+	}
+
+	public void setLon(double lon) {
+		this.lon = lon;
+	}
+
 	@Column(name="RANKING", nullable=false)
 	private int ranking;
 	
@@ -43,6 +83,21 @@ public class Suburb {
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="suburb")
 	private List<User> residents;
+	
+	@Column(name = "SUBURB_STATE")
+	private String state;
+
+	@Column(name = "SUBURB_DC")
+	private String dc;
+
+	@Column(name = "SUBURB_TYPE")
+	private String type;
+
+	@Column(name = "SUBURB_LAT")
+	private double lat;
+
+	@Column(name = "SUBURB_LON")
+	private double lon;
 	
 	public List<User> getResidents() {
 		return residents;
