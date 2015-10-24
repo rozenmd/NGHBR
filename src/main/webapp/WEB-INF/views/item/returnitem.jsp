@@ -17,7 +17,7 @@
 	rel="stylesheet">
 <link href="<c:url value="/static/css/landing.css" />" rel="stylesheet">
 <link href="<c:url value="/static/css/style.css" />" rel="stylesheet">
-<link href="<c:url value="/static/css/listitems.css" />"
+<link href="<c:url value="/static/css/additem.css" />"
 	rel="stylesheet">
 
 
@@ -34,10 +34,9 @@
 	<jsp:include page="/navBar"></jsp:include>
 	
 	<div class="container">
-		<h3>My Items</h3>
-		<h4>Here are the ${label} ${user.getFirstName()}</h4>
-		<c:forEach items="${items}" var="item">
-			<div class="item row box well">
+	
+		<h3>Return Item</h3>
+		<div class="item row box well">
 				<form class="form-inline" action="/items/edit/${item.getId()}">
 					<div class="form-group">
 						<img class="itemimage img-thumbnail" src="/item_images/${item.getOwner().getId()}/${item.getId()}.jpg" alt="Item Image">
@@ -46,26 +45,32 @@
 						<h4 class="itemname">${item.getName()}</h4>
 						<p class="itemdesc">${item.getDescription()}</p>
 					</div>
-					<c:choose>
-						<c:when test="${label.equals("Items you own")}">
-							<button type="submit" class="editbutton btn btn-info">Edit</button>
-						</c:when>
-						<c:otherwise>
-							<button type="button" onclick="location.href='/items/return/${item.getId()}';" class="editbutton btn btn-info">Return</button>
-						</c:otherwise> 
-					</c:choose>
 				</form>
-				
+		</div>
+		
+		<h4>Feedback on your experiences with this item.</h4>
+		<form:form method="POST" modelAttribute="returnRequestForm" action="/items/return/${item.getId()}?${_csrf.parameterName}=${_csrf.token}" name="item" enctype="multipart/form-data">
+
+			<div class="form-group">
+				<label for="borrowerMessage">Message</label>
+				<form:input path="borrowerMessage" type="text" class="form-control" id="borrowerMessage" placeholder="Message"/>
+				<form:errors path="borrowerMessage" />
 			</div>
-		</c:forEach>
-		<c:choose>
-			<c:when test="${label.equals("Items you own")}">
-				<button type="button" class="addbutton btn btn-primary" onclick="location.href='/additem'">Add New Item</button>
-			</c:when>
-			<c:otherwise>
-				<button type="button" class="addbutton btn btn-primary" onclick="location.href='/items/search'">Find Items in you area!</button>
-			</c:otherwise>
-		</c:choose>
+ 			<div class="form-group">
+				<label for="borrowerScore">Select Feedback Score For Owner:</label>
+				<form:select path="borrowerScore" class="form-control" id="borrowerScore" placeholder="2015-01-01">
+					<option>0</option>
+				    <option>1</option>
+				    <option>2</option>
+				    <option>3</option>
+				    <option>4</option>
+				    <option>5</option>
+				</form:select>
+				<form:errors path="borrowerScore" />
+			</div>
+			
+			<button type="submit" class="addbutton btn btn-primary btn-lg">Submit</button>
+		</form:form>
 	</div>
 	
 </body>

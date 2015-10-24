@@ -82,7 +82,11 @@ public class BorrowRequestController extends AbstractController {
 		model.addAttribute("item", item);
 		model.addAttribute("borrowRequestForm", borrowRequest);
 		
-		return "item/approveitem";
+		if(user.equals(borrowRequest.getOwner()) && !borrowRequest.getApproved()){
+			return "item/approveitem";
+		} else {
+			return "redirect:/borrowrequests/recieved";
+		}
 
 	}
 	

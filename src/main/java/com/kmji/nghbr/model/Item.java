@@ -60,9 +60,20 @@ public class Item {
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="item")
 	private Set<BorrowRequest> borrowRequests;
 	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="item")
+	private Set<ReturnRequest> returnRequests;
+	
 	@Transient //Not mapped in hibernate
 	private MultipartFile imageFile;
 	
+	public Set<ReturnRequest> getReturnRequests() {
+		return returnRequests;
+	}
+
+	public void setReturnRequests(Set<ReturnRequest> returnRequests) {
+		this.returnRequests = returnRequests;
+	}
+
 	public int getMinPoints() {
 		return minPoints;
 	}

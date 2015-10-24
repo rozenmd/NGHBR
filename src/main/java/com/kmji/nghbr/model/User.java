@@ -50,6 +50,28 @@ public class User {
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="owner")
 	private Set<BorrowRequest> recievedBorrowRequests;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="borrower")
+	private Set<ReturnRequest> sentReturnRequests;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="owner")
+	private Set<ReturnRequest> recievedReturnRequests;
+
+	public Set<ReturnRequest> getSentReturnRequests() {
+		return sentReturnRequests;
+	}
+
+	public void setSentReturnRequests(Set<ReturnRequest> sentReturnRequests) {
+		this.sentReturnRequests = sentReturnRequests;
+	}
+
+	public Set<ReturnRequest> getRecievedReturnRequests() {
+		return recievedReturnRequests;
+	}
+
+	public void setRecievedReturnRequests(Set<ReturnRequest> recievedReturnRequests) {
+		this.recievedReturnRequests = recievedReturnRequests;
+	}
 
 	public Set<BorrowRequest> getSentBorrowRequests() {
 		return sentBorrowRequests;

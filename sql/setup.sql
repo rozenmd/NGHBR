@@ -37,16 +37,6 @@ CREATE TABLE IF NOT EXISTS APP_MESSAGE
   USERNAME varchar(255)
 );
 
-/* Populate USER_PROFILE Table */
-INSERT INTO USER_PROFILE(type)
-VALUES ('USER');
-
-INSERT INTO USER_PROFILE(type)
-VALUES ('ADMIN');
-
-INSERT INTO USER_PROFILE(type)
-VALUES ('DBA');
-
 /* Populate Suburb */
 INSERT INTO app_suburb(SUBURB_ID, POSTCODE, SUBURB_STATE, SUBURB_NAME, RANKING, TOTAL_POINTS, SUBURB_DC, SUBURB_LAT, SUBURB_LON)
 values (1, 2000, "NSW", "Sydney", 1, 0, 0, 0, 0);
@@ -74,9 +64,26 @@ VALUES ('max','abc125', 'Max','Rozen','maxy@nghbr.com', 'Active', 1, 0);
 INSERT INTO APP_USER(sso_id, password, first_name, last_name, email, state, SUBURB, POINTS)
 VALUES ('jason','abc126', 'Jason','Silver','jason@nghbr.com', 'Active', 1, 0);
 
-  
-INSERT INTO APP_ITEM(DESCRIPTION, END_DATE, NAME, START_DATE, BORROWER_ID, OWNER_ID)
-values ('This is a strong hammer, to be weilded only by the mighty.', '2015-01-01 04:20:20', 'Strong Hammer', '2015-01-01 04:20:20', 1, 2);
+/* Populate JOIN Table */
+INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
+  SELECT user.id, profile.id FROM APP_USER user, USER_PROFILE profile
+  where user.sso_id='khanh' and profile.type='ADMIN';
 
-INSERT INTO APP_ITEM(DESCRIPTION, END_DATE, NAME, START_DATE, BORROWER_ID, OWNER_ID)
-values ('This is a weak hammer, unworthy of any honor.', '2015-01-01 04:20:20', 'Weak Hammer', '2015-01-01 04:20:20', 3, 2);
+INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
+  SELECT user.id, profile.id FROM APP_USER user, USER_PROFILE profile
+  where user.sso_id='imran' and profile.type='ADMIN';
+
+INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
+  SELECT user.id, profile.id FROM APP_USER user, USER_PROFILE profile
+  where user.sso_id='max' and profile.type='ADMIN';
+
+INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
+  SELECT user.id, profile.id FROM APP_USER user, USER_PROFILE profile
+  where user.sso_id='jason' and profile.type='ADMIN';
+  
+INSERT INTO APP_ITEM(DESCRIPTION, END_DATE, NAME, START_DATE, BORROWER_ID, OWNER_ID, MIN_POINTS)
+values ('This is a strong hammer, to be weilded only by the mighty.', '2015-01-01 04:20:20', 'Strong Hammer', '2015-01-01 04:20:20', 2, 2, 0);
+
+INSERT INTO APP_ITEM(DESCRIPTION, END_DATE, NAME, START_DATE, BORROWER_ID, OWNER_ID, MIN_POINTS)
+values ('This is a weak hammer, unworthy of any honor.', '2015-01-01 04:20:20', 'Weak Hammer', '2015-01-01 04:20:20', 2, 2, 0);
+
