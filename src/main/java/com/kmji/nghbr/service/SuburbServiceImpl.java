@@ -30,6 +30,11 @@ public class SuburbServiceImpl implements SuburbService{
 		return dao.findBySuburb(suburbName);
 	}
 
+	@Override
+	public void save(Suburb suburb) {
+		dao.saveOrUpdate(suburb);
+	}
+
 
 	public List<Suburb> findByPostcode(int postcode) {
 		return dao.findByPostcode(postcode);

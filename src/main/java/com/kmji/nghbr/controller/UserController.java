@@ -120,13 +120,18 @@ public class UserController extends AbstractController {
         //try parse a postcode to int
         try{
             int postcode = Integer.parseInt(request.getParameter("postcode"));
-
-            //creates a new suburb row..
-            Suburb suburb = new Suburb();
-            suburb.setSuburbName(request.getParameter("suburb"));
-            suburb.setPostcode(postcode);
-            suburbService.save(suburb);
-
+            Suburb suburb = null;
+            if(request.getParameter("suburb").length() > 0 && postcode > 0){
+                 suburb = suburbService.findByPostcodeSuburb(
+                         postcode,
+                        request.getParameter("suburb")
+                );
+            }else if (postcode > 0){
+                 suburb = suburbService.findByPostcode(postcode).get(0);
+            } else if (!(postcode > 0) ){
+                 suburb = suburbService.findBySuburb(request.getParameter("suburb"));
+            }
+  
             String email = request.getParameter("email");
             User user = userService.findBySso(getPrincipal());
 
@@ -134,8 +139,11 @@ public class UserController extends AbstractController {
 
             user.setFirstName(firstName);
             user.setLastName(lastName);
+            if(suburb != null){
+                user.setSuburb(suburb);
+                System.out.println(suburb.getSuburbName() + " " + suburb.getPostcode());
+            }
 
-            user.setSuburb(suburb);
             //suburbService.save()
             user.setEmail(email);
             userService.save(user);
