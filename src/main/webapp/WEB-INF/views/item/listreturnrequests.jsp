@@ -46,7 +46,7 @@
 						<h4 class="itemname">${req.getItem().getName()}</h4>
 						<p class="itemdesc">${req.getItem().getDescription()}</p>
 					</div>
-					<c:if test="${ label.equals("items you returned")}">
+					<c:if test='${ label.equals("items you returned")}'>
 						<div class="itemtext form-group">
 								<p class="itemdesc">Your Feedback: ${req.getBorrowerMessage()}</p>
 								<p class="itemdesc">Feedback Recieved: ${req.getOwnerMessage()}</p>
@@ -58,7 +58,7 @@
 							<p class="itemdesc">Score Recieved: ${req.getOwnerScore()}</p>
 						</div>
 					</c:if>
-					<c:if test="${ label.equals("items returned to you")}">
+					<c:if test='${ label.equals("items returned to you")}'>
 						<div class="itemtext form-group">
 								<p class="itemdesc">Your Feedback: ${req.getOwnerMessage()}</p>
 								<p class="itemdesc">Feedback Recieved: ${req.getBorrowerMessage()}</p>
@@ -71,14 +71,14 @@
 						</div>
 					</c:if>
 					
-					<c:if test="${ !label.equals("items you returned")}">
+					<c:if test='${ !label.equals("items you returned")}'>
 						<button type="submit" class="editbutton btn btn-info">View</button>
 					</c:if>
 				</form>
 			</div>
 		</c:forEach>
 		<c:choose>
-			<c:when test="${label.equals("items you returned")}">
+			<c:when test='${label.equals("items you returned")}'>
 				<button type="button" class="addbutton btn btn-primary" onclick="location.href='/items/search'">Find Items in you area!</button>
 			</c:when>
 			<c:otherwise>

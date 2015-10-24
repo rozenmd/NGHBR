@@ -68,7 +68,7 @@ public class BorrowRequestController extends AbstractController {
 		User user = userService.findBySso(getPrincipal());
 		model.addAttribute("user", user);
 		model.addAttribute("borrowRequests", user.getRecievedBorrowRequests());
-		model.addAttribute("label", "requests you've recieved");
+		model.addAttribute("label", "requests you have recieved");
 		return "item/listborrowrequests";
 		
 	}

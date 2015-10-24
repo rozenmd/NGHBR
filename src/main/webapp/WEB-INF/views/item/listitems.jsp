@@ -47,7 +47,7 @@
 						<p class="itemdesc">${item.getDescription()}</p>
 					</div>
 					<c:choose>
-						<c:when test="${label.equals("Items you own")}">
+						<c:when test='${label.equals("Items you own")}'>
 							<button type="submit" class="editbutton btn btn-info">Edit</button>
 						</c:when>
 						<c:otherwise>
@@ -59,7 +59,7 @@
 			</div>
 		</c:forEach>
 		<c:choose>
-			<c:when test="${label.equals("Items you own")}">
+			<c:when test='${label.equals("Items you own")}'>
 				<button type="button" class="addbutton btn btn-primary" onclick="location.href='/additem'">Add New Item</button>
 			</c:when>
 			<c:otherwise>

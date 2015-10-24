@@ -54,14 +54,14 @@
 					<div class="itemtext form-group">
 						<p class="itemdesc">Approved? ${req.getApproved()}</p>
 					</div>
-					<c:if test="${ label.equals("requests you've recieved")}">
+					<c:if test='${ label.equals("requests you have recieved")}'>
 						<button type="submit" class="editbutton btn btn-info">View</button>
 					</c:if>
 				</form>
 			</div>
 		</c:forEach>
 		<c:choose>
-			<c:when test="${label.equals("requests you sent")}">
+			<c:when test='${label.equals("requests you sent")}'>
 				<button type="button" class="addbutton btn btn-primary" onclick="location.href='/items/search'">Find Items in you area!</button>
 			</c:when>
 			<c:otherwise>
