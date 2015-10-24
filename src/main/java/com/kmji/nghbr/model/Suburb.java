@@ -1,5 +1,8 @@
 package com.kmji.nghbr.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,6 +25,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="APP_SUBURB")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Suburb {
 	
 	@Id

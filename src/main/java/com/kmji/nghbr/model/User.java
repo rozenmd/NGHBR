@@ -1,5 +1,7 @@
 package com.kmji.nghbr.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.IndexColumn;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -8,6 +10,7 @@ import java.util.*;
 import javax.persistence.*;
 
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Table(name="APP_USER")
 public class User {
 

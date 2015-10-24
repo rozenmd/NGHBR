@@ -30,12 +30,7 @@ public class UserApiController extends AbstractController {
     @ResponseBody
     @RequestMapping(value = "/api/users/authenticate", method = RequestMethod.POST)
     public User authenticate(@RequestBody User requestUser, HttpServletRequest request) {
-
-        System.out.println(requestUser.toString());
-
         User user = userService.findByFacebookId(requestUser.getFacebookId());
-
-        System.out.println(user);
 
         if (user == null) {
             userService.save(requestUser);
