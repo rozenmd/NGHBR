@@ -41,14 +41,7 @@ public class MessageBoardController extends AbstractController {
 
 	}
 
-//	@RequestMapping(value = { "/messageboard" }, method = RequestMethod.GET)
-//	public ModelAndView messageBoardPage() {
-//		ModelAndView model = new ModelAndView("user/messageboard");
-//
-//		//model.addObject();
-//		return model;
-//
-//	}
+
 
 	/*Retrieve message data from user and send to database  */
 	@RequestMapping(value = "/messageboard",  method = RequestMethod.POST)
@@ -61,6 +54,7 @@ public class MessageBoardController extends AbstractController {
 				message.setPostCode(user.getSuburb().getPostcode());
 				message.setUsername(user.getFirstName());
 				message.setDate(new Date());
+				message.setUser(user);
 				messageService.save(message);
 				model.addAttribute("message", message);
 			}else{

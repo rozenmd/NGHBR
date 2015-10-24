@@ -43,6 +43,9 @@ public class User {
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="borrower")
 	private List<Item> borrowedItems;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="user")
+	private List<Message> messages;
 
 	@Column(name="STATE", nullable=false)
 	private String state=State.ACTIVE.getState();

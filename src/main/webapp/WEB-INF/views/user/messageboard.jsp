@@ -41,14 +41,14 @@
 		<div class="conversationsholder">
 			<c:forEach items="${messages}" var="message" varStatus="counter">
 				<c:choose>
-					<c:when test="${counter.index % 2 == 0}">
-						<div class="bubble_left">
-							<p>${message.getText()}</p>
+					<c:when test="${user.getSsoId() == message.getUser().getSsoId}">
+						<div class="bubble_right">
+							<p> You: ${message.getText()} </p>
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div class="bubble_right">
-							<p>${message.getText()}</p>
+						<div class="bubble_left">
+							<p>${message.getUser().getFirstName()}: ${message.getText() }</p>
 						</div>
 					</c:otherwise>
 				</c:choose>

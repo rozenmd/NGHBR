@@ -1,6 +1,7 @@
 package com.kmji.nghbr.model;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,11 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.SessionFactory;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -24,11 +28,15 @@ public class Message {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="Text", nullable=true)
+	@Column(name="Textt", nullable=true)
 	private String text;
 	
 	@Column(name="Username", nullable=false)
 	private String username;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "User", nullable=true)
+	private User user;
 	
 	@Column(name="PostCode", nullable=false)
 	private int postCode;
@@ -50,6 +58,14 @@ public class Message {
 	
 	public String getUsername() {
 		return username;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	public void setDate(Date date) {
