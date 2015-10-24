@@ -121,9 +121,12 @@ public class UserController extends AbstractController {
         try{
             int postcode = Integer.parseInt(request.getParameter("postcode"));
 
+            //creates a new suburb row..
             Suburb suburb = new Suburb();
             suburb.setSuburbName(request.getParameter("suburb"));
             suburb.setPostcode(postcode);
+            suburbService.save(suburb);
+
             String email = request.getParameter("email");
             User user = userService.findBySso(getPrincipal());
 
@@ -131,8 +134,9 @@ public class UserController extends AbstractController {
 
             user.setFirstName(firstName);
             user.setLastName(lastName);
-            //user.setPostcode(postcode);
+
             user.setSuburb(suburb);
+            //suburbService.save()
             user.setEmail(email);
             userService.save(user);
             return new ModelAndView("redirect:../profile");

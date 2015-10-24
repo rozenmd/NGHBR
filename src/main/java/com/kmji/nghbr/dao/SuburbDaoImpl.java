@@ -34,6 +34,10 @@ public class SuburbDaoImpl extends AbstractDao<Integer, Suburb> implements Subur
 		return results.get(0);
 	}
 
+	public void saveOrUpdate(Suburb suburb) {
+		persist(suburb);
+	}
+
 	public List<Suburb> findByPostcode(int postcode) {
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("postcode", postcode));

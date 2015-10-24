@@ -14,7 +14,7 @@ public interface SuburbDao {
 
 	List<Suburb> findByPostcode(int postcode);
 
-
+	void saveOrUpdate(Suburb suburb);
 
 }
 

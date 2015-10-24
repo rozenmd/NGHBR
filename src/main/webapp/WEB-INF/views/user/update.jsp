@@ -93,7 +93,7 @@
 						<tr>
 							<td>Postcode</td>
 							<td><input type="text" style="width: 185px;"
-									   value="${user.postcode}" maxlength="5" name="postcode" id="postcode" /></td>
+									   value="${user.suburb.postcode}" maxlength="5" name="postcode" id="postcode" /></td>
 						</tr>
 						<tr>
 							<td>Suburb</td>
