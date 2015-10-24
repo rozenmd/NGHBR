@@ -38,7 +38,7 @@
 		<h4>Here are the ${label} ${user.getFirstName()}</h4>
 		<c:forEach items="${items}" var="item">
 			<div class="item row box well">
-				<form class="form-inline" action="/item/edit/${item.getId()}">
+				<form class="form-inline" action="/items/edit/${item.getId()}">
 					<div class="form-group">
 						<img class="itemimage img-thumbnail" src="/item_images/${item.getOwner().getId()}/${item.getId()}.jpg" alt="Item Image">
 					</div>

@@ -1,6 +1,5 @@
 package com.kmji.nghbr.dao;
 
-import com.kmji.nghbr.model.Postcode;
 import com.kmji.nghbr.model.Suburb;
 
 import org.hibernate.Criteria;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository("suburbDao")
-public class SuburbDaoImpl extends AbstractDao<Integer, Postcode> implements SuburbDao {
+public class SuburbDaoImpl extends AbstractDao<Integer, Suburb> implements SuburbDao {
 
 	public Suburb findByPostcodeSuburbState(int postcode, String suburbName, String state) {
 		Criteria crit = createEntityCriteria();

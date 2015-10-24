@@ -3,7 +3,6 @@ package com.kmji.nghbr.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kmji.nghbr.model.Postcode;
 import com.kmji.nghbr.model.Suburb;
 import com.kmji.nghbr.service.SuburbService;
 import org.springframework.security.core.Authentication;

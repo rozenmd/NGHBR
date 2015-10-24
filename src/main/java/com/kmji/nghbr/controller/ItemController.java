@@ -27,6 +27,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.ServletContextAware;
@@ -141,6 +142,54 @@ public class ItemController extends AbstractController implements ServletContext
 		File imagePathFile = new File(imagePath);
 		
 		if(!imagePathFile.exists()){
+			imagePathFile.getParentFile().mkdirs();
+		}
+		
+		File out = new File(imagePath);
+		ImageIO.write(thumbImg, "jpg", out);
+		
+		return "redirect:/items";
+	}
+	
+	@RequestMapping(value={"/items/edit/{itemId}"}, method = RequestMethod.GET)
+	public String editItemPageGets(ModelMap model, @PathVariable int itemId){
+		Item item = itemService.findById(itemId);
+		model.addAttribute("itemForm", item);
+		return "item/edititem";
+	}
+	
+	@RequestMapping(value={"/items/edit/{itemId}"}, method = RequestMethod.POST)
+	public String editItemPagePost(@ModelAttribute("itemForm") @Valid Item itemForm, 
+			BindingResult result, ModelMap model, @PathVariable int itemId) throws IOException{
+		
+		Item item = itemService.findById(itemId);
+		
+		if(result.hasErrors()){
+			model.addAttribute("itemForm", item);
+			return "item/edititem";
+		}
+		
+		User user = userService.findBySso(getPrincipal());
+		
+		item.setName(itemForm.getName());
+		item.setDescription(itemForm.getDescription());
+		item.setStartDate(itemForm.getStartDate());
+		item.setEndDate(itemForm.getEndDate());
+		
+		itemService.saveOrUpdate(item);
+		
+		System.out.println("Fetching Image From User...");
+		MultipartFile mpf = itemForm.getImageFile();
+		
+		ByteArrayInputStream bis = new ByteArrayInputStream(mpf.getBytes());
+		BufferedImage img = ImageIO.read(bis);
+		BufferedImage thumbImg = Scalr.resize(img, 
+				Method.QUALITY, Mode.FIT_EXACT, 90,90, Scalr.OP_ANTIALIAS);
+		
+		String imagePath = env.getProperty("item.image.path") + "/" + user.getId() + "/" + itemForm.getId()+".jpg";
+		File imagePathFile = new File(imagePath);
+		
+		if(!imagePathFile.getParentFile().exists()){
 			imagePathFile.getParentFile().mkdirs();
 		}
 		

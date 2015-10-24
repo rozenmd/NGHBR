@@ -1,6 +1,5 @@
 package com.kmji.nghbr.service;
 
-import com.kmji.nghbr.model.Postcode;
 import com.kmji.nghbr.model.Suburb;
 import com.kmji.nghbr.model.User;
 

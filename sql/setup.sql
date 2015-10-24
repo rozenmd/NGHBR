@@ -62,17 +62,17 @@ INSERT INTO USER_PROFILE(type)
 VALUES ('DBA');
 
 /* Populate APP_USER Table */
-INSERT INTO APP_USER(sso_id, password, first_name, last_name, email, state, SUBURB)
-VALUES ('khanh','abc123', 'Khanh','Nguyen','khanh@nghbr.com', 'Active', 1);
+INSERT INTO APP_USER(sso_id, password, first_name, last_name, email, state, SUBURB, POINTS)
+VALUES ('khanh','abc123', 'Khanh','Nguyen','khanh@nghbr.com', 'Active', 1 , 0);
 
-INSERT INTO APP_USER(sso_id, password, first_name, last_name, email, state, SUBURB)
-VALUES ('imran','abc124', 'Imran','Khan','imran@nghbr.com', 'Active', 1);
+INSERT INTO APP_USER(sso_id, password, first_name, last_name, email, state, SUBURB, POINTS)
+VALUES ('imran','abc124', 'Imran','Khan','imran@nghbr.com', 'Active', 1, 0);
 
-INSERT INTO APP_USER(sso_id, password, first_name, last_name, email, state, SUBURB)
-VALUES ('max','abc125', 'Max','Rozen','maxy@nghbr.com', 'Active', 1);
+INSERT INTO APP_USER(sso_id, password, first_name, last_name, email, state, SUBURB, POINTS)
+VALUES ('max','abc125', 'Max','Rozen','maxy@nghbr.com', 'Active', 1, 0);
 
-INSERT INTO APP_USER(sso_id, password, first_name, last_name, email, state, SUBURB)
-VALUES ('jason','abc126', 'Jason','Silver','jason@nghbr.com', 'Active', 1);
+INSERT INTO APP_USER(sso_id, password, first_name, last_name, email, state, SUBURB, POINTS)
+VALUES ('jason','abc126', 'Jason','Silver','jason@nghbr.com', 'Active', 1, 0);
 
   
 INSERT INTO APP_ITEM(DESCRIPTION, END_DATE, NAME, START_DATE, BORROWER_ID, OWNER_ID)
