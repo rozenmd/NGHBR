@@ -1,8 +1,10 @@
 package com.kmji.nghbr.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,10 +38,13 @@ public class Item {
 	@Column(name="DESCRIPTION", nullable=true)
 	private String description;
 	
+	@Column(name="MIN_POINTS", nullable=true)
+	private int minPoints;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "OWNER_ID")
 	private User owner;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "BORROWER_ID", nullable=true)
 	private User borrower;
@@ -51,9 +57,28 @@ public class Item {
 	@Column(name="END_DATE", nullable=true)
 	private java.util.Date endDate;
 	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="item")
+	private Set<BorrowRequest> borrowRequests;
+	
 	@Transient //Not mapped in hibernate
 	private MultipartFile imageFile;
+	
+	public int getMinPoints() {
+		return minPoints;
+	}
 
+	public void setMinPoints(int minPoints) {
+		this.minPoints = minPoints;
+	}
+
+	public Set<BorrowRequest> getBorrowRequests() {
+		return borrowRequests;
+	}
+
+	public void setBorrowRequests(Set<BorrowRequest> borrowRequests) {
+		this.borrowRequests = borrowRequests;
+	}
+	
 	public int getId() {
 		return id;
 	}

@@ -1,5 +1,6 @@
 package com.kmji.nghbr.model;
 
+import org.hibernate.annotations.IndexColumn;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.*;
@@ -43,6 +44,28 @@ public class User {
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="borrower")
 	private List<Item> borrowedItems;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="borrower")
+	private Set<BorrowRequest> sentBorrowRequests;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="owner")
+	private Set<BorrowRequest> recievedBorrowRequests;
+
+	public Set<BorrowRequest> getSentBorrowRequests() {
+		return sentBorrowRequests;
+	}
+
+	public void setSentBorrowRequests(Set<BorrowRequest> sentBorrowRequests) {
+		this.sentBorrowRequests = sentBorrowRequests;
+	}
+
+	public Set<BorrowRequest> getRecievedBorrowRequests() {
+		return recievedBorrowRequests;
+	}
+
+	public void setRecievedBorrowRequests(Set<BorrowRequest> recievedBorrowRequests) {
+		this.recievedBorrowRequests = recievedBorrowRequests;
+	}
 
 	@Column(name="STATE", nullable=false)
 	private String state=State.ACTIVE.getState();

@@ -34,24 +34,40 @@
 	<jsp:include page="/navBar"></jsp:include>
 	
 	<div class="container">
-		<h3>My Items</h3>
-		<h4>Here are items available in your area!}</h4>
-		<c:forEach items="${items}" var="item">
+		<h3>Borrow Requests</h3>
+		<h4>Here are the ${label} ${user.getFirstName()}</h4>
+		<c:forEach items="${borrowRequests}" var="req">
 			<div class="item row box well">
-				<form class="form-inline" action="/items/borrow/${item.getId()}">
+				<form class="form-inline" action="/borrowrequest/${req.getId()}">
 					<div class="form-group">
-						<img class="itemimage img-thumbnail" src="/item_images/${item.getOwner().getId()}/${item.getId()}.jpg" alt="Item Image">
+						<img class="itemimage img-thumbnail" src="/item_images/${req.getItem().getOwner().getId()}/${req.getItem().getId()}.jpg" alt="Item Image">
 					</div>
 					<div class="itemtext form-group">
-						<h4 class="itemname">${item.getName()}</h4>
-						<p class="itemdesc">${item.getDescription()}</p>
+						<h4 class="itemname">${req.getItem().getName()}</h4>
+						<p class="itemdesc">${req.getItem().getDescription()}</p>
 					</div>
-					<button type="submit" class="editbutton btn btn-primary">Borrow</button> 
+	
+					<div class="itemtext form-group">
+						<p class="itemdesc">${req.getMessage()}</p>
+					</div>
 					
+					<div class="itemtext form-group">
+						<p class="itemdesc">Approved? ${req.getApproved()}</p>
+					</div>
+					<c:if test="${ label.equals("requests you've recieved")}">
+						<button type="submit" class="editbutton btn btn-info">View</button>
+					</c:if>
 				</form>
-				
 			</div>
 		</c:forEach>
+		<c:choose>
+			<c:when test="${label.equals("requests you sent")}">
+				<button type="button" class="addbutton btn btn-primary" onclick="location.href='/items/search'">Find Items in you area!</button>
+			</c:when>
+			<c:otherwise>
+				<button type="button" class="addbutton btn btn-primary" onclick="location.href='/items'">Manage Items</button>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	
 </body>

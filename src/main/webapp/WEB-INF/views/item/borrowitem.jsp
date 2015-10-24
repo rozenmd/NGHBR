@@ -17,7 +17,7 @@
 	rel="stylesheet">
 <link href="<c:url value="/static/css/landing.css" />" rel="stylesheet">
 <link href="<c:url value="/static/css/style.css" />" rel="stylesheet">
-<link href="<c:url value="/static/css/listitems.css" />"
+<link href="<c:url value="/static/css/additem.css" />"
 	rel="stylesheet">
 
 
@@ -34,11 +34,10 @@
 	<jsp:include page="/navBar"></jsp:include>
 	
 	<div class="container">
-		<h3>My Items</h3>
-		<h4>Here are items available in your area!}</h4>
-		<c:forEach items="${items}" var="item">
-			<div class="item row box well">
-				<form class="form-inline" action="/items/borrow/${item.getId()}">
+	
+		<h3>Borrow Item</h3>
+		<div class="item row box well">
+				<form class="form-inline" action="/items/edit/${item.getId()}">
 					<div class="form-group">
 						<img class="itemimage img-thumbnail" src="/item_images/${item.getOwner().getId()}/${item.getId()}.jpg" alt="Item Image">
 					</div>
@@ -46,12 +45,30 @@
 						<h4 class="itemname">${item.getName()}</h4>
 						<p class="itemdesc">${item.getDescription()}</p>
 					</div>
-					<button type="submit" class="editbutton btn btn-primary">Borrow</button> 
-					
 				</form>
-				
+		</div>
+		
+		<h4>Enter a message for the owner. The owner will receive a request and can decide if he approves.</h4>
+		<form:form method="POST" modelAttribute="borrowRequestForm" action="/items/borrow/${item.getId()}?${_csrf.parameterName}=${_csrf.token}" name="item" enctype="multipart/form-data">
+
+			<div class="form-group">
+				<label for="message">Message</label>
+				<form:input path="message" type="text" class="form-control" id="message" placeholder="Message"/>
+				<form:errors path="message" />
 			</div>
-		</c:forEach>
+ 			<div class="form-group">
+				<label for="startDate">Start Date (e.g. 2015-01-01)</label>
+				<form:input path="startDate" type="text" class="form-control" id="startDate" placeholder="2015-01-01"/>
+				<form:errors path="startDate" />
+			</div>
+			<div class="form-group">
+				<label for="endDate">End Date (e.g. 2015-01-02)</label>
+				<form:input path="endDate" type="text" class="form-control" id="endDate" placeholder="2015-01-02"/>
+				<form:errors path="endDate" /> 
+			</div>
+			
+			<button type="submit" class="addbutton btn btn-primary btn-lg">Submit</button>
+		</form:form>
 	</div>
 	
 </body>

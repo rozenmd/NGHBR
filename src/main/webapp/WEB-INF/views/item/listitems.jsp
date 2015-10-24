@@ -57,7 +57,7 @@
 				<button type="button" class="addbutton btn btn-primary" onclick="location.href='/additem'">Add New Item</button>
 			</c:when>
 			<c:otherwise>
-				button type="button" class="addbutton btn btn-primary" onclick="location.href='/items/search'">Find Items in you area!</button>
+				<button type="button" class="addbutton btn btn-primary" onclick="location.href='/items/search'">Find Items in you area!</button>
 			</c:otherwise>
 		</c:choose>
 	</div>
