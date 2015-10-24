@@ -22,6 +22,8 @@
             <li><a href="<c:url value="/items" />">Items</a></li>
             <li><a href="<c:url value="/items/borrowed" />">Borrowed Items</a></li>
             <li><a href="<c:url value="/items/search" />">Find Items!</a></li>
+            <li><a href="<c:url value="/borrowrequests/sent" />">Requests Sent</a></li>
+            <li><a href="<c:url value="/borrowrequests/recieved" />">Requests Received</a></li>
             <li><a href="<c:url value="/events" />">Events</a></li>
             <li><a href="<c:url value="/logout" />">Logout</a></li>
           </c:when>
