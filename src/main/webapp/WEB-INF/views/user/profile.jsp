@@ -94,12 +94,12 @@
 	function getColor(d) {
 		return d > 1000 ? '#800026' :
 				d > 500  ? '#BD0026' :
-						d > 200  ? '#E31A1C' :
-								d > 100  ? '#FC4E2A' :
-										d > 50   ? '#FD8D3C' :
-												d > 20   ? '#FEB24C' :
-														d > 10   ? '#FED976' :
-																'#FFEDA0';
+				d > 200  ? '#E31A1C' :
+				d > 100  ? '#FC4E2A' :
+				d > 50   ? '#FD8D3C' :
+				d > 20   ? '#FEB24C' :
+				d > 10   ? '#FED976' :
+						   '#FFEDA0';
 	}
 
 	function style(feature) {
@@ -123,7 +123,12 @@
 
 	var map = L.map('map', { center: latlng, zoom: 16, layers: [tiles] });
 	var customLayer = L.geoJson(null, {style: style});
-	L.marker(latlng).addTo(map);
+	var popupContent =  'Suburb: ${suburb} <br>' +
+						'Total Points:  ${points} <br>';
+	L.marker(latlng).addTo(map).bindPopup(popupContent,{
+		closeButton: true,
+		minWidth: 120
+	});
 	// this can be any kind of omnivore layer
 	var runLayer = omnivore.topojson('/static/js/final.js', null, customLayer).addTo(map);
 

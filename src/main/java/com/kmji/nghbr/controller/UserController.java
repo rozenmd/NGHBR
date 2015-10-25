@@ -85,19 +85,26 @@ public class UserController extends AbstractController {
                     Suburb suburb = suburbService.findByPostcodeSuburb(
                             user.getSuburb().getPostcode(),
                             user.getSuburb().getSuburbName()
+
                     );
                     model.addObject("lat", suburb.getLat());
                     model.addObject("lon", suburb.getLon());
+                    model.addObject("points", suburb.getTotalPoints());
+                    model.addObject("suburb",suburb.toString());
                 }else if (user.getSuburb().getPostcode() > 0){
                 	//Will just pick first suburb in list...
                 	Suburb suburb = suburbService.findByPostcode(user.getSuburb().getPostcode()).get(0);
                     model.addObject("lat", suburb.getLat());
                     model.addObject("lon", suburb.getLon());
+                    model.addObject("points", suburb.getTotalPoints());
+                    model.addObject("suburb",suburb.toString());
                 } else if (user.getSuburb().getPostcode() < 0){
 
                 	Suburb suburb = suburbService.findBySuburb(user.getSuburb().getSuburbName());
                     model.addObject("lat", suburb.getLat());
                     model.addObject("lon", suburb.getLon());
+                    model.addObject("points", suburb.getTotalPoints());
+                    model.addObject("suburb",suburb.toString());
                 }
             }catch (Exception e) {
                 System.err.println("Got an exception! ");
@@ -226,16 +233,22 @@ public class UserController extends AbstractController {
                     );
                     model.addObject("lat", suburb.getLat());
                     model.addObject("lon", suburb.getLon());
+                    model.addObject("points", suburb.getTotalPoints());
+                    model.addObject("suburb",suburb.toString());
                 } else if (user.getSuburb().getPostcode() > 0) {
                     //Will just pick first suburb in list...
                     Suburb suburb = suburbService.findByPostcode(user.getSuburb().getPostcode()).get(0);
                     model.addObject("lat", suburb.getLat());
                     model.addObject("lon", suburb.getLon());
+                    model.addObject("points", suburb.getTotalPoints());
+                    model.addObject("suburb",suburb.toString());
                 } else if (user.getSuburb().getPostcode() < 0) {
 
                     Suburb suburb = suburbService.findBySuburb(user.getSuburb().getSuburbName());
                     model.addObject("lat", suburb.getLat());
                     model.addObject("lon", suburb.getLon());
+                    model.addObject("points", suburb.getTotalPoints());
+                    model.addObject("suburb",suburb.toString());
                 }
             } catch (Exception e) {
                 System.err.println("Got an exception! ");
