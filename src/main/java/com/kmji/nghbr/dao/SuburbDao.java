@@ -12,6 +12,8 @@ public interface SuburbDao {
 
 	Suburb findBySuburb(String suburb);
 
+	List<Suburb> getAll();
+
 	List<Suburb> findByPostcode(int postcode);
 
 	void saveOrUpdate(Suburb suburb);

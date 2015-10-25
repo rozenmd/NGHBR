@@ -34,6 +34,12 @@ public class SuburbDaoImpl extends AbstractDao<Integer, Suburb> implements Subur
 		return results.get(0);
 	}
 
+
+	public List<Suburb> getAll() {
+		Criteria crit = createEntityCriteria();
+		return crit.list();
+	}
+
 	public void saveOrUpdate(Suburb suburb) {
 		persist(suburb);
 	}

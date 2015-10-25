@@ -20,10 +20,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.kmji.nghbr.model.User;
 import com.kmji.nghbr.service.UserService;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class UserController extends AbstractController {
@@ -169,7 +172,7 @@ public class UserController extends AbstractController {
         }
         return model;
     }
-    //Why does this code go to /update???
+
     @RequestMapping(value = "/user/initialise", method = RequestMethod.POST)
     public ModelAndView initialisePOST(HttpServletRequest request){
 
@@ -207,6 +210,55 @@ public class UserController extends AbstractController {
 
     }
 
+    @RequestMapping(value = "/user/scoreboard", method = RequestMethod.GET)
+    public ModelAndView scoreboard() {
+        ModelAndView model = new ModelAndView("/user/scoreboard");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            User user = userService.findBySso(getPrincipal());
+            model.addObject("user", user);
+            try {
+                if (user.getSuburb().getSuburbName().length() > 0 && user.getSuburb().getPostcode() > 0) {
+                    Suburb suburb = suburbService.findByPostcodeSuburb(
+                            user.getSuburb().getPostcode(),
+                            user.getSuburb().getSuburbName()
+                    );
+                    model.addObject("lat", suburb.getLat());
+                    model.addObject("lon", suburb.getLon());
+                } else if (user.getSuburb().getPostcode() > 0) {
+                    //Will just pick first suburb in list...
+                    Suburb suburb = suburbService.findByPostcode(user.getSuburb().getPostcode()).get(0);
+                    model.addObject("lat", suburb.getLat());
+                    model.addObject("lon", suburb.getLon());
+                } else if (user.getSuburb().getPostcode() < 0) {
+
+                    Suburb suburb = suburbService.findBySuburb(user.getSuburb().getSuburbName());
+                    model.addObject("lat", suburb.getLat());
+                    model.addObject("lon", suburb.getLon());
+                }
+            } catch (Exception e) {
+                System.err.println("Got an exception! ");
+                System.err.println(e.getMessage());
+            }
+            //DO NOT REMOVE
+
+            //List<Suburb> allSuburbs = suburbService.findAllSuburbs();
+            //ObjectMapper mapper = new ObjectMapper();
+            //File jsonPath = new File("/suburb.json");
+//            try{
+//                mapper.writeValue(jsonPath, allSuburbs);
+//            } catch (JsonGenerationException e) {
+//                e.printStackTrace();
+//            } catch (JsonMappingException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            model.addObject(jsonPath);
+        }
+        return model;
+
+    }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerPage(ModelMap model) {

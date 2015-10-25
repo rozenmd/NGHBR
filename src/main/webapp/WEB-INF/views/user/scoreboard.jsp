@@ -20,7 +20,9 @@
 
 	<%--//mapping css--%>
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
-
+	<%--//Charting css--%>
+	<link rel="stylesheet" href="https://dc-js.github.io/dc.js/css/dc.css" />
+	<%--//Charting JS--%>
 
 
 	<%-- JavaScripts --%>
@@ -36,56 +38,44 @@
 <jsp:include page="/navBar"></jsp:include>
 
 
-<div  style="padding-top: 40px;padding-bottom:345px;" class="container box well">
-	<h3>Profile</h3>
+<div class="container box well">
+	<h3>Scoreboard</h3>
 	<div class="table-responsive" style="width:40%;float:left">
-		<table class="table" >
-			<c:choose>
-			<c:when test="${pageContext.request.userPrincipal.authenticated}">
-			<tr>
-				<td>Name</td>
-				<td>${user.firstName} ${user.lastName}</td>
-			</tr>
-			<tr>
-				<td>Postcode</td>
-				<td>${user.getSuburb().getPostcode()}</td>
-			</tr>
-			<tr>
-				<td>Suburb</td>
-				<td>${user.getSuburb().getSuburbName()}</td>
-			</tr>
-			<tr>
-				<td>Email</td>
-				<td>${user.email}</td>
-			</tr>
-			<tr>
-				<td>Points</td>
-				<td>${user.points}</td>
-			</tr>
-		</table>
-		<a href="user/update">
-			<span class="glyphicon glyphicon-edit" aria-hidden="true" style="float:left;">Edit</span>
-		</a>
-		</c:when>
-		<c:otherwise>
-			Please <a href="<c:url value="/login" />">login</a> to continue
-		</c:otherwise>
-		</c:choose>
-		<div id="map" style="position: absolute;
-    top: 10%;
+
+	<div id="map" style="position: absolute;
+    top: 17%;
     left: 44%;
     width: 50%;
     height: 500px;
     float: left;"></div>
 	</div>
 
+	<div class="container">
+
+		<div class="row">
+			<table style="width:40%;" class="table table-bordered table-hover dc-data-table dc-chart">
+				<thead>
+				<tr class="header">
+					<th>Suburb</th>
+					<th>Postcode</th>
+					<th>State</th>
+					<th>Total Points</th>
+
+				</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
 
 
 
 </div>
 </body>
 <%--JS for data display on maps:--%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js" type="text/javascript"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.11/crossfilter.js"></script>
+<script src="https://dc-js.github.io/dc.js/js/dc.js"></script>
 <script src="http://d3js.org/topojson.v1.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
 <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
@@ -121,7 +111,7 @@
 			}),
 			latlng = L.latLng(${lat}, ${lon});
 
-	var map = L.map('map', { center: latlng, zoom: 16, layers: [tiles] });
+	var map = L.map('map', { center: latlng, zoom: 13, layers: [tiles] });
 	var customLayer = L.geoJson(null, {style: style});
 	L.marker(latlng).addTo(map);
 	// this can be any kind of omnivore layer
@@ -151,6 +141,37 @@
 		}
 	}
 
+</script>
+
+
+<script>
+	d3.json("http://maxrozen.com/files/suburb.json", function(data) {
+		data.forEach(function(d) {
+			d.totalPoints = +d.totalPoints;
+		});
+		var ndx = crossfilter(data);
+		var all = ndx.groupAll();
+		var id = ndx.dimension(function(d) {return d.totalPoints;});
+
+		dc.dataTable(".dc-data-table")
+				.dimension(id)
+				.group(function(d) {return d.totalPoints;})
+				.size(15)
+				.columns([
+					function(d) { return d.suburbName; },
+					function(d) { return d.postcode},
+					function(d) { return d.state},
+					function(d) { return d.totalPoints},
+				])
+				.sortBy(function (d) {
+					return d.totalPoints;
+				})
+				.order(d3.descending)
+				.renderlet(function (table) {
+					table.selectAll(".dc-table-group").classed("info", true);
+				});
+		dc.renderAll();
+	});
 </script>
 </html>
 
