@@ -12,7 +12,7 @@
     <input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>
 
     <script>
-      window.eventsList = ${eventsJSON || null};
+      window.eventsList = ${eventsJSON};
     </script>
 
     <div class="container">
@@ -118,13 +118,7 @@
                 modal_title: function (event) {
                   $('#events-modal .modal-header h3').html(event.title);
                 },
-                events_source: function() {
-                  if (window.eventsList == false) {
-                    return [];
-                  } else {
-                    return window.eventsList;
-                  }
-                },
+                events_source: window.eventsList,
                 onAfterEventsLoad: function(events) {
                   if(!events) {
                     return;
