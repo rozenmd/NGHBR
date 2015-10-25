@@ -25,6 +25,8 @@ public class Attendee {
     @JoinColumn(name = "EVENT_ID")
     private Event event;
 
+    public int getId() {return id;}
+
     public User getUser() {return user;}
     public void setUser(User user) { this.user = user; }
 
