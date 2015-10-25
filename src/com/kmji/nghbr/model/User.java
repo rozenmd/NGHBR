@@ -1,15 +1,18 @@
 package com.kmji.nghbr.model;
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import org.hibernate.annotations.IndexColumn;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
+
+import org.hibernate.annotations.Proxy;
 
 import java.util.*;
 
 import javax.persistence.*;
 
+
 @Entity
+@Proxy(lazy=false)
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Table(name="APP_USER")
 public class User {
@@ -59,6 +62,17 @@ public class User {
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="owner")
 	private Set<ReturnRequest> recievedReturnRequests;
+
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="user")
+    private List<Message> messages;
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 
 	public Set<ReturnRequest> getSentReturnRequests() {
 		return sentReturnRequests;

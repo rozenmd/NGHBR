@@ -46,7 +46,7 @@
 		<div class="conversationsholder">
 			<c:forEach items="${messages}" var="message" varStatus="counter">
 				<c:choose>
-					<c:when test="${user.getFirstName() == message.getUsername()}">
+					<c:when test="${user.getId() == message.getUser().getId()}">
 						<div class="bubble_right">
 							<div class="message">
                                 <div class="thick">

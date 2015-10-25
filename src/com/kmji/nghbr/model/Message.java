@@ -1,34 +1,32 @@
 package com.kmji.nghbr.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.context.annotation.Lazy;
 
+import javax.persistence.*;
+
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.Proxy;
 
 import java.util.Date;
 
 
 @Entity
+@Proxy(lazy=false)
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Table(name="APP_MESSAGE")
 public class Message {
-	
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(name="Text", nullable=true)
 	private String text;
-	
-	@Column(name="Username", nullable=false)
-	private String username;
+
 	
 	@Column(name="PostCode", nullable=false)
 	private int postCode;
@@ -38,8 +36,12 @@ public class Message {
 	
 	@Column(name="STATE")
 	private String state=State.ACTIVE.getState();
-	
-	
+
+    @Lazy(false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "User", nullable=true)
+    private User user;
+
 	public int getId() {
 		return id;
 	}
@@ -47,10 +49,16 @@ public class Message {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public String getUsername() {
-		return username;
-	}
+
+
+    @Transactional
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 	
 	public void setDate(Date date) {
 		this.date = date;
@@ -61,9 +69,6 @@ public class Message {
 		return date;
 	}
 	
-	public void setUsername(String username) {
-		this.username = username;
-	}
 	public int getPostCode() {
 		return postCode;
 	}
@@ -106,7 +111,7 @@ public class Message {
 	
 	@Override
 	public String toString() {
-		return "Message [id=" + id + ", username=" + username + ", message text=" + text + ", state=" + state +"]";
+		return "Message [id=" + id + ", message text=" + text + ", state=" + state +"]";
 		
 	}
 

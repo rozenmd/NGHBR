@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.kmji.nghbr.model.BorrowRequest;
 import com.kmji.nghbr.model.Item;
 import com.kmji.nghbr.model.ReturnRequest;
 import com.kmji.nghbr.model.User;

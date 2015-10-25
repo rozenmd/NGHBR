@@ -1,9 +1,7 @@
 package com.kmji.nghbr.service;
 
 import com.kmji.nghbr.dao.SuburbDao;
-import com.kmji.nghbr.dao.UserDao;
 import com.kmji.nghbr.model.Suburb;
-import com.kmji.nghbr.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

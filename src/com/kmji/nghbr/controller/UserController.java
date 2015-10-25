@@ -20,11 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.kmji.nghbr.model.User;
 import com.kmji.nghbr.service.UserService;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 @Controller
 public class UserController extends AbstractController {
 

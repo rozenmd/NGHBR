@@ -6,7 +6,6 @@ import org.hibernate.Criteria;
 import org.springframework.stereotype.Repository;
 
 import com.kmji.nghbr.model.BorrowRequest;
-import com.kmji.nghbr.model.Item;
 
 @Repository("BorrowRequestDao")
 public class BorrowRequestDaoImpl extends AbstractDao<Integer, BorrowRequest> implements BorrowRequestDao {
