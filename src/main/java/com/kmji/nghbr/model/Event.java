@@ -1,5 +1,8 @@
 package com.kmji.nghbr.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,6 +22,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="APP_EVENT")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Event {
 
     @Id
@@ -26,10 +30,10 @@ public class Event {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="NAME", nullable=false)
-    private String name;
+    @Column(name="TITLE", nullable=false)
+    private String title;
 
-    @Column(name="DESCRIPTION", nullable=true)
+    @Column(name="DESCRIPTION", nullable=true, length = 100000)
     private String description;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -42,11 +46,11 @@ public class Event {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="START_DATE")
-    private java.util.Date startDate;
+    private java.util.Date start;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="END_DATE")
-    private java.util.Date endDate;
+    private java.util.Date end;
 
 
     public int getId() {
@@ -57,12 +61,12 @@ public class Event {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -81,23 +85,27 @@ public class Event {
         this.host = host;
     }
 
-    public java.util.Date getStartDate() {
-        return startDate;
+    public java.util.Date getStart() {
+        return start;
     }
 
-    public void setStartDate(java.util.Date startDate) {
-        this.startDate = startDate;
+    public void setStart(java.util.Date start) {
+        this.start = start;
     }
 
-    public java.util.Date getEndDate() {
-        return endDate;
+    public java.util.Date getEnd() {
+        return end;
     }
 
-    public void setEndDate(java.util.Date endDate) {
-        this.endDate = endDate;
+    public void setEnd(java.util.Date end) {
+        this.end = end;
     }
 
     public Suburb getSuburb() { return suburb; }
     public void setSuburb(Suburb suburb) { this.suburb = suburb; }
+
+    public String getJSONString() {
+        return "{" + "id:" + id + ",url:" + "'/events/" + id + "',title:"  + "'"+ title  + "'" + ", start:" + start.getTime() + ", end:" + end.getTime() + ",host:"  + "'"+ host.getFirstName() + " " + host.getLastName()  + "'" + "}";
+    }
 
 }
