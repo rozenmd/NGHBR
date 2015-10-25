@@ -89,7 +89,7 @@
     </div><!-- /.modal -->
 
     <div class="modal fade" id="events-modal">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -114,6 +114,10 @@
               {
                 tmpl_path: "<c:url value="/static/tmpls" />/",
                 modal: "#events-modal",
+                modal_type: 'ajax',
+                modal_title: function (event) {
+                  $('#events-modal .modal-header h3').html(event.title);
+                },
                 events_source: window.eventsList,
                 onAfterEventsLoad: function(events) {
                   if(!events) {
@@ -156,8 +160,6 @@
       formParsley.on('form:success', function(e) {
         var token = $('#csrfToken').val();
         var header = $('#csrfHeader').val();
-
-        console.log(JSON.stringify({title: $('#title').val(), description: $('#description').val(), startDate: new Date($('#start-date').val()).getTime(), endDate: new Date($('#end-date').val()).getTime()}))
 
         $.ajax({
           url:'/events/new',

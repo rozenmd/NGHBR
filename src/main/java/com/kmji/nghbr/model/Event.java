@@ -33,7 +33,7 @@ public class Event {
     @Column(name="TITLE", nullable=false)
     private String title;
 
-    @Column(name="DESCRIPTION", nullable=true)
+    @Column(name="DESCRIPTION", nullable=true, length = 100000)
     private String description;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -105,7 +105,7 @@ public class Event {
     public void setSuburb(Suburb suburb) { this.suburb = suburb; }
 
     public String getJSONString() {
-        return "{" + "title:"  + "'"+ title  + "'"+ ", description:" + "'" +description + "'" + ", start:" + start.getTime() + ", end:" + end.getTime() + ",host:"  + "'"+ host.getFirstName() + " " + host.getLastName()  + "'" + "}";
+        return "{" + "id:" + id + ",url:" + "'/events/" + id + "',title:"  + "'"+ title  + "'" + ", start:" + start.getTime() + ", end:" + end.getTime() + ",host:"  + "'"+ host.getFirstName() + " " + host.getLastName()  + "'" + "}";
     }
 
 }

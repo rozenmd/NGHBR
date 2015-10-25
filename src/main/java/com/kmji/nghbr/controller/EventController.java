@@ -9,10 +9,7 @@ import com.kmji.nghbr.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -51,6 +48,17 @@ public class EventController extends AbstractController {
 
             return "event/events";
         }
+    }
+
+    @RequestMapping(value={"/events/{id}"}, method = RequestMethod.GET)
+    public String events(@PathVariable String id, ModelMap model){
+
+        Event event = eventService.findById(Integer.parseInt(id));
+
+        model.addAttribute("event", event);
+
+        return "event/show";
+
     }
 
     @ResponseBody
