@@ -145,7 +145,8 @@
 
 
 <script>
-	d3.json("http://maxrozen.com/files/suburb.json", function(data) {
+		var data = ${jsonSuburb}
+		//data = JSON.parse(myJson);
 		data.forEach(function(d) {
 			d.totalPoints = +d.totalPoints;
 		});
@@ -171,7 +172,7 @@
 					table.selectAll(".dc-table-group").classed("info", true);
 				});
 		dc.renderAll();
-	});
+
 </script>
 </html>
 

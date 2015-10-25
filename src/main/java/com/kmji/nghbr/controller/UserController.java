@@ -3,6 +3,7 @@ package com.kmji.nghbr.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.kmji.nghbr.model.Suburb;
 import com.kmji.nghbr.service.SuburbService;
 import org.springframework.security.core.Authentication;
@@ -240,21 +241,17 @@ public class UserController extends AbstractController {
                 System.err.println("Got an exception! ");
                 System.err.println(e.getMessage());
             }
-            //DO NOT REMOVE
 
-            //List<Suburb> allSuburbs = suburbService.findAllSuburbs();
-            //ObjectMapper mapper = new ObjectMapper();
-            //File jsonPath = new File("/suburb.json");
-//            try{
-//                mapper.writeValue(jsonPath, allSuburbs);
-//            } catch (JsonGenerationException e) {
-//                e.printStackTrace();
-//            } catch (JsonMappingException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            model.addObject(jsonPath);
+            List<Suburb> topSuburbs = suburbService.findTopFifteenSuburbs();
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonSuburb = "";
+            try {
+               jsonSuburb = mapper.writeValueAsString(topSuburbs);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+            System.out.println(jsonSuburb);
+            model.addObject("jsonSuburb", jsonSuburb);
         }
         return model;
 
