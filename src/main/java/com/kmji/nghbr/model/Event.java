@@ -2,23 +2,14 @@ package com.kmji.nghbr.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 @Table(name="APP_EVENT")
@@ -51,6 +42,10 @@ public class Event {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="END_DATE")
     private java.util.Date end;
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="event")
+    private List<Attendee> attendees;
 
 
     public int getId() {
@@ -103,6 +98,9 @@ public class Event {
 
     public Suburb getSuburb() { return suburb; }
     public void setSuburb(Suburb suburb) { this.suburb = suburb; }
+
+    public List<Attendee> getAttendees() {return attendees;}
+    public void setAttendees(List<Attendee> attendees) {this.attendees = attendees;}
 
     public String getJSONString() {
         return "{" + "id:" + id + ",url:" + "'/events/" + id + "',title:"  + "'"+ title  + "'" + ", start:" + start.getTime() + ", end:" + end.getTime() + ",host:"  + "'"+ host.getFirstName() + " " + host.getLastName()  + "'" + "}";

@@ -1,9 +1,11 @@
 package com.kmji.nghbr.controller;
 
 
+import com.kmji.nghbr.model.Attendee;
 import com.kmji.nghbr.model.Event;
 import com.kmji.nghbr.model.Suburb;
 import com.kmji.nghbr.model.User;
+import com.kmji.nghbr.service.AttendeeService;
 import com.kmji.nghbr.service.EventService;
 import com.kmji.nghbr.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class EventController extends AbstractController {
 
     @Autowired
     EventService eventService;
+
+    @Autowired
+    AttendeeService attendeeService;
 
     @RequestMapping(value={"/events"}, method = RequestMethod.GET)
     public String events(ModelMap model){
@@ -74,8 +79,47 @@ public class EventController extends AbstractController {
 
         eventService.saveOrUpdate(newEvent);
 
+        Attendee attendeeHost = new Attendee();
+        attendeeHost.setUser(user);
+        attendeeHost.setEvent(newEvent);
+        attendeeHost.setRsvp(true);
+
+        attendeeService.saveOrUpdate(attendeeHost);
+
         return newEvent;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/events/{id}/rsvp", method = RequestMethod.POST)
+    public Attendee rsvp(@RequestBody Attendee requestAttendee, HttpServletRequest request, @PathVariable String id) {
+
+        User user = userService.findBySso(getPrincipal());
+        Event event = eventService.findById(Integer.parseInt(id));
+
+        List<Attendee> attendees = event.getAttendees();
+
+        Attendee attendee = null;
+
+        for (Attendee a : attendees) {
+            if (a.getUser().equals(user)) {
+                attendee = a;
+            }
+        }
+
+        if (attendee == null) {
+            attendee = requestAttendee;
+            attendee.setUser(user);
+            attendee.setEvent(event);
+        } else {
+            boolean rsvp = requestAttendee.getRsvp();
+            attendee.setRsvp(rsvp);
+        }
+
+        attendeeService.saveOrUpdate(attendee);
+
+        return attendee;
+    }
+
 
 
 }

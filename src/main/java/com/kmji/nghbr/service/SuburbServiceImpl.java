@@ -30,6 +30,15 @@ public class SuburbServiceImpl implements SuburbService{
 		return dao.findBySuburb(suburbName);
 	}
 
+
+	public List<Suburb> findAllSuburbs() {
+		return dao.getAll();
+	}
+
+	public List<Suburb> findTopFifteenSuburbs() {
+		return dao.getTopFifteen();
+	}
+
 	@Override
 	public void save(Suburb suburb) {
 		dao.saveOrUpdate(suburb);

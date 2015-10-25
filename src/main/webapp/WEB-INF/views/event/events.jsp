@@ -36,7 +36,6 @@
         </div>
 
         <h3></h3>
-        <small>To see example with events navigate to march 2013</small>
       </div>
 
 
@@ -46,12 +45,8 @@
     <div class="col-md-3">
 
       <h4>Events</h4>
-      <small>This list is populated with events dynamically</small>
       <ul id="eventlist" class="nav nav-list"></ul>
-
-
     </div>
-
 
     <div class="modal fade" id="new-event">
       <div class="modal-dialog modal-lg">
