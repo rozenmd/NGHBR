@@ -131,7 +131,7 @@ public class UserController extends AbstractController {
             } else if (!(postcode > 0) ){
                  suburb = suburbService.findBySuburb(request.getParameter("suburb"));
             }
-  
+            System.out.println("***** " + suburb.getSuburbName() + " " + suburb.getPostcode());
             String email = request.getParameter("email");
             User user = userService.findBySso(getPrincipal());
 
@@ -141,10 +141,11 @@ public class UserController extends AbstractController {
             user.setLastName(lastName);
             if(suburb != null){
                 user.setSuburb(suburb);
-                System.out.println(suburb.getSuburbName() + " " + suburb.getPostcode());
+                System.out.println("2nd one *** " + suburb.getId() + " " + suburb.getSuburbName() + " " + suburb.getPostcode());
             }
 
             //suburbService.save()
+            System.out.println(user.getSuburb().toString());
             user.setEmail(email);
             userService.save(user);
             return new ModelAndView("redirect:../profile");
