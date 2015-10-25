@@ -32,12 +32,12 @@ public class User {
 	@Column(name="EMAIL", nullable=true)
 	private String email;
 
-	@Column(name="FACEBOOK_ID", nullable=true)
-	private String facebookId;
-
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "SUBURB", nullable=true)
 	private Suburb suburb;
+
+	@Column(name="FACEBOOK_ID", nullable=true)
+	private String facebookId;
 
 	@Column(name="POINTS", nullable=true)
 	private int points = 0;
@@ -246,7 +246,8 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", ssoId=" + ssoId + ", password=" + password
 				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + ", state=" + state + ", userProfiles=" + userProfiles + ", facebookId=" + facebookId +"]";
+				+ ", email=" + email + ", state=" + state + ", userProfiles=" + userProfiles + ", facebookId=" + facebookId
+				+ ", suburb=" + suburb +"]";
 	}
 
 	

@@ -41,7 +41,36 @@ public class Suburb {
 	
 	@Column(name="SUBURB_NAME", nullable=true)
 	private String suburbName;
+
+	@Column(name="RANKING", nullable=false)
+	private int ranking;
 	
+	@Column(name="TOTAL_POINTS", nullable=false)
+	private int totalPoints;
+
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="suburb")
+	private List<User> residents;
+
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="suburb")
+	private List<Event> events;
+	
+	@Column(name = "SUBURB_STATE")
+	private String state;
+
+	@Column(name = "SUBURB_DC")
+	private String dc;
+
+	@Column(name = "SUBURB_TYPE")
+	private String type;
+
+	@Column(name = "SUBURB_LAT")
+	private double lat;
+
+	@Column(name = "SUBURB_LON")
+	private double lon;
+
 	public String getState() {
 		return state;
 	}
@@ -82,35 +111,6 @@ public class Suburb {
 		this.lon = lon;
 	}
 
-	@Column(name="RANKING", nullable=false)
-	private int ranking;
-	
-	@Column(name="TOTAL_POINTS", nullable=false)
-	private int totalPoints;
-
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="suburb")
-	private List<User> residents;
-
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="suburb")
-	private List<Event> events;
-	
-	@Column(name = "SUBURB_STATE")
-	private String state;
-
-	@Column(name = "SUBURB_DC")
-	private String dc;
-
-	@Column(name = "SUBURB_TYPE")
-	private String type;
-
-	@Column(name = "SUBURB_LAT")
-	private double lat;
-
-	@Column(name = "SUBURB_LON")
-	private double lon;
-	
 	public List<User> getResidents() {
 		return residents;
 	}
@@ -165,6 +165,11 @@ public class Suburb {
 
 	public void setTotalPoints(int totalPoints) {
 		this.totalPoints = totalPoints;
+	}
+
+	@Override
+	public String toString() {
+		return suburbName;
 	}
 
 }
