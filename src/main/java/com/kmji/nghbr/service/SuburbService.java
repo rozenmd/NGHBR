@@ -13,6 +13,8 @@ public interface SuburbService {
 
 	Suburb findBySuburb(String suburb);
 
+	List<Suburb> findAllSuburbs();
+
 	void save(Suburb suburb);
 
 	List<Suburb> findByPostcode(int postcode);
