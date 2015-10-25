@@ -2,6 +2,7 @@ package com.kmji.nghbr.controller;
 
 
 import com.kmji.nghbr.model.Event;
+import com.kmji.nghbr.model.Suburb;
 import com.kmji.nghbr.model.User;
 import com.kmji.nghbr.service.EventService;
 import com.kmji.nghbr.service.UserService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -27,10 +29,28 @@ public class EventController extends AbstractController {
 
     @RequestMapping(value={"/events"}, method = RequestMethod.GET)
     public String events(ModelMap model){
-        User user = userService.findBySso(getPrincipal());
-        model.addAttribute("user", user);
+        if (getPrincipal() == "anonymousUser") {
+            return "redirect:/login";
+        } else {
+            User user = userService.findBySso(getPrincipal());
+            model.addAttribute("user", user);
 
-        return "event/events";
+            Suburb suburb = user.getSuburb();
+
+            List<Event> events = suburb.getEvents();
+
+            model.addAttribute("events", events);
+
+            List<String> eventJSON = new ArrayList<String>();
+
+            for (Event event : events) {
+                eventJSON.add(event.getJSONString());
+            }
+
+            model.addAttribute("eventsJSON", eventJSON.toString());
+
+            return "event/events";
+        }
     }
 
     @ResponseBody
@@ -40,10 +60,10 @@ public class EventController extends AbstractController {
 
         Event newEvent = new Event();
 
-        newEvent.setName(requestEvent.getName());
+        newEvent.setTitle(requestEvent.getTitle());
         newEvent.setDescription(requestEvent.getDescription());
-        newEvent.setStartDate(requestEvent.getStartDate());
-        newEvent.setEndDate(requestEvent.getEndDate());
+        newEvent.setStart(requestEvent.getStart());
+        newEvent.setEnd(requestEvent.getEnd());
         newEvent.setOwner(user);
         newEvent.setSuburb(user.getSuburb());
 
@@ -52,5 +72,22 @@ public class EventController extends AbstractController {
         return newEvent;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/events/feed", method = RequestMethod.GET)
+    public String feed() {
+        User user = userService.findBySso(getPrincipal());
 
+        Suburb suburb = user.getSuburb();
+
+        List<Event> events = suburb.getEvents();
+
+
+        List<String> eventJSON = new ArrayList<String>();
+
+        for (Event event : events) {
+            eventJSON.add(event.getJSONString());
+        }
+
+        return eventJSON.toString();
+    }
 }
