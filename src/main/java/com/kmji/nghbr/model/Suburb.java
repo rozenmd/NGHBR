@@ -154,4 +154,8 @@ public class Suburb {
 		this.totalPoints = totalPoints;
 	}
 
+	public String toString() {
+		return suburbName;
+	}
+
 }
