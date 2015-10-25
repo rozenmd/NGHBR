@@ -71,8 +71,10 @@ public class UserController extends AbstractController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null){
             User user = userService.findBySso(getPrincipal());
+            if(user.getSuburb() == null){
+                return new ModelAndView("redirect:user/initialise");
+            }
             model.addObject("user", user);
-            //get postcode row value
             try{
                 if(user.getSuburb().getSuburbName().length() > 0 && user.getSuburb().getPostcode() > 0){
 
@@ -156,6 +158,56 @@ public class UserController extends AbstractController {
         return model;
 
     }
+
+    @RequestMapping(value = "/user/initialise", method = RequestMethod.GET)
+    public ModelAndView initialise() {
+        ModelAndView model = new ModelAndView("user/initialise");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            User user = userService.findBySso(getPrincipal());
+            model.addObject("user", user);
+        }
+        return model;
+    }
+    //Why does this code go to /update???
+    @RequestMapping(value = "/user/initialise", method = RequestMethod.POST)
+    public ModelAndView initialisePOST(HttpServletRequest request){
+
+        ModelAndView model = new ModelAndView("user/initialise");
+
+        try{
+            int postcode = Integer.parseInt(request.getParameter("postcode"));
+            Suburb suburb = null;
+            if(request.getParameter("suburb").length() > 0 && postcode > 0){
+                suburb = suburbService.findByPostcodeSuburb(
+                        postcode,
+                        request.getParameter("suburb")
+                );
+            }else if (postcode > 0){
+                suburb = suburbService.findByPostcode(postcode).get(0);
+            } else if (!(postcode > 0) ){
+                suburb = suburbService.findBySuburb(request.getParameter("suburb"));
+            }
+
+            User user = userService.findBySso(getPrincipal());
+            System.out.println(user.toString());
+
+            if(suburb != null){
+                user.setSuburb(suburb);
+            }
+
+            userService.save(user);
+            return new ModelAndView("redirect:/profile");
+        }catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+
+        return model;
+
+    }
+
+
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerPage(ModelMap model) {
         // create a test user
