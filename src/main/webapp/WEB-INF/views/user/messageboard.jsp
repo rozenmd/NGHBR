@@ -2,6 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ page import="java.io.*,java.util.*" %>
+<%@ page import="java.io.*,java.util.*" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,14 +46,46 @@
 		<div class="conversationsholder">
 			<c:forEach items="${messages}" var="message" varStatus="counter">
 				<c:choose>
-					<c:when test="${counter.index % 2 == 0}">
-						<div class="bubble_left">
-							<p>${message.getText()}</p>
+					<c:when test="${user.getFirstName() == message.getUsername()}">
+						<div class="bubble_right">
+							<div class="message">
+                                <div class="thick">
+                                    You
+                                    <div class ="date">
+                                        <%--${message.getDate()}--%>
+                                            <c:set var="date" value="${message.getDate()}"/>
+                                            <%
+                                                Object datee = pageContext.getAttribute("date");
+                                                SimpleDateFormat sdf=new SimpleDateFormat("dd MMMM YYYY HH:mm");
+                                                String date=sdf.format(datee);
+                                                pageContext.setAttribute("date", date);
+                                            %>
+                                            <c:out value="${date}"/>
+                                    </div>
+                                </div>
+                            ${message.getText()}
+                            </div>
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div class="bubble_right">
-							<p>${message.getText()}</p>
+						<div class="bubble_left">
+                            <div class="message">
+                                <div class="thick">
+                                    ${message.getUsername()}
+                                        <div class ="date">
+                                                <%--${message.getDate()}--%>
+                                            <c:set var="date" value="${message.getDate()}"/>
+                                            <%
+                                                Object datee = pageContext.getAttribute("date");
+                                                SimpleDateFormat sdf=new SimpleDateFormat("dd MMMM YYYY HH:mm");
+                                                String date=sdf.format(datee);
+                                                pageContext.setAttribute("date", date);
+                                            %>
+                                            <c:out value="${date}"/>
+                                        </div>
+                                </div>
+                            ${message.getText()}
+                            </div>
 						</div>
 					</c:otherwise>
 				</c:choose>

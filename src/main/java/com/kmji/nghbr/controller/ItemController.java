@@ -97,7 +97,11 @@ public class ItemController extends AbstractController implements ServletContext
 		
 		for(User u : suburbUsers){
 			if(!u.equals(user)){ //don't add users own items lol
-				items.addAll(u.getOwnedItems());
+				for (Item i : u.getOwnedItems()){
+					if(i.getOwner().equals(i.getBorrower())){ //only show items not already borrowed
+						items.add(i);
+					}
+				}
 			}
 		}
 		

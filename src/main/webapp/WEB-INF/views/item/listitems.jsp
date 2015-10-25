@@ -34,7 +34,15 @@
 	<jsp:include page="/navBar"></jsp:include>
 	
 	<div class="container">
-		<h3>My Items</h3>
+		
+		<c:choose>
+			<c:when test='${label.equals("Items you own")}'>
+				<h3>My Items</h3>
+			</c:when>
+			<c:otherwise>
+				<h3>Borrowed Items</h3>
+			</c:otherwise>
+		</c:choose>
 		<h4>Here are the ${label} ${user.getFirstName()}</h4>
 		<c:forEach items="${items}" var="item">
 			<div class="item row box well">

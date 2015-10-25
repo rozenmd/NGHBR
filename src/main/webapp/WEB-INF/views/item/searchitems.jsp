@@ -34,8 +34,8 @@
 	<jsp:include page="/navBar"></jsp:include>
 	
 	<div class="container">
-		<h3>My Items</h3>
-		<h4>Here are items available in your area!}</h4>
+		<h3>Suburb Items</h3>
+		<h4>Here are items available in your area!</h4>
 		<c:forEach items="${items}" var="item">
 			<div class="item row box well">
 				<form class="form-inline" action="/items/borrow/${item.getId()}">
