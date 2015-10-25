@@ -8,9 +8,27 @@ h3 {
 	padding-bottom: 40px;
 }
 
-p {
-    font-size: 12px;
+.message {
+    font-size: 11px;
 }
+
+.thick {
+    font-weight: bold;
+    font-size: 11px;
+    margin-bottom: 5px;
+
+
+}
+
+.date {
+    float:right;
+    color:#00B8E6;
+;
+
+
+
+}
+
 .box {
 	width: 700px;
 	height: 500px;
@@ -29,14 +47,13 @@ p {
 	resize: none;
 	margin-right: 50px;
 	height: 47px;
-	
 /* 	border: 2px solid #000000;
  */	
 	
 }
 
-.a {float right;
-	
+.a {
+    float:right;
 }
 
 .bubble_left {
@@ -44,24 +61,26 @@ p {
 	position: relative;
 	width: 320px;
 	height: 70px;
-	padding: 10px;
-	margin-bottom: 10px;
+    padding-top: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+    margin-bottom: 10px;
 	margin-left: 15px;
-
 	background: #FFFFFF;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
 
-
 .bubble_right {
-	
 	position: relative;
 	width: 320px;
 	height: 70px;
-	padding: 10px;
-	margin-bottom: 10px;
+	padding-top: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+
+    margin-bottom: 10px;
 	margin-left: 325px;
 	background: #FFFFFF;
 	-webkit-border-radius: 5px;
