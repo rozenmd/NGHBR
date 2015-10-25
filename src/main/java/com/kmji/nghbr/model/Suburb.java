@@ -87,8 +87,9 @@ public class Suburb {
 	
 	@Column(name="TOTAL_POINTS", nullable=false)
 	private int totalPoints;
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="suburb")
+
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="suburb")
 	private List<User> residents;
 
 	@LazyCollection(LazyCollectionOption.FALSE)
