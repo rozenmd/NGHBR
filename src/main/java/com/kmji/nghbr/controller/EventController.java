@@ -24,10 +24,14 @@ public class EventController extends AbstractController {
 
     @RequestMapping(value={"/events"}, method = RequestMethod.GET)
     public String events(ModelMap model){
-        User user = userService.findBySso(getPrincipal());
-        model.addAttribute("user", user);
+        if (getPrincipal() != "anonymousUser") {
+            User user = userService.findBySso(getPrincipal());
+            model.addAttribute("user", user);
 
-        return "event/events";
+            return "event/events";
+        } else {
+            return "redirect:/login";
+        }
     }
 
     @RequestMapping(value={"/events/{id}"}, method = RequestMethod.GET)
@@ -48,10 +52,10 @@ public class EventController extends AbstractController {
 
         Event newEvent = new Event();
 
-        newEvent.setName(requestEvent.getName());
+        newEvent.setTitle(requestEvent.getTitle());
         newEvent.setDescription(requestEvent.getDescription());
-        newEvent.setStartDate(requestEvent.getStartDate());
-        newEvent.setEndDate(requestEvent.getEndDate());
+        newEvent.setStart(requestEvent.getStart());
+        newEvent.setEnd(requestEvent.getEnd());
         newEvent.setOwner(user);
         newEvent.setSuburb(user.getSuburb());
 
