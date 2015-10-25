@@ -27,8 +27,8 @@ CREATE TABLE `APP_SUBURB` (
   `SUBURB_LAT` double NOT NULL default '0',
   `SUBURB_LON` double NOT NULL default '0',
   `SUBURB_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `RANKING` int(11) unsigned,
-  `TOTAL_POINTS` int(11) unsigned,
+  `RANKING` int(11) unsigned default '0',
+  `TOTAL_POINTS` int(11) unsigned default '0',
   PRIMARY KEY  (`SUBURB_ID`	),
   KEY `idx_lon` (`SUBURB_LON`),
   KEY `idx_lat` (`SUBURB_LAT`)
