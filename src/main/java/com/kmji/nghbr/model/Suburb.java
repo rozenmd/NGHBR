@@ -81,6 +81,11 @@ public class Suburb {
 		this.lon = lon;
 	}
 
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="suburb")
+	private List<Event> events;
+
+
 	@Column(name="RANKING", nullable=false)
 	private int ranking;
 	
@@ -157,5 +162,14 @@ public class Suburb {
 	public String toString() {
 		return suburbName;
 	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
 
 }

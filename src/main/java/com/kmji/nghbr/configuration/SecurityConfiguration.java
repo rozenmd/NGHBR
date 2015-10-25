@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 
 @Configuration
 @EnableWebSecurity
@@ -30,6 +31,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
 				.and().formLogin().loginPage("/login")
 				.usernameParameter("ssoId").passwordParameter("password").and().csrf()
-				.and().exceptionHandling().accessDeniedPage("/Access_Denied");
+				.and().exceptionHandling().accessDeniedPage("/Access_Denied").and().headers().frameOptions().sameOrigin();
 	}
+
+
 }

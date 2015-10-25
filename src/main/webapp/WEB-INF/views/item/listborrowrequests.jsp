@@ -17,7 +17,7 @@
 	rel="stylesheet">
 <link href="<c:url value="/static/css/landing.css" />" rel="stylesheet">
 <link href="<c:url value="/static/css/style.css" />" rel="stylesheet">
-<link href="<c:url value="/static/css/listitems.css" />"
+<link href="<c:url value="/static/css/listbr.css" />"
 	rel="stylesheet">
 
 
@@ -39,20 +39,43 @@
 		<c:forEach items="${borrowRequests}" var="req">
 			<div class="item row box well">
 				<form class="form-inline" action="/borrowrequest/${req.getId()}">
-					<div class="form-group">
-						<img class="itemimage img-thumbnail" src="/item_images/${req.getItem().getOwner().getId()}/${req.getItem().getId()}.jpg" alt="Item Image">
+					<div class="container">
+						<div class="form-group">
+							<img class="itemimage img-thumbnail" src="/item_images/${req.getItem().getOwner().getId()}/${req.getItem().getId()}.jpg" alt="Item Image">
+						</div>
+						<div class="itemtext form-group">
+							<h4 class="itemname">${req.getItem().getName()}</h4>
+							<p class="itemdesc">${req.getItem().getDescription()}</p>
+						</div>
 					</div>
-					<div class="itemtext form-group">
-						<h4 class="itemname">${req.getItem().getName()}</h4>
-						<p class="itemdesc">${req.getItem().getDescription()}</p>
+					<div class="container">
+						<div class="sentmessage message">
+							<h5><b>Message:</b></h5>
+							<p>${req.getMessage()}</p>
+						</div>
 					</div>
-	
-					<div class="itemtext form-group">
-						<p class="itemdesc">${req.getMessage()}</p>
+					<div class="container">
+						<div class="responsemessage message">
+							<h5><b>Response:</b></h5>
+							<p>${req.getResponseMessage()}</p>
+						</div>
 					</div>
-					
-					<div class="itemtext form-group">
-						<p class="itemdesc">Approved? ${req.getApproved()}</p>
+					<div class="container">	
+						<div class="approveicon">
+							<c:if test="${req.getApproved()}">
+								<span class="label label-success">Approved</span>
+							</c:if>
+							<c:choose>
+								<c:when test="${!req.getApproved() && req.getResponseMessage()==null}">
+									<h5><span class="label label-default">Pending</span></h5>
+								</c:when>
+								<c:otherwise>
+									<c:if test="${!req.getApproved()}">
+										<span class="label label-danger">Denied</span>
+									</c:if>
+								</c:otherwise>
+							</c:choose>
+						</div>
 					</div>
 					<c:if test='${ label.equals("requests you have recieved")}'>
 						<button type="submit" class="editbutton btn btn-info">View</button>

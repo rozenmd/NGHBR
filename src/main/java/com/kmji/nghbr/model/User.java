@@ -3,6 +3,8 @@ package com.kmji.nghbr.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.IndexColumn;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.*;
@@ -59,6 +61,10 @@ public class User {
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="owner")
 	private Set<ReturnRequest> recievedReturnRequests;
+
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
+	private List<Attendee> attendances;
 
 	public Set<ReturnRequest> getSentReturnRequests() {
 		return sentReturnRequests;
@@ -213,6 +219,9 @@ public class User {
 		grantedAuthorities.add(grantedAuthority);
 		return grantedAuthorities;
 	}
+
+	public List<Attendee> getAttendances() {return attendances;}
+	public void setAttendances(List<Attendee> attendances) {this.attendances = attendances;}
 
 	@Override
 	public int hashCode() {

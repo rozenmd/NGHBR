@@ -27,9 +27,9 @@
 		            <li><a href="<c:url value="/items/borrowed" />">Borrowed Items</a></li>
 		            <li><a href="<c:url value="/items/search" />">Find Items!</a></li>
 		            <li><a href="<c:url value="/borrowrequests/sent" />">Borrow Requests Sent</a></li>
-		            <li><a href="<c:url value="/borrowrequests/recieved" />">Borrrow Requests Received</a></li>
+		            <li><a href="<c:url value="/borrowrequests/recieved" />">Borrrow Requests Received <span class="badge">2</span></a></li>
 		            <li><a href="<c:url value="/returnrequests/sent" />">Feedback Sent</a></li>
-		            <li><a href="<c:url value="/returnrequests/recieved" />">Feedback Recieved</a></li>
+		            <li><a href="<c:url value="/returnrequests/recieved" />">Feedback Recieved <span class="badge">1</span></a></li>
 		        </ul>
             </li>
             <li><a href="<c:url value="/events" />">Events</a></li>
