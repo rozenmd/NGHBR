@@ -126,7 +126,7 @@
 
                 $.each(events, function(key, val) {
                   $(document.createElement('li'))
-                          .html('<a href="' + val.url + '">' + val.title + '</a>')
+                          .html('<a href="#" onclick="openInModal(\'' + val.url + '\', \''+ val.title+'\')">' + val.title + '</a>')
                           .appendTo(list);
                 });
               },
@@ -134,7 +134,7 @@
                 $('.page-header h3').text(this.getTitle());
                 $('.btn-group button').removeClass('active');
                 $('button[data-calendar-view="' + view + '"]').addClass('active');
-              },
+              }
             });
 
     $('.btn-group button[data-calendar-nav]').each(function() {
@@ -155,6 +155,21 @@
       formParsley.validate();
     }
 
+    function openInModal(url, title) {
+
+      $.ajax({
+        url: url,
+        method: "GET",
+        success: function(response) {
+          $('#events-modal .modal-body').html(response);
+          $('#events-modal .modal-header h3').html(title);
+          $('#events-modal').modal();
+        }
+      })
+
+
+    }
+
     formParsley.on('form:success', function(e) {
       var token = $('#csrfToken').val();
       var header = $('#csrfHeader').val();
@@ -170,7 +185,6 @@
           xhr.setRequestHeader(header, token);
         },
         success: function(data){
-          //redirecting once logged in
           window.location = '/events';
         }});
     })
