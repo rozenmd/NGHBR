@@ -20,19 +20,20 @@ h3 {
 	font-size: 11px;
 	margin-bottom: 10px;
 
-
 }
 
 .name {
 	float:left;
 	clear:left;
 	margin-right: 100px;
-
 }
 
 .photo {
 	display: inline-block;
 	margin-bottom: 2px;
+	margin-right: 2px;
+
+
 	float:left;
 	clear:left
 

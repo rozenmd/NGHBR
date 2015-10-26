@@ -48,7 +48,13 @@
                 <c:when test="${user.getId() == message.getUser().getId()}">
                     <div class="bubble_right">
                         <div class="photo">
-                            <img src="https://graph.facebook.com/${user.getFacebookId()}/picture?width=50&height=50"/>
+                            <c:if test="${user.getFacebookId() != null}">
+                                <img src="https://graph.facebook.com/${message.getUser().getFacebookId()}/picture?width=50&height=50 "/>
+                            </c:if>
+                            <c:if test="${user.getFacebookId() == null}">
+                                <img src="<c:url value="/static/images/question.png" />" alt="" height="50" width="50">
+
+                            </c:if>
                         </div>
                         <div class="message">
                             <div class="thick">
@@ -76,7 +82,15 @@
                 <c:otherwise>
                     <div class="bubble_left">
                         <div class="photo">
-                            <img src="https://graph.facebook.com/${message.getUser().getFacebookId()}/picture?width=50&height=50 "/>
+                            <c:if test="${message.getUser().getFacebookId() != null}">
+                                <img src="https://graph.facebook.com/${message.getUser().getFacebookId()}/picture?width=50&height=50 "/>
+
+
+                            </c:if>
+                            <c:if test="${message.getUser().getFacebookId() == null}">
+                                <img src="<c:url value="/static/images/question.png" />" alt="" height="50" width="50">
+
+                            </c:if>
                         </div>
                         <div class="message">
                             <div class="thick">
