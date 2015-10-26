@@ -27,6 +27,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -69,18 +70,23 @@ public class UserController extends AbstractController {
     public String totalPoints(ModelMap model) {
         model.addAttribute("user", getPrincipal());
         List<User> users = userService.findAllUsers();
+        //List<User> added = new ArrayList<User>();
         List<Suburb> suburbs = suburbService.findAllSuburbs();
         String result = "";
-        for(User user : users){
-            for(Suburb suburb : suburbs){
+        for(Suburb suburb : suburbs){
+            suburb.setTotalPoints(0);
+            for(User user : users){
+
 //                System.out.println(user.getSuburb().getSuburbName());
 //                System.out.println(suburb.getSuburbName());
-                if((user.getSuburb().getSuburbName().equals(suburb.getSuburbName()))
-                        && (user.getSuburb().getPostcode()==suburb.getPostcode())){
-                    suburb.setTotalPoints(suburb.getTotalPoints()+user.getPoints());
-                    result = suburb.toString() + " points: " + suburb.getTotalPoints();
-                    suburbService.save(suburb);
-                }
+                int x = suburb.getTotalPoints() + user.getPoints();
+
+                    if((user.getSuburb().getSuburbName().equals(suburb.getSuburbName()))
+                            && (user.getSuburb().getPostcode()==suburb.getPostcode())){
+                        suburb.setTotalPoints(x);
+                        result = suburb.toString() + " points: " + suburb.getTotalPoints();
+                        suburbService.save(suburb);
+                    }
             }
         }
         System.out.println(result);
