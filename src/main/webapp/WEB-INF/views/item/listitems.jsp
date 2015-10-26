@@ -17,8 +17,6 @@
 	rel="stylesheet">
 <link href="<c:url value="/static/css/landing.css" />" rel="stylesheet">
 <link href="<c:url value="/static/css/style.css" />" rel="stylesheet">
-<link href="<c:url value="/static/css/listitems.css" />"
-	rel="stylesheet">
 
 
 <%-- JavaScripts --%>
@@ -37,35 +35,13 @@
 		
 		<c:choose>
 			<c:when test='${label.equals("Items you own")}'>
-				<h3>My Items</h3>
+				<h1>My Items</h1>
 			</c:when>
 			<c:otherwise>
-				<h3>Borrowed Items</h3>
+				<h1>Borrowed Items</h1>
 			</c:otherwise>
 		</c:choose>
-		<h4>Here are the ${label} ${user.getFirstName()}</h4>
-		<c:forEach items="${items}" var="item">
-			<div class="item row box well">
-				<form class="form-inline" action="/items/edit/${item.getId()}">
-					<div class="form-group">
-						<img class="itemimage img-thumbnail" src="/item_images/${item.getOwner().getId()}/${item.getId()}.jpg" alt="Item Image">
-					</div>
-					<div class="itemtext form-group">
-						<h4 class="itemname">${item.getName()}</h4>
-						<p class="itemdesc">${item.getDescription()}</p>
-					</div>
-					<c:choose>
-						<c:when test='${label.equals("Items you own")}'>
-							<button type="submit" class="editbutton btn btn-info">Edit</button>
-						</c:when>
-						<c:otherwise>
-							<button type="button" onclick="location.href='/items/return/${item.getId()}';" class="editbutton btn btn-info">Return</button>
-						</c:otherwise> 
-					</c:choose>
-				</form>
-				
-			</div>
-		</c:forEach>
+
 		<c:choose>
 			<c:when test='${label.equals("Items you own")}'>
 				<button type="button" class="addbutton btn btn-primary" onclick="location.href='/additem'">Add New Item</button>
@@ -74,6 +50,32 @@
 				<button type="button" class="addbutton btn btn-primary" onclick="location.href='/items/search'">Find Items in you area!</button>
 			</c:otherwise>
 		</c:choose>
+		<h4>Here are the ${label} </h4>
+		<c:forEach items="${items}" var="item">
+
+			<div class="col-sm-6 col-md-2">
+				<div class="thumbnail">
+					<img class="itemimage img-thumbnail" src="/item_images/${item.getOwner().getId()}/${item.getId()}.jpg" alt="Item Image">
+					<div class="caption">
+						<h3 class="itemname">${item.getName()}</h3>
+						<p class="itemdesc">${item.getDescription()}</p>
+						<p>
+						<form class="form-inline" action="/items/edit/${item.getId()}">
+						<c:choose>
+								<c:when test='${label.equals("Items you own")}'>
+									<button type="submit" class="editbutton btn btn-block btn-info">Edit</button>
+								</c:when>
+								<c:otherwise>
+									<button type="button" onclick="location.href='/items/return/${item.getId()}';" class="editbutton btn btn-block btn-info">Return</button>
+								</c:otherwise>
+							</c:choose>
+						</form>
+						</p>
+					</div>
+				</div>
+			</div>
+
+		</c:forEach>
 	</div>
 	
 </body>

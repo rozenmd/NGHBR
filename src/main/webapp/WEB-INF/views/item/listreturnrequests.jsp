@@ -34,8 +34,9 @@
 	<jsp:include page="/navBar"></jsp:include>
 	
 	<div class="container">
-		<h3>Item Return Requests</h3>
-		<h4>Here are the ${label} ${user.getFirstName()}</h4>
+		<h1>Item Return Requests</h1>
+		<h4>Here are the ${label}</h4>
+		<hr>
 		<c:forEach items="${returnRequests}" var="req">
 			<div class="item row box well">
 				<form class="form-inline" action="/returnrequest/${req.getId()}">

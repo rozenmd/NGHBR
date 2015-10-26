@@ -34,22 +34,23 @@
 	<jsp:include page="/navBar"></jsp:include>
 	
 	<div class="container">
-		<h3>Suburb Items</h3>
+		<h1>Suburb Items</h1>
 		<h4>Here are items available in your area!</h4>
 		<c:forEach items="${items}" var="item">
-			<div class="item row box well">
-				<form class="form-inline" action="/items/borrow/${item.getId()}">
-					<div class="form-group">
-						<img class="itemimage img-thumbnail" src="/item_images/${item.getOwner().getId()}/${item.getId()}.jpg" alt="Item Image">
-					</div>
-					<div class="itemtext form-group">
-						<h4 class="itemname">${item.getName()}</h4>
+
+			<div class="col-sm-6 col-md-2">
+				<div class="thumbnail">
+					<img class="itemimage img-thumbnail" src="/item_images/${item.getOwner().getId()}/${item.getId()}.jpg" alt="Item Image">
+					<div class="caption">
+						<h3 class="itemname">${item.getName()}</h3>
 						<p class="itemdesc">${item.getDescription()}</p>
+						<p>
+						<form class="form-inline" action="/items/borrow/${item.getId()}">
+						<button type="submit" class="editbutton btn btn-block btn-primary">Borrow</button>
+						</form>
+						</p>
 					</div>
-					<button type="submit" class="editbutton btn btn-primary">Borrow</button> 
-					
-				</form>
-				
+				</div>
 			</div>
 		</c:forEach>
 	</div>
