@@ -24,3 +24,19 @@ body {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+/* Custom navbar color for NGHBR*/
+
+.navbar-inverse {
+    background-color: #5cb85c;
+    border-color: #5cb85c;
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse, .navbar-inverse .navbar-nav > li > a {
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    color: #FFF;
+    background-color: #16b81e;
+}

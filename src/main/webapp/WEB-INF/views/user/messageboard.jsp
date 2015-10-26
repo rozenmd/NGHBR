@@ -19,7 +19,6 @@
           rel="stylesheet">
     <link href="<c:url value="/static/css/bootstrap-social.css" />"
           rel="stylesheet">
-    <link href="<c:url value="/static/css/landing.css" />" rel="stylesheet">
     <link href="<c:url value="/static/css/style.css" />" rel="stylesheet">
     <link href="<c:url value="/static/css/messageboard.css" />"
           rel="stylesheet">

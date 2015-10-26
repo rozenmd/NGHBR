@@ -19,13 +19,12 @@
 	<link href="<c:url value="/static/css/style.css" />" rel="stylesheet">
 
 	<%--//mapping css--%>
-	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+		<link href="<c:url value="/static/css/leaflet.min.css" />" rel="stylesheet">
 
 
 
 	<%-- JavaScripts --%>
-	<script
-			src="<c:url value="/static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" />"></script>
+	<script src="<c:url value="/static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" />"></script>
 	<script src="<c:url value="/static/js/vendor/jquery-1.11.2.min.js" />"></script>
 	<script src="<c:url value="/static/js/vendor/bootstrap.min.js" />"></script>
 
@@ -88,8 +87,8 @@
 </div>
 </body>
 <%--JS for data display on maps:--%>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="http://d3js.org/topojson.v1.min.js"></script>
+<script src="<c:url value="/static/js/vendor/d3.v3.min.js" />"></script>
+<script src="<c:url value="/static/js/vendor/topojson.v1.min.js" />"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
 <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
 
