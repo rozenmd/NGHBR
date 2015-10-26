@@ -1,18 +1,17 @@
 package com.kmji.nghbr.model;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import org.springframework.context.annotation.Lazy;
+import org.hibernate.annotations.IndexColumn;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
-
-import org.hibernate.annotations.Proxy;
 
 import java.util.*;
 
 import javax.persistence.*;
 
-
 @Entity
-@Proxy(lazy=false)
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Table(name="APP_USER")
 public class User {
@@ -63,17 +62,9 @@ public class User {
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="owner")
 	private Set<ReturnRequest> recievedReturnRequests;
 
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="user")
-
-    private Set<Message> messages;
-
-    public Set<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(Set<Message> messages) {
-        this.messages = messages;
-    }
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
+	private List<Attendee> attendances;
 
 	public Set<ReturnRequest> getSentReturnRequests() {
 		return sentReturnRequests;
@@ -227,6 +218,13 @@ public class User {
 		};
 		grantedAuthorities.add(grantedAuthority);
 		return grantedAuthorities;
+	}
+
+	public List<Attendee> getAttendances() {return attendances;}
+	public void setAttendances(List<Attendee> attendances) {this.attendances = attendances;}
+
+	public String getProfilePictureUrl(String size) {
+		return "http://graph.facebook.com/" +  facebookId + "/picture?type=" + size;
 	}
 
 	@Override

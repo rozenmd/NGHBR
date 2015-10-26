@@ -2,6 +2,8 @@ package com.kmji.nghbr.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import java.util.HashSet;
 import java.util.List;
@@ -79,13 +81,19 @@ public class Suburb {
 		this.lon = lon;
 	}
 
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="suburb")
+	private List<Event> events;
+
+
 	@Column(name="RANKING", nullable=false)
 	private int ranking;
 	
 	@Column(name="TOTAL_POINTS", nullable=false)
 	private int totalPoints;
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="suburb")
+
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="suburb")
 	private List<User> residents;
 	
 	@Column(name = "SUBURB_STATE")
@@ -150,5 +158,18 @@ public class Suburb {
 	public void setTotalPoints(int totalPoints) {
 		this.totalPoints = totalPoints;
 	}
+
+	public String toString() {
+		return suburbName;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
 
 }

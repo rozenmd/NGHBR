@@ -3,6 +3,7 @@ package com.kmji.nghbr.dao;
 import com.kmji.nghbr.model.Suburb;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -32,6 +33,20 @@ public class SuburbDaoImpl extends AbstractDao<Integer, Suburb> implements Subur
 		crit.setMaxResults(1);
 		List<Suburb> results = crit.list();
 		return results.get(0);
+	}
+
+
+	public List<Suburb> getAll() {
+		Criteria crit = createEntityCriteria();
+		return crit.list();
+	}
+
+
+	public List<Suburb> getTopFifteen() {
+		Criteria crit = createEntityCriteria();
+		crit.addOrder(Order.desc("totalPoints"));
+		crit.setMaxResults(15);
+		return crit.list();
 	}
 
 	public void saveOrUpdate(Suburb suburb) {

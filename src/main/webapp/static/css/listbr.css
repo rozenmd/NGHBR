@@ -1,0 +1,65 @@
+
+body{
+	background-color: #eeeeec;
+}
+
+h3 {
+    padding-top: 70px;
+    padding-bottom: 40px;   
+}
+
+h4 {
+	padding-bottom: 40px;
+}
+  
+.box{
+    float: left;
+    min-height: 250px; 
+}
+
+.message{
+	padding-top: 10px;
+	float: right;
+	width: 100%;
+}
+
+.approveicon{
+	float:right;
+	padding-top: 20px;
+	padding-right: 20px;
+}
+
+.score{
+	float:right;
+	padding-top: 20px;
+	padding-right: 20px;
+}
+
+.scorelabel{
+ 
+}
+
+.item{
+	
+	width: inherit;
+}
+
+.editbutton{
+	float:right;
+	margin-top:40px;
+	
+}
+
+.itemname{
+	padding-bottom: 10px;
+	
+}
+
+.itemdesc{
+	
+}
+
+.itemimage{
+	margin-right: 80px;
+}
+

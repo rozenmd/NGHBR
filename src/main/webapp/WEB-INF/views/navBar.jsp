@@ -18,6 +18,7 @@
         <c:choose>
           <c:when test="${pageContext.request.userPrincipal.authenticated}">
             <li><a href="<c:url value="/profile" />">Profile</a></li>
+            <li><a href="<c:url value="/user/scoreboard" />">Scoreboard</a></li>
             <li><a href="<c:url value="/messageboard" />">Message Board</a></li>
             <li class="dropdown">
           		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Items <span class="caret"></span></a>
@@ -26,9 +27,9 @@
 		            <li><a href="<c:url value="/items/borrowed" />">Borrowed Items</a></li>
 		            <li><a href="<c:url value="/items/search" />">Find Items!</a></li>
 		            <li><a href="<c:url value="/borrowrequests/sent" />">Borrow Requests Sent</a></li>
-		            <li><a href="<c:url value="/borrowrequests/recieved" />">Borrrow Requests Received</a></li>
+		            <li><a href="<c:url value="/borrowrequests/recieved" />">Borrrow Requests Received <span class="badge">2</span></a></li>
 		            <li><a href="<c:url value="/returnrequests/sent" />">Feedback Sent</a></li>
-		            <li><a href="<c:url value="/returnrequests/recieved" />">Feedback Recieved</a></li>
+		            <li><a href="<c:url value="/returnrequests/recieved" />">Feedback Recieved <span class="badge">1</span></a></li>
 		        </ul>
             </li>
             <li><a href="<c:url value="/events" />">Events</a></li>

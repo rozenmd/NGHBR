@@ -17,7 +17,7 @@
 	rel="stylesheet">
 <link href="<c:url value="/static/css/landing.css" />" rel="stylesheet">
 <link href="<c:url value="/static/css/style.css" />" rel="stylesheet">
-<link href="<c:url value="/static/css/listitems.css" />"
+<link href="<c:url value="/static/css/listbr.css" />"
 	rel="stylesheet">
 
 
@@ -39,35 +39,49 @@
 		<c:forEach items="${returnRequests}" var="req">
 			<div class="item row box well">
 				<form class="form-inline" action="/returnrequest/${req.getId()}">
-					<div class="form-group">
-						<img class="itemimage img-thumbnail" src="/item_images/${req.getItem().getOwner().getId()}/${req.getItem().getId()}.jpg" alt="Item Image">
-					</div>
-					<div class="itemtext form-group">
-						<h4 class="itemname">${req.getItem().getName()}</h4>
-						<p class="itemdesc">${req.getItem().getDescription()}</p>
-					</div>
-					<c:if test='${ label.equals("items you returned")}'>
-						<div class="itemtext form-group">
-								<p class="itemdesc">Your Feedback: ${req.getBorrowerMessage()}</p>
-								<p class="itemdesc">Feedback Recieved: ${req.getOwnerMessage()}</p>
-							<p class="itemdesc"></p>
-	
+					<div class="container">
+						<div class="form-group">
+							<img class="itemimage img-thumbnail" src="/item_images/${req.getItem().getOwner().getId()}/${req.getItem().getId()}.jpg" alt="Item Image">
 						</div>
 						<div class="itemtext form-group">
-							<p class="itemdesc">Score Given: ${req.getBorrowerScore()}</p>
-							<p class="itemdesc">Score Recieved: ${req.getOwnerScore()}</p>
+							<h4 class="itemname">${req.getItem().getName()}</h4>
+							<p class="itemdesc">${req.getItem().getDescription()}</p>
+						</div>
+					</div>
+					<c:if test='${ label.equals("items you returned")}'>
+						<div class="container">
+							<div class="returnmessage message">
+									<h5><b>Your Feedback:</b></h5>
+									<p> ${req.getBorrowerMessage()}</p>
+									<h5><b>Feedback Recieved: </b></h5>
+									<p>${req.getOwnerMessage()}</p>
+							</div>
+						</div>
+						<div class="container">
+							<div class="score">
+								<span class="scorelabel label label-success">Score Given <span class="badge"> ${req.getBorrowerScore()}</span></span>
+								<c:if test="${req.getOwnerScore() > 0}">
+									<span class="scorelabel label label-primary">Score Recieved <span class="badge"> ${req.getOwnerScore()}</span></span>
+								</c:if>
+							</div>
 						</div>
 					</c:if>
 					<c:if test='${ label.equals("items returned to you")}'>
-						<div class="itemtext form-group">
-								<p class="itemdesc">Your Feedback: ${req.getOwnerMessage()}</p>
-								<p class="itemdesc">Feedback Recieved: ${req.getBorrowerMessage()}</p>
-							<p class="itemdesc"></p>
-	
+						<div class="container">
+							<div class="returnmessage message">
+									<h5><b>Your Feedback:</b></h5>
+									<p>${req.getOwnerMessage()}</p>
+									<h5><b>Feedback Recieved: </b></h5>
+									<p> ${req.getBorrowerMessage()}</p>
+							</div>
 						</div>
-						<div class="itemtext form-group">
-							<p class="itemdesc">Score Given: ${req.getOwnerScore()}</p>
-							<p class="itemdesc">Score Recieved: ${req.getBorrowerScore()}</p>
+						<div class="container">
+							<div class="score">
+								<c:if test="${req.getOwnerScore() > 0}">
+									<span class="scorelabel label label-success">Score Given <span class="badge">  ${req.getOwnerScore()}</span></span>
+								</c:if>
+								<span class="scorelabel label label-primary">Score Recieved <span class="badge"> ${req.getBorrowerScore()}</span></span>
+							</div>
 						</div>
 					</c:if>
 					
