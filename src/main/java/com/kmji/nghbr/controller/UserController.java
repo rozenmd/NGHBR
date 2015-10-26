@@ -3,6 +3,7 @@ package com.kmji.nghbr.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.kmji.nghbr.model.Suburb;
 import com.kmji.nghbr.service.SuburbService;
 import org.springframework.security.core.Authentication;
@@ -84,19 +85,26 @@ public class UserController extends AbstractController {
                     Suburb suburb = suburbService.findByPostcodeSuburb(
                             user.getSuburb().getPostcode(),
                             user.getSuburb().getSuburbName()
+
                     );
                     model.addObject("lat", suburb.getLat());
                     model.addObject("lon", suburb.getLon());
+                    model.addObject("points", suburb.getTotalPoints());
+                    model.addObject("suburb",suburb.toString());
                 }else if (user.getSuburb().getPostcode() > 0){
                 	//Will just pick first suburb in list...
                 	Suburb suburb = suburbService.findByPostcode(user.getSuburb().getPostcode()).get(0);
                     model.addObject("lat", suburb.getLat());
                     model.addObject("lon", suburb.getLon());
+                    model.addObject("points", suburb.getTotalPoints());
+                    model.addObject("suburb",suburb.toString());
                 } else if (user.getSuburb().getPostcode() < 0){
 
                 	Suburb suburb = suburbService.findBySuburb(user.getSuburb().getSuburbName());
                     model.addObject("lat", suburb.getLat());
                     model.addObject("lon", suburb.getLon());
+                    model.addObject("points", suburb.getTotalPoints());
+                    model.addObject("suburb",suburb.toString());
                 }
             }catch (Exception e) {
                 System.err.println("Got an exception! ");
@@ -225,36 +233,38 @@ public class UserController extends AbstractController {
                     );
                     model.addObject("lat", suburb.getLat());
                     model.addObject("lon", suburb.getLon());
+                    model.addObject("points", suburb.getTotalPoints());
+                    model.addObject("suburb",suburb.toString());
                 } else if (user.getSuburb().getPostcode() > 0) {
                     //Will just pick first suburb in list...
                     Suburb suburb = suburbService.findByPostcode(user.getSuburb().getPostcode()).get(0);
                     model.addObject("lat", suburb.getLat());
                     model.addObject("lon", suburb.getLon());
+                    model.addObject("points", suburb.getTotalPoints());
+                    model.addObject("suburb",suburb.toString());
                 } else if (user.getSuburb().getPostcode() < 0) {
 
                     Suburb suburb = suburbService.findBySuburb(user.getSuburb().getSuburbName());
                     model.addObject("lat", suburb.getLat());
                     model.addObject("lon", suburb.getLon());
+                    model.addObject("points", suburb.getTotalPoints());
+                    model.addObject("suburb",suburb.toString());
                 }
             } catch (Exception e) {
                 System.err.println("Got an exception! ");
                 System.err.println(e.getMessage());
             }
-            //DO NOT REMOVE
 
-            //List<Suburb> allSuburbs = suburbService.findAllSuburbs();
-            //ObjectMapper mapper = new ObjectMapper();
-            //File jsonPath = new File("/suburb.json");
-//            try{
-//                mapper.writeValue(jsonPath, allSuburbs);
-//            } catch (JsonGenerationException e) {
-//                e.printStackTrace();
-//            } catch (JsonMappingException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            model.addObject(jsonPath);
+            List<Suburb> topSuburbs = suburbService.findTopFifteenSuburbs();
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonSuburb = "";
+            try {
+               jsonSuburb = mapper.writeValueAsString(topSuburbs);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+            System.out.println(jsonSuburb);
+            model.addObject("jsonSuburb", jsonSuburb);
         }
         return model;
 

@@ -113,7 +113,12 @@
 
 	var map = L.map('map', { center: latlng, zoom: 13, layers: [tiles] });
 	var customLayer = L.geoJson(null, {style: style});
-	L.marker(latlng).addTo(map);
+	var popupContent =  'Suburb: ${suburb} <br>' +
+			'Total Points:  ${points} <br>';
+	L.marker(latlng).addTo(map).bindPopup(popupContent,{
+		closeButton: true,
+		minWidth: 120
+	});
 	// this can be any kind of omnivore layer
 	var runLayer = omnivore.topojson('/static/js/final.js', null, customLayer).addTo(map);
 
@@ -145,7 +150,8 @@
 
 
 <script>
-	d3.json("http://maxrozen.com/files/suburb.json", function(data) {
+		var data = ${jsonSuburb}
+		//data = JSON.parse(myJson);
 		data.forEach(function(d) {
 			d.totalPoints = +d.totalPoints;
 		});
@@ -171,7 +177,7 @@
 					table.selectAll(".dc-table-group").classed("info", true);
 				});
 		dc.renderAll();
-	});
+
 </script>
 </html>
 

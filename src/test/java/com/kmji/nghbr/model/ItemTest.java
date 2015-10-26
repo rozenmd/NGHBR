@@ -2,13 +2,28 @@ package com.kmji.nghbr.model;
 
 import static org.junit.Assert.*;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
+import org.imgscalr.Scalr;
+import org.imgscalr.Scalr.Method;
+import org.imgscalr.Scalr.Mode;
 import org.junit.Test;
+import org.springframework.web.multipart.MultipartFile;
 
 public class ItemTest {
+	
+	//Get the test specific file dir
+	File dir = new File(System.getProperty("user.dir") 
+			+ "/src/test/resources/" + this.getClass().getSimpleName());
 	
 	@Test
 	public void itemTest(){
@@ -68,4 +83,25 @@ public class ItemTest {
 		assertEquals(owner.getOwnedItems().get(0).getBorrower(), borrower);
 		
 	}
+	
+	@Test
+	public void imageShrinkTest() throws IOException{
+		File imageFile = new File(dir, "hammer.png");
+		
+		FileInputStream fis = new FileInputStream(imageFile);
+		BufferedImage img = ImageIO.read(fis);
+		
+		assertTrue(img.getHeight() == 90);
+		assertTrue(img.getWidth() == 90);
+		
+		BufferedImage thumbImg = Scalr.resize(img, 
+				Method.QUALITY, Mode.FIT_EXACT, 40,40, Scalr.OP_ANTIALIAS);
+		
+		assertTrue(thumbImg.getHeight() == 40);
+		assertTrue(thumbImg.getWidth() == 40);
+		
+		
+	}
+	
+	
 }

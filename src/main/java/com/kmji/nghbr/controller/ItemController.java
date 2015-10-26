@@ -85,7 +85,7 @@ public class ItemController extends AbstractController implements ServletContext
 		model.addAttribute("items", user.getBorrowedItems());
 		model.addAttribute("label", "Items you've borrowed");
 		return "item/listitems";
-
+		
 	}
 	
 	@RequestMapping(value={"/items/search"}, method = RequestMethod.GET)
@@ -221,6 +221,22 @@ public class ItemController extends AbstractController implements ServletContext
 	@Override
 	public void setServletContext(ServletContext servletContext) {
 		this.servletContext = servletContext;
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public ItemService getItemService() {
+		return itemService;
+	}
+
+	public void setItemService(ItemService itemService) {
+		this.itemService = itemService;
 	}
 	
 	
