@@ -58,6 +58,8 @@ public class MessageBoardController extends AbstractController {
 				message.setPostCode(user.getSuburb().getPostcode());
 				message.setUser(user);
 				message.setDate(new Date());
+				user.setPoints(user.getPoints()+1);
+                userService.save(user);
 				messageService.save(message);
 				model.addAttribute("message", message);
 			}else{
