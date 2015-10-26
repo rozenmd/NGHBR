@@ -17,6 +17,7 @@
       <ul class="nav navbar-nav navbar-right">
         <c:choose>
           <c:when test="${pageContext.request.userPrincipal.authenticated}">
+            <li><a href="<c:url value="/admin" />">Administration</a></li>
             <li><a href="<c:url value="/profile" />">Profile</a></li>
             <li><a href="<c:url value="/user/scoreboard" />">Scoreboard</a></li>
             <li><a href="<c:url value="/messageboard" />">Message Board</a></li>

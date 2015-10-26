@@ -20,5 +20,6 @@ public interface SuburbDao {
 
 	void saveOrUpdate(Suburb suburb);
 
+
 }
 

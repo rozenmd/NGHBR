@@ -16,6 +16,8 @@ public interface SuburbService {
 
 	List<Suburb> findTopFifteenSuburbs();
 
+
+
 	void save(Suburb suburb);
 
 	List<Suburb> findByPostcode(int postcode);
