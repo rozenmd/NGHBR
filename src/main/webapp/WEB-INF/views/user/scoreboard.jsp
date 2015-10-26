@@ -40,7 +40,7 @@
 
 
 <div class="container">
-	<div class="col-md-6" style="padding-top: 50px;">
+	<div class="col-md-6">
 		<h1>Scoreboard</h1>
 
 		<table class="table table-bordered table-hover dc-data-table dc-chart">
@@ -55,7 +55,7 @@
 			</thead>
 		</table>
 	</div>
-	<div class="col-md-6" style="margin-top: 115px;">
+	<div class="col-md-6" style="margin-top: 65px;">
 		<div id="map" style="position: relative;
 		width: 100%;
 		height: 670px;"></div>
