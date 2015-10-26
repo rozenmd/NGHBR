@@ -34,7 +34,7 @@
 <body>
 <jsp:include page="/navBar"></jsp:include>
 
-<div   class="container">
+<div class="container">
 	<div class="col-md-6" style="padding-top: 50px;">
 		<h1 class="text-center">${user.firstName} ${user.lastName}</h1>
 		<table class="table table-responsive">

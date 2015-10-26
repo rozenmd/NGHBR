@@ -15,11 +15,10 @@
 		  rel="stylesheet">
 	<link href="<c:url value="/static/css/bootstrap-social.css" />"
 		  rel="stylesheet">
-	<link href="<c:url value="/static/css/landing.css" />" rel="stylesheet">
 	<link href="<c:url value="/static/css/style.css" />" rel="stylesheet">
 
 	<%--//mapping css--%>
-	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+		<link href="<c:url value="/static/css/leaflet.min.css" />" rel="stylesheet">
 	<%--//Charting css--%>
 	<link rel="stylesheet" href="https://dc-js.github.io/dc.js/css/dc.css" />
 	<%--//Charting JS--%>
@@ -38,45 +37,39 @@
 <jsp:include page="/navBar"></jsp:include>
 
 
-<div class="container box well">
-	<h3>Scoreboard</h3>
-	<div class="table-responsive" style="width:40%;float:left">
 
-	<div id="map" style="position: absolute;
-    top: 17%;
-    left: 44%;
-    width: 50%;
-    height: 500px;
-    float: left;"></div>
+
+<div class="container">
+	<div class="col-md-6" style="padding-top: 50px;">
+		<h1>Scoreboard</h1>
+
+		<table class="table table-bordered table-hover dc-data-table dc-chart">
+			<thead>
+			<tr class="header">
+				<th>Suburb</th>
+				<th>Postcode</th>
+				<th>State</th>
+				<th>Total Points</th>
+
+			</tr>
+			</thead>
+		</table>
 	</div>
-
-	<div class="container">
-
-		<div class="row">
-			<table style="width:40%;" class="table table-bordered table-hover dc-data-table dc-chart">
-				<thead>
-				<tr class="header">
-					<th>Suburb</th>
-					<th>Postcode</th>
-					<th>State</th>
-					<th>Total Points</th>
-
-				</tr>
-				</thead>
-			</table>
-		</div>
+	<div class="col-md-6" style="margin-top: 115px;">
+		<div id="map" style="position: relative;
+		width: 100%;
+		height: 670px;"></div>
 	</div>
-
-
-
 </div>
 </body>
 <%--JS for data display on maps:--%>
+
+<%--JS for data display on maps:--%>
+<script src="<c:url value="/static/js/vendor/d3.v3.min.js" />"></script>
+<script src="<c:url value="/static/js/vendor/topojson.v1.min.js" />"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js" type="text/javascript"></script>
-<script src="http://d3js.org/d3.v3.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.11/crossfilter.js"></script>
 <script src="https://dc-js.github.io/dc.js/js/dc.js"></script>
-<script src="http://d3js.org/topojson.v1.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
 <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
 
