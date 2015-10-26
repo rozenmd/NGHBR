@@ -19,7 +19,7 @@
 </script>
 
 <div class="container">
-  <h1>Events</h1>
+  <h1>Events in ${user.getSuburb().getSuburbName()}</h1>
   <a class="btn btn-primary" onclick="$('#new-event').modal()">New Event</a>
 
   <div class="page-header">
@@ -47,7 +47,7 @@
     <div id="calendar"></div>
   </div>
   <div class="col-md-3">
-    <h4>Events</h4>
+    <h4>Events around ${user.getSuburb().getSuburbName()}</h4>
     <ul id="eventlist" class="nav nav-list"></ul>
   </div>
   </div>

@@ -37,101 +37,67 @@
 </head>
 
 <body>
-<jsp:include page="/navBar"></jsp:include>
+<div id="wrap">
 
-<h3>Message Board</h3>
+    <!-- Fixed navbar -->
+    <jsp:include page="/navBar"></jsp:include>
 
-<div class="container box well">
-    <div class="conversationsholder">
+    <!-- Begin page content -->
+    <div class="container">
+        <div class="page-header">
+            <h1>Message Board <small>${user.getSuburb().getSuburbName()}</small></h1>
+        </div>
         <c:forEach items="${messages}" var="message" varStatus="counter">
-            <c:choose>
-                <c:when test="${user.getId() == message.getUser().getId()}">
-                    <div class="bubble_right">
-                        <div class="photo">
-                            <c:if test="${user.getFacebookId() != null}">
-                                <img src="https://graph.facebook.com/${message.getUser().getFacebookId()}/picture?width=50&height=50 "/>
-                            </c:if>
-                            <c:if test="${user.getFacebookId() == null}">
-                                <img src="<c:url value="/static/images/question.png" />" alt="" height="50" width="50">
-
-                            </c:if>
-                        </div>
-                        <div class="message">
-                            <div class="thick">
-                                <div class="name">
-                                    You
-                                </div>
-                                <div class="date">
-                                        <%--${message.getDate()}--%>
-                                    <c:set var="date" value="${message.getDate()}"/>
-                                    <%
-                                        Object datee = pageContext.getAttribute("date");
-                                        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM YYYY HH:mm");
-                                        String date = sdf.format(datee);
-                                        pageContext.setAttribute("date", date);
-                                    %>
-                                    <c:out value="${date}"/>
-                                </div>
-                            </div>
-                            <div class="text">
-                                    ${message.getText()}
-                            </div>
-                        </div>
+            <div class="row message">
+                <div style="float: left; position: relative; padding-right: 15px; padding-left: 15px;">
+                    <c:if test="${user.getFacebookId() != null}">
+                        <img src="https://graph.facebook.com/${message.getUser().getFacebookId()}/picture?width=50&height=50 "/>
+                    </c:if>
+                    <c:if test="${user.getFacebookId() == null}">
+                        <img src="<c:url value="/static/images/question.png" />" alt="" height="50" width="50">
+                    </c:if>
+                </div>
+                <div class="col-md-9">
+                    <div class="row message-meta">
+                        <b style="">${message.getUser().getFirstName()} ${message.getUser().getLastName()}</b>
+                        <c:set var="date" value="${message.getDate()}"/>
+                        <%
+                            Object datee = pageContext.getAttribute("date");
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM YYYY HH:mm");
+                            String date = sdf.format(datee);
+                            pageContext.setAttribute("date", date);
+                        %>
+                        <c:out value="${date}"/>
                     </div>
-                </c:when>
-                <c:otherwise>
-                    <div class="bubble_left">
-                        <div class="photo">
-                            <c:if test="${message.getUser().getFacebookId() != null}">
-                                <img src="https://graph.facebook.com/${message.getUser().getFacebookId()}/picture?width=50&height=50 "/>
-
-
-                            </c:if>
-                            <c:if test="${message.getUser().getFacebookId() == null}">
-                                <img src="<c:url value="/static/images/question.png" />" alt="" height="50" width="50">
-
-                            </c:if>
-                        </div>
-                        <div class="message">
-                            <div class="thick">
-                                <div class="name">
-                                        ${message.getUser().getFirstName()}
-                                </div>
-                                <div class="date">
-                                        <%--${message.getDate()}--%>
-                                    <c:set var="date" value="${message.getDate()}"/>
-                                    <%
-                                        Object datee = pageContext.getAttribute("date");
-                                        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM YYYY HH:mm");
-                                        String date = sdf.format(datee);
-                                        pageContext.setAttribute("date", date);
-                                    %>
-                                    <c:out value="${date}"/>
-                                </div>
-                            </div>
-                            <div class="text">
-                                    ${message.getText()}
-                            </div>
-                        </div>
+                    <div class="row message-content">
+                        <p class="lead">${message.getText()}</p>
                     </div>
-                </c:otherwise>
-            </c:choose>
+                <hr>
+                </div>
+
+            </div>
         </c:forEach>
     </div>
 
-    <form:form method="POST" action="messageboard" name="message">
-        <div class="input-group">
-				<textarea id="messagetext" class="form-control"
-                          placeholder="Type Message..." maxlength="150" rows="2" name="text"></textarea>
+    <div id="push"></div>
+</div>
+
+<div id="footer">
+    <div class="container">
+        <form:form method="POST" action="messageboard" name="message">
+            <div class="input-group" style="margin-top: 15px;">
+                <textarea id="messagetext" class="form-control"
+                          placeholder="Type Message..."  style="resize: none; height:45px;" name="text"></textarea>
 				<span class="input-group-btn">
 					<button class="btn a btn-primary btn-lg"
                             type="submit">Post!
                     </button>
 				</span>
-        </div>
-    </form:form>
-
+            </div>
+        </form:form>
+    </div>
 </div>
+
 </body>
 </html>
 
