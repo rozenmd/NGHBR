@@ -37,7 +37,7 @@ public class Message {
 	@Column(name="STATE")
 	private String state=State.ACTIVE.getState();
 
-    @Lazy(false)
+     @Lazy(false)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "User", nullable=true)
     private User user;

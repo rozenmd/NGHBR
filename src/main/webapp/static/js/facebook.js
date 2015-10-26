@@ -65,7 +65,12 @@ function testAPI(accessTocken) {
             success: function(data){
                 //redirecting once logged in
                 window.location = '/profile';
-            }});
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown ){
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+        });
 
     });
 }

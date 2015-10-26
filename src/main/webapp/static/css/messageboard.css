@@ -10,6 +10,8 @@ h3 {
 
 .message {
     font-size: 11px;
+	display: inline-block;
+
 }
 
 .thick {
@@ -18,10 +20,20 @@ h3 {
     margin-bottom: 5px;
 
 
+
+
+}
+
+
+.photo {
+	display: inline-block;
+
 }
 
 .date {
+	
     float:right;
+	/*margin-left: 112px;*/
     color:#00B8E6;
 ;
 

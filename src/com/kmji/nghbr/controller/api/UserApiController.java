@@ -22,7 +22,7 @@ public class UserApiController extends AbstractController {
     @Autowired
     UserService userService;
 
-    @ResponseBody
+     @ResponseBody
     @RequestMapping(value = "/api/users/authenticate", method = RequestMethod.POST)
     public User authenticate(@RequestBody User requestUser, HttpServletRequest request) {
         User user = userService.findByFacebookId(requestUser.getFacebookId());
@@ -36,5 +36,7 @@ public class UserApiController extends AbstractController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         return user;
+//        User user = new User();
+//        return user;
     }
 }

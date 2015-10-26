@@ -48,6 +48,9 @@
 				<c:choose>
 					<c:when test="${user.getId() == message.getUser().getId()}">
 						<div class="bubble_right">
+                            <div class = "photo">
+                                <img src="https://graph.facebook.com/${user.getFacebookId()}/picture?width=50&height=50"/>
+                            </div>
 							<div class="message">
                                 <div class="thick">
                                     You
@@ -63,15 +66,18 @@
                                             <c:out value="${date}"/>
                                     </div>
                                 </div>
-                            ${message.getText()}
+                                ${message.getText()}
                             </div>
 						</div>
 					</c:when>
 					<c:otherwise>
 						<div class="bubble_left">
+                            <div class = "photo">
+                                <img src="https://graph.facebook.com/${message.getUser().getFacebookId()}/picture?width=50&height=50 "/>
+                            </div>
                             <div class="message">
                                 <div class="thick">
-                                    ${message.getUsername()}
+                                    ${message.getUser().getFirstName()}
                                         <div class ="date">
                                                 <%--${message.getDate()}--%>
                                             <c:set var="date" value="${message.getDate()}"/>

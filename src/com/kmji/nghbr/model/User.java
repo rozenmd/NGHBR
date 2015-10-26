@@ -63,14 +63,15 @@ public class User {
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="owner")
 	private Set<ReturnRequest> recievedReturnRequests;
 
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="user")
-    private List<Message> messages;
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="user")
 
-    public List<Message> getMessages() {
+    private Set<Message> messages;
+
+    public Set<Message> getMessages() {
         return messages;
     }
 
-    public void setMessages(List<Message> messages) {
+    public void setMessages(Set<Message> messages) {
         this.messages = messages;
     }
 
