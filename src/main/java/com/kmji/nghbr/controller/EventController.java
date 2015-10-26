@@ -116,7 +116,7 @@ public class EventController extends AbstractController {
 
     @ResponseBody
     @RequestMapping(value = "/events/{id}/rsvp", method = RequestMethod.POST)
-    public Attendee rsvp(@RequestBody Attendee requestAttendee, HttpServletRequest request, @PathVariable String id) {
+    public String rsvp(@RequestBody Attendee requestAttendee, HttpServletRequest request, @PathVariable String id) {
 
         User user = userService.findBySso(getPrincipal());
         Event event = eventService.findById(Integer.parseInt(id));
@@ -144,9 +144,7 @@ public class EventController extends AbstractController {
 
         attendeeService.saveOrUpdate(attendee);
 
-
-
-        return attendee;
+        return attendee.toJsonString();
     }
 
 

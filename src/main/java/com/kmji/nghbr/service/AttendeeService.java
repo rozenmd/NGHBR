@@ -10,8 +10,6 @@ public interface AttendeeService {
 
     Attendee findById(int id);
 
-    Attendee findByUserAndEvent(User user, Event event);
-
     List<Attendee> getAll();
 
     void saveOrUpdate(Attendee item);

@@ -24,11 +24,6 @@ public class AttendeeServiceImpl implements AttendeeService {
     }
 
     @Override
-    public Attendee findByUserAndEvent(User user, Event event) {
-        return dao.findByUserAndEvent(user, event);
-    }
-
-    @Override
     public List<Attendee> getAll() {
         return dao.getAll();
     }
@@ -41,7 +36,6 @@ public class AttendeeServiceImpl implements AttendeeService {
     @Override
     public void destroy(Attendee item) {
         dao.destroy(item);
-
     }
 
 }

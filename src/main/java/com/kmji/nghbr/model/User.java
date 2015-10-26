@@ -264,5 +264,9 @@ public class User {
 				+ ", email=" + email + ", state=" + state + ", userProfiles=" + userProfiles + ", facebookId=" + facebookId +"]";
 	}
 
+	public String toJsonString() {
+		return "{" + "firstName:'" + firstName + "'," + "lastName:'" + lastName + "'}";
+	}
+
 	
 }

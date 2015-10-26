@@ -53,8 +53,9 @@
                 xhr.setRequestHeader("Content-Type", "application/json");
                 xhr.setRequestHeader(modalHeader, modalToken);
             },
-            success: function(data){
-                var newRsvp = data.rsvp;
+            complete: function(data){
+                var jsonData = JSON.parse(data.responseText);
+                var newRsvp = jsonData.rsvp;
                 var newActiveButton, oldButton, newCaption;
                 if (newRsvp) {
                     newActiveButton = $('#going');

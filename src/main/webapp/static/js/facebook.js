@@ -69,6 +69,7 @@ function testAPI(accessTocken) {
             error: function(XMLHttpRequest, textStatus, errorThrown ){
                 console.log(textStatus);
                 console.log(errorThrown);
+                window.location = '/profile';
             }
         });
 

@@ -35,4 +35,8 @@ public class Attendee {
 
     public boolean getRsvp() {return rsvp;}
     public void setRsvp(boolean rsvp) { this.rsvp = rsvp; }
+
+    public String toJsonString() {
+        return "{\"rsvp\": " + rsvp + " }";
+    }
 }
