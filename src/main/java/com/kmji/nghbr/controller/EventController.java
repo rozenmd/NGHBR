@@ -54,13 +54,34 @@ public class EventController extends AbstractController {
 
     @RequestMapping(value={"/events/{id}"}, method = RequestMethod.GET)
     public String events(@PathVariable String id, ModelMap model){
-
+        User user = userService.findBySso(getPrincipal());
         Event event = eventService.findById(Integer.parseInt(id));
 
+        Attendee attendance = null;
+
+        List<User> usersGoing = new ArrayList<User>();
+        List<User> usersNotGoing = new ArrayList<User>();
+
+        List<Attendee> attendees = event.getAttendees();
+        for (Attendee attendee : attendees) {
+            if (attendee.getUser().equals(user)) {
+                attendance = attendee;
+            }
+
+            if (attendee.getRsvp()) {
+                usersGoing.add(attendee.getUser());
+            } else {
+                usersNotGoing.add(attendee.getUser());
+            }
+
+        }
+
         model.addAttribute("event", event);
+        model.addAttribute("usersGoing", usersGoing);
+        model.addAttribute("usersNotGoing", usersNotGoing);
+        model.addAttribute("attendance", attendance);
 
         return "event/show";
-
     }
 
     @ResponseBody

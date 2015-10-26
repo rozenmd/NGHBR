@@ -223,6 +223,10 @@ public class User {
 	public List<Attendee> getAttendances() {return attendances;}
 	public void setAttendances(List<Attendee> attendances) {this.attendances = attendances;}
 
+	public String getProfilePictureUrl(String size) {
+		return "http://graph.facebook.com/" +  facebookId + "/picture?type=" + size;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

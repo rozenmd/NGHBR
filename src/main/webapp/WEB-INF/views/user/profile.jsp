@@ -35,13 +35,16 @@
 <body>
 <jsp:include page="/navBar"></jsp:include>
 
-
 <div  style="padding-top: 40px;padding-bottom:345px;" class="container box well">
 	<h3>Profile</h3>
 	<div class="table-responsive" style="width:40%;float:left">
 		<table class="table" >
 			<c:choose>
 			<c:when test="${pageContext.request.userPrincipal.authenticated}">
+			<tr>
+				<td></td>
+				<td><img src="${user.getProfilePictureUrl("large")}" /></td>
+			</tr>
 			<tr>
 				<td>Name</td>
 				<td>${user.firstName} ${user.lastName}</td>

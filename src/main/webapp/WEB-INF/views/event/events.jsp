@@ -13,6 +13,9 @@
 
     <script>
       window.eventsList = ${eventsJSON};
+      window.userId = ${user.getId()};
+      window.userFullname = "${user.getFirstName()} ${user.getLastName()}";
+      window.userPictureSmall = "${user.getProfilePictureUrl('small')}";
     </script>
 
     <div class="container">
