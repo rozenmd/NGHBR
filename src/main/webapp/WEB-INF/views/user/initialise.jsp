@@ -15,7 +15,8 @@
 		  rel="stylesheet">
 	<link href="<c:url value="/static/css/bootstrap-social.css" />"
 		  rel="stylesheet">
-	<link href="<c:url value="/static/css/landing.css" />" rel="stylesheet">
+	<link href="<c:url value="/static/css/select2.css" />" rel="stylesheet">
+	<link href="<c:url value="/static/css/select2-bootstrap.css" />" rel="stylesheet">
 	<link href="<c:url value="/static/css/style.css" />" rel="stylesheet">
 
 	<%--//mapping css--%>
@@ -24,52 +25,53 @@
 
 
 	<%-- JavaScripts --%>
-	<script
-			src="<c:url value="/static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" />"></script>
+	<script src="<c:url value="/static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" />"></script>
 	<script src="<c:url value="/static/js/vendor/jquery-1.11.2.min.js" />"></script>
 	<script src="<c:url value="/static/js/vendor/bootstrap.min.js" />"></script>
+	<script src="<c:url value="/static/js/vendor/select2.min.js" />"></script>
 	<%--JS for data display on maps:--%>
 
 	<title>NGHBR</title>
 </head>
 
 <body>
-<jsp:include page="/navBar"></jsp:include>
+<div  class="container text-center">
+	<div class="col-md-6 col-md-offset-3" style="padding-top: 100px;">
 
+		<img src="<c:url value="/static/images/find-neighbourhood.png" />" alt="" height="200" width="200" />
 
-<div  style="padding-top: 40px;padding-bottom:345px;" class="container box well">
-	<h3>Profile</h3>
-	<div class="table-responsive" style="width:40%;float:left">
 		<form method="post" action="/user/initialise" >
+			<c:choose>
+			<c:when test="${pageContext.request.userPrincipal.authenticated}">
+			<h1>Find your neighbourhood...</h1>
+			<p>As it is your first time on NGHBR, please set a Suburb and Postcode.</p>
 
-			<table class="table" >
-				<c:choose>
-				<c:when test="${pageContext.request.userPrincipal.authenticated}">
-				<p>As it is your first time on NGHBR, please set a Suburb and Postcode.</p>
+			<c:if test="${alertMessage != null}">
+				<div class="alert alert-warning" role="alert">${alertMessage}</div>
+			</c:if>
 
-				<tr>
-					<td>Suburb</td>
-					<td><input type="text" style="width: 185px;"
-							   value="${user.suburb}" maxlength="30" name="suburb" id="suburb" /></td>
-				</tr>
-				<tr>
-					<td>Postcode</td>
-					<td><input type="text" style="width: 185px;"
-							   value="${user.suburb.postcode}" maxlength="5" name="postcode" id="postcode" /></td>
-				</tr>
-			</table>
+			<div style="padding: 10px;">
+				<input type="text" class="form-control"
+					   value="${user.suburb}" maxlength="30" name="suburb" id="suburb" placeholder="Suburb, e.g. University of Sydney" />
+			</div>
+			<div style="padding: 10px;">
+				<input type="text" class="form-control"
+					   value="${user.suburb.postcode}" maxlength="5" name="postcode" id="postcode" placeholder="Postcode, e.g. 2006"/>
+			</div>
+
 			<input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
-			<input type="submit" class="initialise" title="initialise" value="initialise" />
-			<a href="../profile">Cancel</a>
+			<input type="submit" class="btn btn-lg btn-success" title="initialise" value="Join my neighbourinos!" />
+			<a href="<c:url value="/logout" />" class="btn btn-lg btn-danger">Cancel</a>
 		</form>
+	</div>
 
-		</c:when>
-		<c:otherwise>
+	</c:when>
+	<c:otherwise>
 		Please <a href="<c:url value="/login" />">login</a> to continue
-		</c:otherwise>
-		</c:choose>
+	</c:otherwise>
+	</c:choose>
 
-
+</div>
 
 </body>
 
