@@ -35,15 +35,15 @@
 <body>
 <jsp:include page="/navBar"></jsp:include>
 
-<div  style="padding-top: 40px;padding-bottom:345px;" class="container box well">
-	<h3>Profile</h3>
-	<div class="table-responsive" style="width:40%;float:left">
-		<table class="table" >
+<div   class="container">
+	<div class="col-md-6" style="padding-top: 50px;">
+		<h1 class="text-center">${user.firstName} ${user.lastName}</h1>
+		<table class="table table-responsive">
 			<c:choose>
 			<c:when test="${pageContext.request.userPrincipal.authenticated}">
 			<tr>
 				<td></td>
-				<td><img src="${user.getProfilePictureUrl("large")}" /></td>
+				<td><img class="img-circle" src="${user.getProfilePictureUrl("large")}" /></td>
 			</tr>
 			<tr>
 				<td>Name</td>
@@ -66,20 +66,20 @@
 				<td>${user.points}</td>
 			</tr>
 		</table>
-		<a href="user/update">
-			<span class="glyphicon glyphicon-edit" aria-hidden="true" style="float:left;">Edit</span>
+		<a href="user/update" class="btn btn-default">
+			<i class="fa fa-pencil"></i> Update Profile
 		</a>
 		</c:when>
 		<c:otherwise>
 			Please <a href="<c:url value="/login" />">login</a> to continue
 		</c:otherwise>
 		</c:choose>
-		<div id="map" style="position: absolute;
-    top: 10%;
-    left: 44%;
-    width: 50%;
-    height: 500px;
-    float: left;"></div>
+
+	</div>
+	<div class="col-md-6" style="margin-top: 75px;">
+		<div id="map" style="position: relative;
+		width: 100%;
+		height: 550px;"></div>
 	</div>
 
 
