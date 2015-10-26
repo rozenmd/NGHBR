@@ -2,6 +2,7 @@ package com.kmji.nghbr.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -171,5 +172,8 @@ public class Suburb {
 		this.events = events;
 	}
 
+	public String getJSONString() {
+		return "{" + "'id':" + id +  ",'postcode':"  + ""+ postcode  + "" + ", 'suburbName':" + "'" + suburbName + "'" + ", 'totalPoints':" + totalPoints + ",'lat':"  + ""+ lat  + "" + ",'lon':"  + ""+ lon  + "" + "}";
+	}
 
 }

@@ -38,16 +38,54 @@ public class UserController extends AbstractController {
     SuburbService suburbService;
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String adminPage(ModelMap model) {
-        model.addAttribute("user", getPrincipal());
-        model.addAttribute("users", userService.findAllUsers());
-        return "user/admin";
+    public ModelAndView adminPage() {
+        ModelAndView model = new ModelAndView("user/admin");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            User user = userService.findBySso(getPrincipal());
+            if (user.getSuburb() == null) {
+                return new ModelAndView("redirect:user/initialise");
+            }
+            model.addObject("user", user);
+            try {
+                //do stuff
+            } catch (Exception e) {
+                System.err.println("Got an exception! ");
+                System.err.println(e.getMessage());
+            }
+            //model.addAttribute("user", getPrincipal());
+        }
+        //model.addAttribute("users", userService.findAllUsers());
+        return model;
     }
 
     @RequestMapping(value = "/db", method = RequestMethod.GET)
     public String dbaPage(ModelMap model) {
         model.addAttribute("user", getPrincipal());
         return "user/dba";
+    }
+
+    @RequestMapping(value = "/totalPoints", method = RequestMethod.GET)
+    public String totalPoints(ModelMap model) {
+        model.addAttribute("user", getPrincipal());
+        List<User> users = userService.findAllUsers();
+        List<Suburb> suburbs = suburbService.findAllSuburbs();
+        String result = "";
+        for(User user : users){
+            for(Suburb suburb : suburbs){
+//                System.out.println(user.getSuburb().getSuburbName());
+//                System.out.println(suburb.getSuburbName());
+                if((user.getSuburb().getSuburbName().equals(suburb.getSuburbName()))
+                        && (user.getSuburb().getPostcode()==suburb.getPostcode())){
+                    suburb.setTotalPoints(suburb.getTotalPoints()+user.getPoints());
+                    result = suburb.toString() + " points: " + suburb.getTotalPoints();
+                    suburbService.save(suburb);
+                }
+            }
+        }
+        System.out.println(result);
+        return "/user/profile";
+
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -81,39 +119,35 @@ public class UserController extends AbstractController {
             model.addObject("user", user);
             try{
                 if(user.getSuburb().getSuburbName().length() > 0 && user.getSuburb().getPostcode() > 0){
-
                     Suburb suburb = suburbService.findByPostcodeSuburb(
                             user.getSuburb().getPostcode(),
-                            user.getSuburb().getSuburbName()
-
-                    );
+                            user.getSuburb().getSuburbName());
                     model.addObject("lat", suburb.getLat());
                     model.addObject("lon", suburb.getLon());
                     model.addObject("points", suburb.getTotalPoints());
                     model.addObject("suburb",suburb.toString());
                 }else if (user.getSuburb().getPostcode() > 0){
-                	//Will just pick first suburb in list...
                 	Suburb suburb = suburbService.findByPostcode(user.getSuburb().getPostcode()).get(0);
                     model.addObject("lat", suburb.getLat());
                     model.addObject("lon", suburb.getLon());
                     model.addObject("points", suburb.getTotalPoints());
                     model.addObject("suburb",suburb.toString());
                 } else if (user.getSuburb().getPostcode() < 0){
-
                 	Suburb suburb = suburbService.findBySuburb(user.getSuburb().getSuburbName());
                     model.addObject("lat", suburb.getLat());
                     model.addObject("lon", suburb.getLon());
                     model.addObject("points", suburb.getTotalPoints());
                     model.addObject("suburb",suburb.toString());
                 }
+
             }catch (Exception e) {
                 System.err.println("Got an exception! ");
                 System.err.println(e.getMessage());
             }
         }
         return model;
-
     }
+
     @RequestMapping(value = "/user/update", method = RequestMethod.GET)
     public ModelAndView updateProfile() {
         ModelAndView model = new ModelAndView("user/update");
@@ -206,7 +240,7 @@ public class UserController extends AbstractController {
             if(suburb != null){
                 user.setSuburb(suburb);
             }
-
+            user.setPoints(user.getPoints()+1);
             userService.save(user);
             return new ModelAndView("redirect:/profile");
         }catch (Exception e) {
@@ -256,13 +290,18 @@ public class UserController extends AbstractController {
             }
 
             List<Suburb> topSuburbs = suburbService.findTopFifteenSuburbs();
-            ObjectMapper mapper = new ObjectMapper();
-            String jsonSuburb = "";
-            try {
-               jsonSuburb = mapper.writeValueAsString(topSuburbs);
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
+            //ObjectMapper mapper = new ObjectMapper();
+            String jsonSuburb = "[";
+            for(Suburb suburb: topSuburbs){
+                jsonSuburb += suburb.getJSONString();
+                jsonSuburb += ",";
             }
+            jsonSuburb += "]";
+//            try {
+//               jsonSuburb = mapper.writeValueAsString(topSuburbs);
+//            } catch (JsonProcessingException e) {
+//                e.printStackTrace();
+//            }
             System.out.println(jsonSuburb);
             model.addObject("jsonSuburb", jsonSuburb);
         }

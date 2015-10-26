@@ -2,6 +2,7 @@ package com.kmji.nghbr.dao;
 
 import com.kmji.nghbr.model.Suburb;
 
+import com.kmji.nghbr.service.UserService;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -52,6 +53,8 @@ public class SuburbDaoImpl extends AbstractDao<Integer, Suburb> implements Subur
 	public void saveOrUpdate(Suburb suburb) {
 		persist(suburb);
 	}
+
+
 
 	public List<Suburb> findByPostcode(int postcode) {
 		Criteria crit = createEntityCriteria();
