@@ -107,6 +107,10 @@ public class EventController extends AbstractController {
 
         attendeeService.saveOrUpdate(attendeeHost);
 
+        // Give user a point for creating an event
+        user.setPoints(user.getPoints() + 1);
+        userService.save(user);
+
         return newEvent;
     }
 
@@ -131,12 +135,16 @@ public class EventController extends AbstractController {
             attendee = requestAttendee;
             attendee.setUser(user);
             attendee.setEvent(event);
+            user.setPoints(user.getPoints()+1); // Give user a point for rsvping an event
+            userService.save(user);
         } else {
             boolean rsvp = requestAttendee.getRsvp();
             attendee.setRsvp(rsvp);
         }
 
         attendeeService.saveOrUpdate(attendee);
+
+
 
         return attendee;
     }

@@ -9,32 +9,41 @@ h3 {
 }
 
 .message {
-    font-size: 11px;
+	font-size: 11px;
 	display: inline-block;
-
+	float:right;
+	clear:right;
 }
 
 .thick {
-    font-weight: bold;
-    font-size: 11px;
-    margin-bottom: 5px;
-
-
-
+	font-weight: bold;
+	font-size: 11px;
+	margin-bottom: 10px;
 
 }
 
+.name {
+	float:left;
+	clear:left;
+	margin-right: 100px;
+}
 
 .photo {
 	display: inline-block;
+	margin-bottom: 2px;
+	margin-right: 2px;
+
+
+	float:left;
+	clear:left
 
 }
 
 .date {
-	
-    float:right;
-	/*margin-left: 112px;*/
-    color:#00B8E6;
+
+	float:right;
+	clear:right;
+	color:#00B8E6;
 ;
 
 
@@ -52,31 +61,32 @@ h3 {
 	width: 675px;
 	height: 425px;
 	overflow-y: auto;
-	
+
 }
 
 #messagetext {
 	resize: none;
 	margin-right: 50px;
 	height: 47px;
-/* 	border: 2px solid #000000;
- */	
-	
+	/* 	border: 2px solid #000000;
+     */
+
 }
 
 .a {
-    float:right;
+	float:right;
 }
 
 .bubble_left {
-	
+
 	position: relative;
 	width: 320px;
 	height: 70px;
-    padding-top: 8px;
-    padding-left: 8px;
-    padding-right: 8px;
-    margin-bottom: 10px;
+	padding-top: 3px;
+	padding-left: 8px;
+	padding-right: 8px;
+
+	margin-bottom: 10px;
 	margin-left: 15px;
 	background: #FFFFFF;
 	-webkit-border-radius: 5px;
@@ -89,10 +99,10 @@ h3 {
 	width: 320px;
 	height: 70px;
 	padding-top: 3px;
-    padding-left: 8px;
-    padding-right: 8px;
+	padding-left: 8px;
+	padding-right: 8px;
 
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 	margin-left: 325px;
 	background: #FFFFFF;
 	-webkit-border-radius: 5px;

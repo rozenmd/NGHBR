@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.IndexColumn;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.Proxy;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.*;
@@ -12,6 +13,7 @@ import java.util.*;
 import javax.persistence.*;
 
 @Entity
+@Proxy(lazy=false)
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Table(name="APP_USER")
 public class User {
