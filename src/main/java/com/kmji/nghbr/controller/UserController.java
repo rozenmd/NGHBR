@@ -249,13 +249,13 @@ public class UserController extends AbstractController {
                 userService.save(user);
                 model = new ModelAndView("redirect:/profile");
             } else {
-                model.addObject("alertMessage", "Sorry, we could not find your suburb. Please have you sure you have entered the correct suburb and/or postcode!");
+                model.addObject("alertMessage", "Sorry, we could not find your suburb. Please make you sure you have entered the correct suburb and/or postcode!");
             }
 
         }catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
-            model.addObject("alertMessage", "Sorry, we could not find your suburb. Please have you sure you have entered the correct suburb and/or postcode!");
+            model.addObject("alertMessage", "Sorry, we could not find your suburb. Please make you sure you have entered the correct suburb and/or postcode!");
         }
 
         return model;

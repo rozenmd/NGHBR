@@ -15,8 +15,6 @@
 		  rel="stylesheet">
 	<link href="<c:url value="/static/css/bootstrap-social.css" />"
 		  rel="stylesheet">
-	<link href="<c:url value="/static/css/select2.css" />" rel="stylesheet">
-	<link href="<c:url value="/static/css/select2-bootstrap.css" />" rel="stylesheet">
 	<link href="<c:url value="/static/css/style.css" />" rel="stylesheet">
 
 	<%--//mapping css--%>
@@ -28,7 +26,6 @@
 	<script src="<c:url value="/static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" />"></script>
 	<script src="<c:url value="/static/js/vendor/jquery-1.11.2.min.js" />"></script>
 	<script src="<c:url value="/static/js/vendor/bootstrap.min.js" />"></script>
-	<script src="<c:url value="/static/js/vendor/select2.min.js" />"></script>
 	<%--JS for data display on maps:--%>
 
 	<title>NGHBR</title>
@@ -36,7 +33,7 @@
 
 <body>
 <div  class="container text-center">
-	<div class="col-md-6 col-md-offset-3" style="padding-top: 100px;">
+	<div class="col-md-6 col-md-offset-3" style="padding-top: 75px;">
 
 		<img src="<c:url value="/static/images/find-neighbourhood.png" />" alt="" height="200" width="200" />
 
