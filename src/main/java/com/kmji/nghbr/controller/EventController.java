@@ -1,12 +1,10 @@
 package com.kmji.nghbr.controller;
 
 
-import com.kmji.nghbr.model.Attendee;
-import com.kmji.nghbr.model.Event;
-import com.kmji.nghbr.model.Suburb;
-import com.kmji.nghbr.model.User;
+import com.kmji.nghbr.model.*;
 import com.kmji.nghbr.service.AttendeeService;
 import com.kmji.nghbr.service.EventService;
+import com.kmji.nghbr.service.MessageService;
 import com.kmji.nghbr.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +12,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -28,6 +28,9 @@ public class EventController extends AbstractController {
 
     @Autowired
     AttendeeService attendeeService;
+
+    @Autowired
+    MessageService messageService;
 
     @RequestMapping(value={"/events"}, method = RequestMethod.GET)
     public String events(ModelMap model){
@@ -110,6 +113,16 @@ public class EventController extends AbstractController {
         // Give user a point for creating an event
         user.setPoints(user.getPoints() + 1);
         userService.save(user);
+
+        Message message = new Message();
+        message.setUser(user);
+        message.setPostCode(user.getSuburb().getPostcode());
+        message.setDate(new Date());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM YYYY HH:mm");
+        String startDate = sdf.format(newEvent.getStart());
+        String endDate = sdf.format(newEvent.getEnd());
+        message.setText("<i>Hey guys! I'm hosting <a href='/events'>" + newEvent.getTitle() + "</a> which goes from " + startDate + " to " + endDate + ". Hope you see you all there!</i>");
+        messageService.save(message);
 
         return newEvent;
     }
