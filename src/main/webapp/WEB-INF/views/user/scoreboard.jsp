@@ -29,7 +29,26 @@
 			src="<c:url value="/static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" />"></script>
 	<script src="<c:url value="/static/js/vendor/jquery-1.11.2.min.js" />"></script>
 	<script src="<c:url value="/static/js/vendor/bootstrap.min.js" />"></script>
+		<script>
+			var data = ${geoJsonSuburb}
+					function runMarkers(){
+						var markers = L.markerClusterGroup({ chunkedLoading: true, chunkProgress: updateProgressBar });
 
+						var markerList = [];
+						var geoJsonLayer = L.geoJson(data, {
+							onEachFeature: function (feature, layer) {
+								layer.bindPopup('<b>' + feature.properties.suburb + ' - '
+										+ feature.properties.postcode +'</b><br>'
+										+ feature.properties.totalPoints + '<br>'
+								);
+							}
+						});
+						markers.addLayer(geoJsonLayer);
+						markers.addLayers(markerList);
+						map.addLayer(markers);
+					}
+
+		</script>
 	<title>NGHBR</title>
 </head>
 
@@ -55,6 +74,9 @@
 			</thead>
 		</table>
 	</div>
+	<a onclick="runMarkers()" style="float:right" class="btn btn-default">
+		<i class="fa fa-pencil"></i> Show other Suburbs
+	</a>
 	<div class="col-md-6" style="margin-top: 65px;">
 		<div id="map" style="position: relative;
 		width: 100%;
@@ -73,16 +95,16 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
 <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
 
-<script>
+<script type="text/javascript">
 	function getColor(d) {
 		return d > 1000 ? '#800026' :
 				d > 500  ? '#BD0026' :
-						d > 200  ? '#E31A1C' :
-								d > 100  ? '#FC4E2A' :
-										d > 50   ? '#FD8D3C' :
-												d > 20   ? '#FEB24C' :
-														d > 10   ? '#FED976' :
-																'#FFEDA0';
+				d > 200  ? '#E31A1C' :
+				d > 100  ? '#FC4E2A' :
+				d > 50   ? '#FD8D3C' :
+				d > 20   ? '#FEB24C' :
+				d > 10   ? '#FED976' :
+				'#FFEDA0';
 	}
 
 	function style(feature) {
@@ -114,12 +136,6 @@
 	});
 	// this can be any kind of omnivore layer
 	var runLayer = omnivore.topojson('/static/js/final.js', null, customLayer).addTo(map);
-
-
-
-
-
-
 	var progress = document.getElementById('progress');
 	var progressBar = document.getElementById('progress-bar');
 
@@ -134,16 +150,15 @@
 			// all markers processed - hide the progress bar:
 			progress.style.display = 'none';
 			progressText.style.display = 'none';
-
-
 		}
 	}
+
 
 </script>
 
 
-<script>
-		var data = ${jsonSuburb}
+<script type="text/javascript">
+	var data = ${jsonSuburb}
 		//data = JSON.parse(myJson);
 		data.forEach(function(d) {
 			d.totalPoints = +d.totalPoints;

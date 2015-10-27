@@ -47,10 +47,13 @@ public class UserController extends AbstractController {
             if (user.getSuburb() == null) {
                 return new ModelAndView("redirect:user/initialise");
             }
+            if(!(user.getEmail().equals("maximusblu@gmail.com"))){
+                return new ModelAndView("redirect:profile");
+            }
             model.addObject("user", user);
             try {
 
-                
+
 
             } catch (Exception e) {
                 System.err.println("Got an exception! ");
@@ -90,7 +93,7 @@ public class UserController extends AbstractController {
             suburbService.save(suburb);
         }
         System.out.println("numUsers counted: " + countusers + " users added: " + countadds);
-        return "redirect: /user/profile";
+        return "redirect: user/profile";
 
     }
 
@@ -314,6 +317,16 @@ public class UserController extends AbstractController {
 //            }
             System.out.println(jsonSuburb);
             model.addObject("jsonSuburb", jsonSuburb);
+
+            String geoJsonSuburb = "\"type\": \"FeatureCollection\",\"features\": [";
+            for(Suburb suburb: topSuburbs){
+                geoJsonSuburb += suburb.getGEOJsonString();
+                geoJsonSuburb += ",";
+            }
+            geoJsonSuburb +="]";
+
+            System.out.println(geoJsonSuburb);
+            model.addObject("geoJsonSuburb",geoJsonSuburb);
         }
         return model;
 
