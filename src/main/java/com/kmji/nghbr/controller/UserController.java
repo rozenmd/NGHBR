@@ -318,12 +318,13 @@ public class UserController extends AbstractController {
             System.out.println(jsonSuburb);
             model.addObject("jsonSuburb", jsonSuburb);
 
-            String geoJsonSuburb = "\"type\": \"FeatureCollection\",\"features\": [";
+            String geoJsonSuburb = "{\"type\": \"FeatureCollection\",\"features\": [";
             for(Suburb suburb: topSuburbs){
                 geoJsonSuburb += suburb.getGEOJsonString();
                 geoJsonSuburb += ",";
             }
-            geoJsonSuburb +="]";
+            geoJsonSuburb = geoJsonSuburb.substring(0,geoJsonSuburb.length()-1);
+            geoJsonSuburb +="]}";
 
             System.out.println(geoJsonSuburb);
             model.addObject("geoJsonSuburb",geoJsonSuburb);

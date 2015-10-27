@@ -29,26 +29,6 @@
 			src="<c:url value="/static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" />"></script>
 	<script src="<c:url value="/static/js/vendor/jquery-1.11.2.min.js" />"></script>
 	<script src="<c:url value="/static/js/vendor/bootstrap.min.js" />"></script>
-		<script>
-			var data = ${geoJsonSuburb}
-					function runMarkers(){
-						var markers = L.markerClusterGroup({ chunkedLoading: true, chunkProgress: updateProgressBar });
-
-						var markerList = [];
-						var geoJsonLayer = L.geoJson(data, {
-							onEachFeature: function (feature, layer) {
-								layer.bindPopup('<b>' + feature.properties.suburb + ' - '
-										+ feature.properties.postcode +'</b><br>'
-										+ feature.properties.totalPoints + '<br>'
-								);
-							}
-						});
-						markers.addLayer(geoJsonLayer);
-						markers.addLayers(markerList);
-						map.addLayer(markers);
-					}
-
-		</script>
 	<title>NGHBR</title>
 </head>
 
@@ -74,9 +54,9 @@
 			</thead>
 		</table>
 	</div>
-	<a onclick="runMarkers()" style="float:right" class="btn btn-default">
-		<i class="fa fa-pencil"></i> Show other Suburbs
-	</a>
+	<div id="progress">
+		<div id="progress-bar"></div>
+	</div>
 	<div class="col-md-6" style="margin-top: 65px;">
 		<div id="map" style="position: relative;
 		width: 100%;
@@ -127,15 +107,15 @@
 			latlng = L.latLng(${lat}, ${lon});
 
 	var map = L.map('map', { center: latlng, zoom: 13, layers: [tiles] });
-	var customLayer = L.geoJson(null, {style: style});
-	var popupContent =  'Suburb: ${suburb} <br>' +
-			'Total Points:  ${points} <br>';
-	L.marker(latlng).addTo(map).bindPopup(popupContent,{
-		closeButton: true,
-		minWidth: 120
-	});
+	//var customLayer = L.geoJson(null, {style: style});
+	//var popupContent =  'Suburb: ${suburb} <br>' +
+	//		'Total Points:  ${points} <br>';
+	//L.marker(latlng).addTo(map).bindPopup(popupContent,{
+//		closeButton: true,
+//		minWidth: 120
+//	});
 	// this can be any kind of omnivore layer
-	var runLayer = omnivore.topojson('/static/js/final.js', null, customLayer).addTo(map);
+//	var runLayer = omnivore.topojson('/static/js/final.js', null, customLayer).addTo(map);
 	var progress = document.getElementById('progress');
 	var progressBar = document.getElementById('progress-bar');
 
@@ -152,6 +132,22 @@
 			progressText.style.display = 'none';
 		}
 	}
+	var data = ${geoJsonSuburb};
+
+		var markers = L.markerClusterGroup({ chunkedLoading: true, chunkProgress: updateProgressBar });
+
+		var markerList = [];
+		var geoJsonLayer = L.geoJson(data, {
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup('<b>' + feature.properties.suburb + ' - '
+						+ feature.properties.postcode +'</b><br>'
+						+ feature.properties.totalPoints + '<br>'
+				);
+			}
+		});
+		markers.addLayer(geoJsonLayer);
+		markers.addLayers(markerList);
+		map.addLayer(markers);
 
 
 </script>
