@@ -68,9 +68,7 @@
 		<a href="user/update" class="btn btn-default">
 			<i class="fa fa-pencil"></i> Update Profile
 		</a>
-		<a onclick="runMarkers()" style="float:right" class="btn btn-default">
-			<i class="fa fa-pencil"></i> Show other Suburbs
-		</a>
+		
 		</c:when>
 		<c:otherwise>
 			Please <a href="<c:url value="/login" />">login</a> to continue
@@ -137,31 +135,6 @@
 	// this can be any kind of omnivore layer
 	var runLayer = omnivore.topojson('/static/js/final.js', null, customLayer).addTo(map);
 //first, populate all suburbs into a json variable "fullDataSet"
-	var data = ${geoJsonSuburb}
-	function runMarkers(){
-		var markers = L.markerClusterGroup({ chunkedLoading: true, chunkProgress: updateProgressBar });
-
-		var markerList = [];
-		var geoJsonLayer = L.geoJson(fullDataSet, {
-			onEachFeature: function (feature, layer) {
-				//layer.bindPopup(feature.properties.ACCIDENT_NO);
-				layer.bindPopup('<b>' + feature.properties.ACCIDENT_DATE + ' - '
-						+ feature.properties.ACCIDENT_TIME +'</b><br>'
-						+ feature.properties.ACCIDENT_DESCRIPTION + '<br>'
-						+ 'Severity: ' + feature.properties.SEVERITY + '<br>'
-						+ 'Deaths/People Involved: '
-						+ feature.properties.NO_PERSONS_KILLED
-						+ '/'
-						+ feature.properties.NO_PERSONS_INVOLVED)
-				;
-			}
-		});
-		markers.addLayer(geoJsonLayer);
-		markers.addLayers(markerList);
-		map.addLayer(markers);
-	}
-
-
 
 
 	var progress = document.getElementById('progress');

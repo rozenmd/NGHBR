@@ -22,7 +22,8 @@
 	<%--//Charting css--%>
 	<link rel="stylesheet" href="https://dc-js.github.io/dc.js/css/dc.css" />
 	<%--//Charting JS--%>
-
+		<link href="<c:url value="/static/css/MarkerCluster.css" />" rel="stylesheet" >
+		<link href="<c:url value="/static/css/MarkerCluster.Default.css" />" rel="stylesheet" >
 
 	<%-- JavaScripts --%>
 	<script
@@ -41,7 +42,7 @@
 <div class="container">
 	<div class="col-md-6">
 		<h1>Scoreboard</h1>
-
+<p id="progress-text">Please wait while the map loads!</p>
 		<table class="table table-bordered table-hover dc-data-table dc-chart">
 			<thead>
 			<tr class="header">
@@ -73,6 +74,8 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.11/crossfilter.js"></script>
 <script src="https://dc-js.github.io/dc.js/js/dc.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+<script src="<c:url value="/static/js/vendor/leaflet.markercluster-src.js" />"></script>
+
 <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
 
 <script type="text/javascript">
@@ -116,6 +119,8 @@
 //	});
 	// this can be any kind of omnivore layer
 //	var runLayer = omnivore.topojson('/static/js/final.js', null, customLayer).addTo(map);
+	var progressText = document.getElementById('progress-text');
+	progressText.style.display = 'block';
 	var progress = document.getElementById('progress');
 	var progressBar = document.getElementById('progress-bar');
 
@@ -140,7 +145,7 @@
 		var geoJsonLayer = L.geoJson(data, {
 			onEachFeature: function (feature, layer) {
 				layer.bindPopup('<b>' + feature.properties.suburb + ' - '
-						+ feature.properties.postcode +'</b><br>'
+						+ feature.properties.postcode +'</b><br>Total Points: '
 						+ feature.properties.totalPoints + '<br>'
 				);
 			}

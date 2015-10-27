@@ -176,7 +176,7 @@ public class Suburb {
 		return "{" + "'id':" + id +  ",'postcode':"  + ""+ postcode  + "" + ", 'suburbName':" + "'" + suburbName + "'" + ", 'totalPoints':" + totalPoints + ",'lat':"  + ""+ lat  + "" + ",'lon':"  + ""+ lon  + "" + "}";
 	}
 	public String getGEOJsonString(){
-		return "{ \"type\": \"Feature\", \"properties\": {" + "\"postcode\":\"" + postcode + "\" " + "\"suburb\":\"" + suburbName + "\" " + "\"totalPoints\":\"" + totalPoints + "\" " + "},\"geometry\": {\"type\": \"Point\",\"coordinates\": ["+lon + ","+lat+"]}}";
+		return "{ \"type\": \"Feature\", \"properties\": {" + "\"postcode\":\"" + postcode + "\"," + "\"suburb\":\"" + suburbName + "\"," + "\"totalPoints\":\"" + totalPoints + "\" " + "},\"geometry\": {\"type\": \"Point\",\"coordinates\": ["+lon + ","+lat+"]}}";
 
 	}
 }
