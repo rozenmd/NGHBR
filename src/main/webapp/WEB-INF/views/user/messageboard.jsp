@@ -49,12 +49,14 @@
         <c:forEach items="${messages}" var="message" varStatus="counter">
             <div class="row message">
                 <div style="float: left; position: relative; padding-right: 15px; padding-left: 15px;">
-                    <c:if test="${user.getFacebookId() != null}">
-                        <img src="https://graph.facebook.com/${message.getUser().getFacebookId()}/picture?width=50&height=50 "/>
+                    <c:if test="${message.getUser().getFacebookId() != null}">
+                        <img src="https://graph.facebook.com/${message.getUser().getFacebookId()}/picture?width=50&height=50 " style="width:50px;" height="50" width="50"/>
                     </c:if>
-                    <c:if test="${user.getFacebookId() == null}">
-                        <img src="<c:url value="/static/images/question.png" />" alt="" height="50" width="50">
+                    <c:if test="${message.getUser().getFacebookId() == null}">
+                        <img src="<c:url value="/static/images/question.png" />" alt="" style="width:50px;" height="50" width="50">
                     </c:if>
+
+
                 </div>
                 <div class="col-md-9">
                     <div class="row message-meta">
