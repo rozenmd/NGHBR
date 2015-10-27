@@ -38,7 +38,7 @@ public class SuburbDaoImpl extends AbstractDao<Integer, Suburb> implements Subur
 
 
 	public List<Suburb> getAll() {
-		Criteria crit = createEntityCriteria();
+		Criteria crit = createEntityCriteria().setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		return crit.list();
 	}
 

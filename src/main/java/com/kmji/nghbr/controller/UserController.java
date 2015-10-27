@@ -49,7 +49,9 @@ public class UserController extends AbstractController {
             }
             model.addObject("user", user);
             try {
-                //do stuff
+
+                
+
             } catch (Exception e) {
                 System.err.println("Got an exception! ");
                 System.err.println(e.getMessage());
@@ -70,27 +72,25 @@ public class UserController extends AbstractController {
     public String totalPoints(ModelMap model) {
         model.addAttribute("user", getPrincipal());
         List<User> users = userService.findAllUsers();
-        //List<User> added = new ArrayList<User>();
         List<Suburb> suburbs = suburbService.findAllSuburbs();
         String result = "";
+        int countusers = 0;
+        int countadds = 0;
         for(Suburb suburb : suburbs){
-            suburb.setTotalPoints(0);
+            int tp = 0;
             for(User user : users){
-
-//                System.out.println(user.getSuburb().getSuburbName());
-//                System.out.println(suburb.getSuburbName());
-                int x = suburb.getTotalPoints() + user.getPoints();
-
                     if((user.getSuburb().getSuburbName().equals(suburb.getSuburbName()))
                             && (user.getSuburb().getPostcode()==suburb.getPostcode())){
-                        suburb.setTotalPoints(x);
-                        result = suburb.toString() + " points: " + suburb.getTotalPoints();
-                        suburbService.save(suburb);
+                        tp += user.getPoints();
+                        countadds++;
                     }
+                countusers++;
             }
+            suburb.setTotalPoints(tp);
+            suburbService.save(suburb);
         }
-        System.out.println(result);
-        return "/user/profile";
+        System.out.println("numUsers counted: " + countusers + " users added: " + countadds);
+        return "redirect: /user/profile";
 
     }
 
